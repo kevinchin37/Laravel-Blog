@@ -35,13 +35,10 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Post $post)
+    public function store()
     {
-        $post->title = request('title');
-        $post->content = request('content');
-        $post->save();
-
-        return redirect('/posts');
+        Post::create(request(['title', 'content']));
+        return redirect('/posts/create');
     }
 
     /**
