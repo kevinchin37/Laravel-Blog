@@ -37,7 +37,12 @@ class PostController extends Controller
      */
     public function store()
     {
-        Post::create(request(['title', 'content']));
+        $attributes = request()->validate([
+            'title' => ['required', 'min:3'],
+            'content' => 'required',
+        ]);
+
+        Post::create($attributes);
         return redirect('/posts/create');
     }
 
