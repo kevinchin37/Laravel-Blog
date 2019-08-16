@@ -39,7 +39,7 @@ class PostController extends Controller
     {
         $attributes = request()->validate([
             'title' => ['required', 'min:3'],
-            'content' => 'required',
+            'body' => 'required',
         ]);
 
         Post::create($attributes);

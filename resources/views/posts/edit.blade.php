@@ -2,6 +2,6 @@
     @csrf
     @method('PATCH')
     <input type="text" name="title" value="{{ $post->title }}"/>
-    <textarea id="" cols="30" rows="10" name="content">{{ $post->content }}</textarea>
+    <textarea id="" cols="30" rows="10" name="body">{{ $post->content }}</textarea>
     <button type="submit">Update</button>
 </form>
