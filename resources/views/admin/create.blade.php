@@ -1,4 +1,4 @@
-<form action="/posts/" method="POST">
+<form action="/admin/posts/" method="POST">
     @csrf
     <input type="text" name="title" placeholder="Post title"/><br/><br/>
     <textarea id="" cols="30" rows="10" name="body"></textarea><br/><br/>
