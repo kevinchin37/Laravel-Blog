@@ -19,6 +19,12 @@ class AdminPostController extends Controller
         ]);
     }
 
+    public function postIndex(Post $post) {
+        return view('admin.post_list', [
+            'posts' => Post::all(),
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
