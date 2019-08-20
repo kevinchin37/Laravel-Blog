@@ -15,5 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::resource('posts', 'PostController');
-Route::resource('admin/posts', 'AdminPostController');
+Route::get('admin', 'AdminPostController@index');
+Route::get('admin/posts', 'AdminPostController@postIndex');
+Route::get('admin/posts/create', 'AdminPostController@create');
+// Route::get('admin/posts{post}', 'AdminPostController@show');
+Route::get('admin/posts/{post}/edit', 'AdminPostController@edit');
+Route::post('admin/posts', 'AdminPostController@store');
+Route::patch('admin/posts/{post}', 'AdminPostController@update');
+Route::delete('admin/posts/{post}', 'AdminPostController@destroy');
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
