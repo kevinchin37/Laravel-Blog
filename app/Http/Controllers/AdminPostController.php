@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
 
 class AdminPostController extends Controller
@@ -30,9 +31,11 @@ class AdminPostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Category $category)
     {
-        return view('admin.create');
+        return view('admin.create',[
+            'categories' => $category->getCategories(),
+        ]);
     }
 
     /**
@@ -41,14 +44,16 @@ class AdminPostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Post $post)
     {
         $attributes = request()->validate([
-            'title' => ['required', 'min:3'],
+            'title' => ['required'],
             'body' => 'required',
         ]);
 
-        Post::create($attributes);
+        $post = $post->create($attributes);
+        $post->categories()->attach(request('category'));
+
         return redirect('/admin/posts/create');
     }
 
