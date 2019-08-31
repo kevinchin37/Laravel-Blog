@@ -15,13 +15,13 @@ class AdminPostController extends Controller
      */
     public function index()
     {
-        return view('admin.index', [
+        return view('admin.post.index', [
             'posts' => Post::all(),
         ]);
     }
 
     public function postIndex(Post $post) {
-        return view('admin.post_list', [
+        return view('admin.post.post_list', [
             'posts' => Post::all(),
         ]);
     }
@@ -33,7 +33,7 @@ class AdminPostController extends Controller
      */
     public function create(Category $category)
     {
-        return view('admin.create',[
+        return view('admin.post.create',[
             'categories' => $category->getCategories(),
         ]);
     }
@@ -65,7 +65,7 @@ class AdminPostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('admin.show', ['post' => $post]);
+        return view('admin.post.show', ['post' => $post]);
     }
 
     /**
@@ -76,7 +76,7 @@ class AdminPostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.edit', [
+        return view('admin.post.edit', [
             'post' => $post,
             'categories' => Category::all(),
         ]);
