@@ -90,8 +90,14 @@ class AdminPostController extends Controller
      */
     public function update(Post $post)
     {
-        $post->update(request(['title', 'content']));
-        return redirect('/admin/posts');
+        $attributes = request()->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+        $post->update($attributes);
+        $post->categories()->sync(request('category'));
+
+        return back();
     }
 
     /**
