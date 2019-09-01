@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->longText('body');
+            $table->string('slug')->unique();
             $table->timestamps();
             // $table->unsignedBigInteger('category_id')->nullable();
             // $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
