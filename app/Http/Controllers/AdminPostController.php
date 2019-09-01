@@ -51,6 +51,7 @@ class AdminPostController extends Controller
             'body' => 'required',
         ]);
 
+        $attributes['slug'] = str_slug($attributes['title']);
         $post = $post->create($attributes);
         $post->categories()->attach(request('category'));
 
