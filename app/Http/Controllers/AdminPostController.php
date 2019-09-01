@@ -54,7 +54,7 @@ class AdminPostController extends Controller
         $post = $post->create($attributes);
         $post->categories()->attach(request('category'));
 
-        return redirect('/admin/posts/create');
+        return redirect('/admin/posts/' . $post->id . '/edit');
     }
 
     /**
@@ -110,6 +110,6 @@ class AdminPostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect('/admin/posts');
+        return back();
     }
 }
