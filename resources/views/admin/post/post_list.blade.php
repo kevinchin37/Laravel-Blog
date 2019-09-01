@@ -3,7 +3,7 @@
 @section('header_title', 'Posts')
 
 @section('header_links')
-    <a class="btn btn-outline-dark" href="/admin/posts/create">Create new Post</a>
+    <a class="btn btn-primary" href="/admin/posts/create">Create new Post</a>
 @endsection
 
 @section('main_content')

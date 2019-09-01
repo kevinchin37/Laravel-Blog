@@ -22,7 +22,7 @@
             </select>
         </div>
 
-        <div class="row"><a class="btn btn-outline-dark" href="#">Create new Post</a></div>
+        <div class="row"><button type="submit" class="btn btn-primary">Create Post</button></div>
     </form>
 
     @if ($errors->any())
