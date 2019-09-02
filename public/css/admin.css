@@ -1,0 +1,15 @@
+html, body {
+    height: 100%;
+}
+.sidebar {
+    background: #333;
+    float: left;
+    height: 100%;
+    padding-top: 25px;
+    width: 300px;
+}
+.main-admin-panel {
+    height: 100%;
+    overflow: auto;
+    padding: 25px;
+}
