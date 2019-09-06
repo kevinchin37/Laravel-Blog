@@ -46,26 +46,13 @@ class AdminPostController extends Controller
      */
     public function store(Post $post)
     {
-        $attributes = tap(request()->validate([
-            'title' => 'required',
-            'body' => 'required',
-        ]), function() {
-            if(request()->hasFile('featured_image')) {
-                request()->validate([
-                    'featured_image' => 'file|image|max:5000'
-                ]);
-            }
-        });
-
+        $attributes = $this->validateRequest();
         $attributes['slug'] = str_slug($attributes['title']);
+
         $post = $post->create($attributes);
         $post->categories()->attach(request('category'));
 
-        $file = request()->file('featured_image');
-        $file_name = time() . '-' . $file->getClientOriginalName();
-        $post->update([
-            'featured_image' => $file->storeAs('uploads', $file_name, 'public')
-        ]);
+        $this->storeImage($post);
 
         return redirect('/admin/posts/' . $post->id . '/edit');
     }
@@ -124,5 +111,26 @@ class AdminPostController extends Controller
     {
         $post->delete();
         return back();
+    }
+
+    public function validateRequest() {
+        return tap(request()->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]), function() {
+            if(request()->hasFile('featured_image')) {
+                request()->validate([
+                    'featured_image' => 'file|image|max:5000'
+                ]);
+            }
+        });
+    }
+
+    public function storeImage($post) {
+        $file = request()->file('featured_image');
+        $file_name = time() . '-' . $file->getClientOriginalName();
+        $post->update([
+            'featured_image' => $file->storeAs('uploads', $file_name, 'public')
+        ]);
     }
 }
