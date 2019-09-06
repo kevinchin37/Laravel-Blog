@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Category;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class AdminPostController extends Controller
 {
@@ -46,14 +47,26 @@ class AdminPostController extends Controller
      */
     public function store(Post $post)
     {
-        $attributes = request()->validate([
-            'title' => ['required'],
+        $attributes = tap(request()->validate([
+            'title' => 'required',
             'body' => 'required',
-        ]);
+        ]), function() {
+            if(request()->hasFile('featured_image')) {
+                request()->validate([
+                    'featured_image' => 'file|image|max:5000'
+                ]);
+            }
+        });
 
         $attributes['slug'] = str_slug($attributes['title']);
         $post = $post->create($attributes);
         $post->categories()->attach(request('category'));
+
+        $file = request()->file('featured_image');
+        $file_name = time() . '-' . $file->getClientOriginalName();
+        $post->update([
+            'featured_image' => $file->storeAs('uploads', $file_name, 'public')
+        ]);
 
         return redirect('/admin/posts/' . $post->id . '/edit');
     }
