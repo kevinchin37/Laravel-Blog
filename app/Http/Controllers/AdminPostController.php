@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Category;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 
 class AdminPostController extends Controller
 {
