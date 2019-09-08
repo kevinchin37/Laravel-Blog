@@ -3,7 +3,7 @@
 @section('header_title', 'New Post')
 
 @section('main_content')
-    <form action="/admin/posts/" method="POST">
+    <form action="/admin/posts/" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group row">
             <input type="text" id="post-title" class="form-control" name="title" placeholder="Enter Post Title"/>
@@ -20,6 +20,11 @@
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
             </select>
+        </div>
+
+        <div class="form-group row">
+            <label for="featured-image">Featured Image</label>
+            <input type="file" id="featured-image" name="featured_image">
         </div>
 
         <div class="row"><button type="submit" class="btn btn-primary">Create Post</button></div>
