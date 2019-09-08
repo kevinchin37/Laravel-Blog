@@ -22,7 +22,7 @@ class AdminPostController extends Controller
 
     public function postIndex(Post $post) {
         return view('admin.post.post_list', [
-            'posts' => Post::all(),
+            'posts' => $post->all(),
         ]);
     }
 
@@ -111,7 +111,8 @@ class AdminPostController extends Controller
         return back();
     }
 
-    public function validateRequest() {
+    public function validateRequest()
+    {
         return request()->validate([
             'title' => 'required',
             'body' => 'required',
@@ -119,7 +120,8 @@ class AdminPostController extends Controller
         ]);
     }
 
-    public function storeImage($post) {
+    public function storeImage($post)
+    {
         if (request()->hasFile('featured_image')) {
             $file_request = request()->file('featured_image');
             $file_name = time() . '-' . $file_request->getClientOriginalName();
