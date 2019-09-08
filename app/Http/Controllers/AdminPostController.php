@@ -21,7 +21,7 @@ class AdminPostController extends Controller
     }
 
     public function postIndex(Post $post) {
-        return view('admin.post.post_list', [
+        return view('admin.post.index', [
             'posts' => $post->all(),
         ]);
     }
