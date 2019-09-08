@@ -122,10 +122,12 @@ class AdminPostController extends Controller
     }
 
     public function storeImage($post) {
-        $file = request()->file('featured_image');
-        $file_name = time() . '-' . $file->getClientOriginalName();
-        $post->update([
-            'featured_image' => $file->storeAs('uploads', $file_name, 'public')
-        ]);
+        if (request()->hasFile('featured_image')) {
+            $file_request = request()->file('featured_image');
+            $file_name = time() . '-' . $file_request->getClientOriginalName();
+            $post->update([
+                'featured_image' => $file_request->storeAs('uploads', $file_name, 'public')
+            ]);
+        }
     }
 }
