@@ -15,24 +15,26 @@
 
 @section('main_content')
     <div class="row">
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Category ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Post Count</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach ($categories as $category)
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-dark">
                     <tr>
-                        <th scope="row">{{ $category->id }}</th>
-                        <td><a href="/admin/categories/{{ $category->id }}">{{ $category->name }}</a></td>
-                        <td><a href="/admin/categories/{{ $category->id }}">{{ $category->posts->count() }}</a></td>
+                        <th scope="col">Category ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Post Count</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                    @foreach ($categories as $category)
+                        <tr>
+                            <th scope="row">{{ $category->id }}</th>
+                            <td><a href="/admin/categories/{{ $category->id }}">{{ $category->name }}</a></td>
+                            <td><a href="/admin/categories/{{ $category->id }}">{{ $category->posts->count() }}</a></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 @endsection
