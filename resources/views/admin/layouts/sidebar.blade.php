@@ -1,6 +1,5 @@
-<ul class="list-group list-group-flush border-right">
-    <li class="list-group-item"><a href="/admin/posts">Posts</a></li>
-    <li class="list-group-item"><a href="/admin/categories">Categories</a></li>
+<div class="list-group list-group-flush">
+    <a class="list-group-item" href="/admin/posts">Posts</a>
+    <a class="list-group-item" href="/admin/categories">Categories</a>
     @yield('sidebar_items')
-</ul>
-
+</div>
