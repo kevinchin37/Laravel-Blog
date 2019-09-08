@@ -1,13 +1,24 @@
 html, body {
     height: 100%;
 }
+
+/* Sidebar */
 .sidebar {
-    background: #333;
+    background: #1a1a1a;
     float: left;
     height: 100%;
     padding-top: 25px;
     width: 300px;
 }
+.sidebar .list-group-item {
+    background: #333333;
+    color: #eeeeee;
+}
+.sidebar .list-group-item:hover {
+    background: #595959;
+}
+
+/* Admin Panel */
 .main-admin-panel {
     height: 100%;
     overflow: auto;
