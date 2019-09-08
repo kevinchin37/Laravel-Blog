@@ -114,16 +114,11 @@ class AdminPostController extends Controller
     }
 
     public function validateRequest() {
-        return tap(request()->validate([
+        return request()->validate([
             'title' => 'required',
             'body' => 'required',
-        ]), function() {
-            if(request()->hasFile('featured_image')) {
-                request()->validate([
-                    'featured_image' => 'file|image|max:5000'
-                ]);
-            }
-        });
+            'featured_image' => 'sometimes|file|image|max:5000',
+        ]);
     }
 
     public function storeImage($post) {
