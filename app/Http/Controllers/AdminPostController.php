@@ -91,12 +91,10 @@ class AdminPostController extends Controller
      */
     public function update(Post $post)
     {
-        $attributes = request()->validate([
-            'title' => 'required',
-            'body' => 'required',
-        ]);
-        $post->update($attributes);
+        $post->update($this->validateRequest());
         $post->categories()->sync(request('category'));
+
+        $this->storeImage($post);
 
         return back();
     }
