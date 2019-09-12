@@ -15,18 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin', 'AdminPostController@index');
-Route::get('admin/posts', 'AdminPostController@postIndex');
-Route::get('admin/posts/create', 'AdminPostController@create');
-Route::get('admin/posts/{post}/edit', 'AdminPostController@edit');
-Route::post('admin/posts', 'AdminPostController@store');
-Route::patch('admin/posts/{post}', 'AdminPostController@update');
-Route::delete('admin/posts/{post}', 'AdminPostController@destroy');
+Route::group(['namespace' => 'Admin'], function () {
+    // Post
+    Route::get('admin', 'PostController@index');
+    Route::get('admin/posts', 'PostController@postIndex');
+    Route::get('admin/posts/create', 'PostController@create');
+    Route::get('admin/posts/{post}/edit', 'PostController@edit');
+    Route::post('admin/posts', 'PostController@store');
+    Route::patch('admin/posts/{post}', 'PostController@update');
+    Route::delete('admin/posts/{post}', 'PostController@destroy');
 
-
-Route::get('admin/categories', 'CategoryController@index');
-Route::get('admin/categories/{category}', 'CategoryController@show');
-Route::post('admin/categories/', 'CategoryController@store');
+    // Category
+    Route::get('admin/categories', 'CategoryController@index');
+    Route::get('admin/categories/{category}', 'CategoryController@show');
+    Route::post('admin/categories/', 'CategoryController@store');
+});
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');

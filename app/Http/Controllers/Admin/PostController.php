@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Post;
 use App\Category;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class AdminPostController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,8 +21,8 @@ class AdminPostController extends Controller
     }
 
     public function postIndex(Post $post) {
-        return view('admin.post.post_list', [
-            'posts' => Post::all(),
+        return view('admin.post.index', [
+            'posts' => $post->all(),
         ]);
     }
 
@@ -46,14 +46,13 @@ class AdminPostController extends Controller
      */
     public function store(Post $post)
     {
-        $attributes = request()->validate([
-            'title' => ['required'],
-            'body' => 'required',
-        ]);
-
+        $attributes = $this->validateRequest();
         $attributes['slug'] = str_slug($attributes['title']);
+
         $post = $post->create($attributes);
         $post->categories()->attach(request('category'));
+
+        $this->storeImage($post);
 
         return redirect('/admin/posts/' . $post->id . '/edit');
     }
@@ -92,12 +91,10 @@ class AdminPostController extends Controller
      */
     public function update(Post $post)
     {
-        $attributes = request()->validate([
-            'title' => 'required',
-            'body' => 'required',
-        ]);
-        $post->update($attributes);
+        $post->update($this->validateRequest());
         $post->categories()->sync(request('category'));
+
+        $this->storeImage($post);
 
         return back();
     }
@@ -112,5 +109,25 @@ class AdminPostController extends Controller
     {
         $post->delete();
         return back();
+    }
+
+    public function validateRequest()
+    {
+        return request()->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'featured_image' => 'sometimes|file|image|max:5000',
+        ]);
+    }
+
+    public function storeImage($post)
+    {
+        if (request()->hasFile('featured_image')) {
+            $file_request = request()->file('featured_image');
+            $file_name = time() . '-' . $file_request->getClientOriginalName();
+            $post->update([
+                'featured_image' => $file_request->storeAs('uploads', $file_name, 'public')
+            ]);
+        }
     }
 }
