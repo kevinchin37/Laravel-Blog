@@ -44,11 +44,12 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Post $post)
+    public function store()
     {
         $attributes = $this->validateRequest();
         $attributes['slug'] = str_slug($attributes['title']);
 
+        $post = new Post;
         $post = $post->create($attributes);
         $post->categories()->attach(request('category'));
 
@@ -116,6 +117,7 @@ class PostController extends Controller
         return request()->validate([
             'title' => 'required',
             'body' => 'required',
+            'category' => 'nullable',
             'featured_image' => 'sometimes|file|image|max:5000',
         ]);
     }
