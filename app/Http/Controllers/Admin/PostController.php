@@ -52,7 +52,9 @@ class PostController extends Controller
         $attributes['slug'] = $this->getSlug($attributes['title']);
         $post = $post->create($attributes);
 
-        $post->categories()->attach(request('category'));
+        if (request()->has('category')) {
+            $post->categories()->attach(request('category'));
+        }
 
         $this->storeImage($post);
 
@@ -128,7 +130,7 @@ class PostController extends Controller
     {
         return request()->validate([
             'title' => 'required',
-            'body' => 'required',
+            'body' => 'nullable',
             'featured_image' => 'sometimes|file|image|max:5000',
         ]);
     }
