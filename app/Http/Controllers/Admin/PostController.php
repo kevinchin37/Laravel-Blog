@@ -47,10 +47,11 @@ class PostController extends Controller
     public function store()
     {
         $attributes = $this->validateRequest();
-        $attributes['slug'] = str_slug($attributes['title']);
 
         $post = new Post;
+        $attributes['slug'] = $this->getSlug($attributes['title']);
         $post = $post->create($attributes);
+
         $post->categories()->attach(request('category'));
 
         $this->storeImage($post);
@@ -112,12 +113,22 @@ class PostController extends Controller
         return back();
     }
 
+    public function getSlug($title)
+    {
+        $slug = str_slug($title);
+        if (Post::where('slug', '=', $slug)->get()->isNotEmpty()) {
+            $slugCount = (Post::where('slug', 'like', $slug . '-%')->get()->count()) + 1;
+            $slug = $slug . '-' . $slugCount;
+        }
+
+        return $slug;
+    }
+
     public function validateRequest()
     {
         return request()->validate([
             'title' => 'required',
             'body' => 'required',
-            'category' => 'nullable',
             'featured_image' => 'sometimes|file|image|max:5000',
         ]);
     }
