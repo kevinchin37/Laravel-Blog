@@ -35,9 +35,19 @@
                     <img class="img-thumbnail" src="{{ asset('storage/' . $post->featured_image ) }}" alt="">
                 @endif
 
-                <div class="form-group">
-                    <label for="featured-image">Update Featured Image</label>
-                    <input type="file" id="featured-image" name="featured_image">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="featured-image">Update Image</label>
+                        <input type="file" id="featured-image" name="featured_image">
+                    </div>
+
+                    <div class="col-md-6">
+                        <ul>
+                            <li>Post ID: {{ $post->id }}</li>
+                            <li>Published Date: {{ $post->created_at }}</li>
+                            <li>Last Modified: {{ $post->updated_at }}</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="row"><button type="submit" class="btn btn-outline-dark">Update</button></div>
