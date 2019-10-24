@@ -62,7 +62,7 @@ class PostController extends Controller
             $post->categories()->attach(request('category'));
         }
 
-        return redirect('/admin/posts/' . $post->id . '/edit');
+        return redirect('/admin/posts/' . $post->slug . '/edit');
     }
 
     /**
