@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Post;
 use App\Category;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -47,16 +48,19 @@ class PostController extends Controller
     public function store()
     {
         $attributes = $this->validateRequest();
-
         $post = new Post;
-        $attributes['slug'] = $this->getSlug($attributes['title']);
-        $post = $post->create($attributes);
+        $post->title = $attributes['title'];
+        $post->slug = $this->getSlug($attributes['title']);
+
+        if (!empty($attributes['featured_image'])) {
+            $post->featured_image = $this->storeImage($attributes['featured_image']);
+        }
+
+        $post->save();
 
         if (request()->has('category')) {
             $post->categories()->attach(request('category'));
         }
-
-        $this->storeImage($post);
 
         return redirect('/admin/posts/' . $post->id . '/edit');
     }
@@ -95,10 +99,16 @@ class PostController extends Controller
      */
     public function update(Post $post)
     {
-        $post->update($this->validateRequest());
-        $post->categories()->sync(request('category'));
+        $attributes = $this->validateRequest();
+        $post->title = $attributes['title'];
+        $post->body = $attributes['body'];
 
-        $this->storeImage($post);
+        if (!empty($attributes['featured_image'])) {
+            $this->deleteImage($post->featured_image);
+            $post->featured_image = $this->storeImage($attributes['featured_image']);
+        }
+
+        $post->save();
 
         return back();
     }
@@ -135,14 +145,16 @@ class PostController extends Controller
         ]);
     }
 
-    public function storeImage($post)
+    public function storeImage($image)
     {
-        if (request()->hasFile('featured_image')) {
-            $file_request = request()->file('featured_image');
-            $file_name = time() . '-' . $file_request->getClientOriginalName();
-            $post->update([
-                'featured_image' => $file_request->storeAs('uploads', $file_name, 'public')
-            ]);
+        $file_name = time() . '-' . $image->getClientOriginalName();
+        return $image->storeAs('uploads', $file_name, 'public');
+    }
+
+    public function deleteImage($image)
+    {
+        if (Storage::disk('public')->exists($image)) {
+            Storage::disk('public')->delete($image);
         }
     }
 }
