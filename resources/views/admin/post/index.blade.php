@@ -25,7 +25,7 @@
                             <th scope="row">{{ $post->id }}</th>
 
                             <td {{ $post->categories->count() ? '' : 'colspan=2' }}>
-                                <a href="/admin/posts/{{ $post->id }}/edit">{{ $post->title }}</a>
+                                <a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a>
                             </td>
 
                             @if ($post->categories->count())
@@ -37,7 +37,7 @@
                             @endif
 
                             <td>
-                                <form action="/admin/posts/{{ $post->id }}" method="POST">
+                                <form action="/admin/posts/{{ $post->slug }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit">Delete</button>
