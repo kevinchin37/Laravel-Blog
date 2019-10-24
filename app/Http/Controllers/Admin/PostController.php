@@ -110,6 +110,10 @@ class PostController extends Controller
 
         $post->save();
 
+        if (request()->has('category')) {
+            $post->categories()->sync(request('category'));
+        }
+
         return back();
     }
 
