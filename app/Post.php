@@ -12,4 +12,14 @@ class Post extends Model
     public function categories() {
         return $this->belongsToMany(Category::class);
     }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
