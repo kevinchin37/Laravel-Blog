@@ -7,7 +7,7 @@ use App\Category;
 
 class Post extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['title', 'body', 'featured_image', 'slug'];
 
     public function categories() {
         return $this->belongsToMany(Category::class);
