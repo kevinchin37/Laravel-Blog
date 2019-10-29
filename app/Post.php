@@ -13,6 +13,13 @@ class Post extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function addCategory($category)
+    {
+        if (!empty($category)) {
+            $this->categories()->attach($category);
+        }
+    }
+
     /**
      * Get the route key for the model.
      *
