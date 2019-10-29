@@ -20,6 +20,27 @@ class Post extends Model
         }
     }
 
+    public function slugExist($slug)
+    {
+       return $this->where('slug', '=', $slug)->get()->isNotEmpty();
+    }
+
+    public function incrementSlug($slug)
+    {
+        $slugCount = $this->where('slug', 'like', $slug . '-%')->get()->count() + 1;
+        return $slug . '-' . $slugCount;
+    }
+
+    public function getSlug($title)
+    {
+        $slug = str_slug($title);
+        if ($this->slugExist($slug)) {
+            $slug = $this->incrementSlug($slug);
+        }
+
+        return $slug;
+    }
+
     /**
      * Get the route key for the model.
      *
