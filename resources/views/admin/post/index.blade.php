@@ -14,6 +14,7 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Title</th>
+                        <th scope="col">Slug</th>
                         <th scope="col">Categories</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -24,8 +25,12 @@
                         <tr>
                             <th scope="row">{{ $post->id }}</th>
 
-                            <td {{ $post->categories->count() ? '' : 'colspan=2' }}>
+                            <td>
                                 <a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a>
+                            </td>
+
+                            <td {{ $post->categories->count() ? '' : 'colspan=2' }}>
+                                {{ $post->slug }}
                             </td>
 
                             @if ($post->categories->count())
