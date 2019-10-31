@@ -14,10 +14,6 @@ class FileUploadProvider extends ServiceProvider
      */
     public function register()
     {
-        // $this->app->singleton(Twitter::class, function() {
-        //     return new Twitter(config('services.twitter'));
-        // });
-
         $this->app->bind('Image', function() {
             return new Image;
         })
