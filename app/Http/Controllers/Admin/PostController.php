@@ -6,6 +6,7 @@ use App\Post;
 use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Services\Image;
 
 class PostController extends Controller
 {
@@ -45,22 +46,18 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Image $image)
     {
         $attributes = $this->validateRequest();
+        dd($attributes['category']);
         $post = new Post;
-        $post->title = $attributes['title'];
-        $post->slug = $this->getSlug($attributes['title']);
+        $attributes['slug'] = $post->getSlug($attributes['title']);
+        $attributes['featured_image'] = $image->imageUploadHandler(request()->file('featured_image'))->store();
+        $post = $post->create($attributes);
 
-        if (!empty($attributes['featured_image'])) {
-            $post->featured_image = $this->storeImage($attributes['featured_image']);
-        }
-
-        $post->save();
-
-        if (request()->has('category')) {
-            $post->categories()->attach(request('category'));
-        }
+        // if (!empty($attributes['category'])) {
+        //     $post->addCategory($attributes['category']);
+        // }
 
         return redirect('/admin/posts/' . $post->slug . '/edit');
     }
