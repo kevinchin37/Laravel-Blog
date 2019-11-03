@@ -8,15 +8,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Services\Image;
 
-class PostController extends Controller
-{
+class PostController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         return view('admin.post.index', [
             'posts' => Post::all(),
         ]);
@@ -33,8 +31,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Category $category)
-    {
+    public function create(Category $category) {
         return view('admin.post.create',[
             'categories' => $category->getCategories(),
         ]);
@@ -46,13 +43,15 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Image $image)
-    {
+    public function store(Image $imageService) {
         $attributes = $this->validateRequest();
-        dd($attributes['category']);
         $post = new Post;
         $attributes['slug'] = $post->getSlug($attributes['title']);
-        $attributes['featured_image'] = $image->imageUploadHandler(request()->file('featured_image'))->store();
+
+        if (!empty($attributes['featured_image'])) {
+            $attributes['featured_image'] = $imageService->uploadHandler($attributes['featured_image'])->store();
+        }
+
         $post = $post->create($attributes);
 
         // if (!empty($attributes['category'])) {
@@ -68,8 +67,7 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
-    {
+    public function show(Post $post) {
         return view('admin.post.show', ['post' => $post]);
     }
 
@@ -79,8 +77,7 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
-    {
+    public function edit(Post $post) {
         return view('admin.post.edit', [
             'post' => $post,
             'categories' => Category::all(),
@@ -94,8 +91,7 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Post $post)
-    {
+    public function update(Post $post) {
         $attributes = $this->validateRequest();
         $post->title = $attributes['title'];
         $post->body = $attributes['body'];
@@ -120,14 +116,12 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
-    {
+    public function destroy(Post $post) {
         $post->delete();
         return back();
     }
 
-    public function getSlug($title)
-    {
+    public function getSlug($title) {
         $slug = str_slug($title);
         if (Post::where('slug', '=', $slug)->get()->isNotEmpty()) {
             $slugCount = (Post::where('slug', 'like', $slug . '-%')->get()->count()) + 1;
@@ -137,8 +131,7 @@ class PostController extends Controller
         return $slug;
     }
 
-    public function validateRequest()
-    {
+    public function validateRequest() {
         return request()->validate([
             'title' => 'required',
             'body' => 'nullable',
@@ -146,14 +139,12 @@ class PostController extends Controller
         ]);
     }
 
-    public function storeImage($image)
-    {
+    public function storeImage($image) {
         $file_name = time() . '-' . $image->getClientOriginalName();
         return $image->storeAs('uploads', $file_name, 'public');
     }
 
-    public function deleteImage($image)
-    {
+    public function deleteImage($image) {
         if (Storage::disk('public')->exists($image)) {
             Storage::disk('public')->delete($image);
         }
