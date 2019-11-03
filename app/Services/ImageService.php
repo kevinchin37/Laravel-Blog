@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Storage;
+
 class ImageService {
 
     public $image;
@@ -17,5 +19,11 @@ class ImageService {
 
     public function store() {
         return $this->image->storeAs('uploads', $this->getFileName(), 'public');
+    }
+
+    public function deleteImage($image) {
+        if (Storage::disk('public')->exists($image)) {
+            Storage::disk('public')->delete($image);
+        }
     }
 }
