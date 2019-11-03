@@ -6,7 +6,7 @@ use App\Post;
 use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\Services\Image;
+use App\Services\ImageService;
 
 class PostController extends Controller {
     /**
@@ -43,8 +43,9 @@ class PostController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Image $imageService) {
+    public function store(ImageService $imageService) {
         $attributes = $this->validateRequest();
+
         $post = new Post;
         $attributes['slug'] = $post->getSlug($attributes['title']);
 
@@ -91,20 +92,17 @@ class PostController extends Controller {
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Post $post) {
+    public function update(Post $post, ImageService $imageService) {
         $attributes = $this->validateRequest();
-        $post->title = $attributes['title'];
-        $post->body = $attributes['body'];
 
         if (!empty($attributes['featured_image'])) {
-            $this->deleteImage($post->featured_image);
-            $post->featured_image = $this->storeImage($attributes['featured_image']);
+            $attributes['featured_image'] = $imageService->uploadHandler($attributes['featured_image'])->store();
         }
 
-        $post->save();
+        $post->update($attributes);
 
-        if (request()->has('category')) {
-            $post->categories()->sync(request('category'));
+        if (!empty($attributes['category'])) {
+            $post->categories()->sync($attributes['category']);
         }
 
         return back();
