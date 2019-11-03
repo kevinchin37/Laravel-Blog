@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Post;
 use App\Category;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use App\Services\ImageService;
 
 class PostController extends Controller {
@@ -97,6 +96,7 @@ class PostController extends Controller {
 
         if (!empty($attributes['featured_image'])) {
             $attributes['featured_image'] = $imageService->uploadHandler($attributes['featured_image'])->store();
+            $imageService->deleteImage($post->featured_image);
         }
 
         $post->update($attributes);
