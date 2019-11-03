@@ -31,14 +31,14 @@
                     </select>
                 </div>
 
-                @if ($post->featured_image)
-                    <img class="img-thumbnail" src="{{ asset('storage/' . $post->featured_image ) }}" alt="">
-                @endif
-
                 <div class="row">
                     <div class="col-md-6">
                         <label for="featured-image">Update Image</label>
                         <input type="file" id="featured-image" name="featured_image">
+
+                        @if (!empty($post->featured_image))
+                            <img class="img-thumbnail img-fluid" src="{{ asset('storage/' . $post->featured_image ) }}" alt="">
+                        @endif
                     </div>
 
                     <div class="col-md-6">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
 
-                <div class="row"><button type="submit" class="btn btn-outline-dark">Update</button></div>
+                <button type="submit" class="btn btn-outline-dark mt-3">Update</button>
             </form>
         </div>
     </div>
