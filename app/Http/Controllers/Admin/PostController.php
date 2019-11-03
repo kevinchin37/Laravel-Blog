@@ -54,9 +54,9 @@ class PostController extends Controller {
 
         $post = $post->create($attributes);
 
-        // if (!empty($attributes['category'])) {
-        //     $post->addCategory($attributes['category']);
-        // }
+        if (!empty($attributes['category'])) {
+            $post->addCategory($attributes['category']);
+        }
 
         return redirect('/admin/posts/' . $post->slug . '/edit');
     }
@@ -136,6 +136,7 @@ class PostController extends Controller {
             'title' => 'required',
             'body' => 'nullable',
             'featured_image' => 'sometimes|file|image|max:5000',
+            'category' => 'nullable'
         ]);
     }
 
