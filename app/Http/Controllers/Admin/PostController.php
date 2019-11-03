@@ -102,7 +102,7 @@ class PostController extends Controller {
         $post->update($attributes);
 
         if (!empty($attributes['category'])) {
-            $post->categories()->sync($attributes['category']);
+            $post->updateCategory($attributes['category']);
         }
 
         return back();
@@ -136,16 +136,5 @@ class PostController extends Controller {
             'featured_image' => 'sometimes|file|image|max:5000',
             'category' => 'nullable'
         ]);
-    }
-
-    public function storeImage($image) {
-        $file_name = time() . '-' . $image->getClientOriginalName();
-        return $image->storeAs('uploads', $file_name, 'public');
-    }
-
-    public function deleteImage($image) {
-        if (Storage::disk('public')->exists($image)) {
-            Storage::disk('public')->delete($image);
-        }
     }
 }
