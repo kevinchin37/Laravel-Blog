@@ -13,26 +13,24 @@ class Post extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function addCategory($category)
-    {
-        if (!empty($category)) {
-            $this->categories()->attach($category);
-        }
+    public function addCategory($category) {
+        $this->categories()->attach($category);
     }
 
-    public function slugExist($slug)
-    {
+    public function updateCategory($category) {
+        $this->categories()->sync($category);
+    }
+
+    public function slugExist($slug) {
        return $this->where('slug', '=', $slug)->get()->isNotEmpty();
     }
 
-    public function incrementSlug($slug)
-    {
+    public function incrementSlug($slug) {
         $slugCount = $this->where('slug', 'like', $slug . '-%')->get()->count() + 1;
         return $slug . '-' . $slugCount;
     }
 
-    public function getSlug($title)
-    {
+    public function getSlug($title) {
         $slug = str_slug($title);
         if ($this->slugExist($slug)) {
             $slug = $this->incrementSlug($slug);
@@ -46,8 +44,7 @@ class Post extends Model
      *
      * @return string
      */
-    public function getRouteKeyName()
-    {
+    public function getRouteKeyName() {
         return 'slug';
     }
 }
