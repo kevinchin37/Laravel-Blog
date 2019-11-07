@@ -119,16 +119,6 @@ class PostController extends Controller {
         return back();
     }
 
-    public function getSlug($title) {
-        $slug = str_slug($title);
-        if (Post::where('slug', '=', $slug)->get()->isNotEmpty()) {
-            $slugCount = (Post::where('slug', 'like', $slug . '-%')->get()->count()) + 1;
-            $slug = $slug . '-' . $slugCount;
-        }
-
-        return $slug;
-    }
-
     public function validateRequest() {
         return request()->validate([
             'title' => 'required',
