@@ -9,6 +9,7 @@ class PostSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        DB::table('posts')->delete();
         factory(App\Post::class, 25)->create();
     }
 }
