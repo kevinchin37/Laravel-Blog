@@ -36,11 +36,8 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Category $category)
-    {
-        $attributes = request()->validate([
-            'name' => 'required|unique:categories',
-        ]);
+    public function store(Category $category) {
+        $attributes = $this->validateRequest();
 
         $attributes['slug'] = str_slug($attributes['name']);
         $category->create($attributes);
@@ -92,5 +89,11 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+    }
+
+    public function validateRequest() {
+        return request()->validate([
+            'title' => 'required|unique:categories',
+        ]);
     }
 }
