@@ -28,6 +28,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     // Category
     Route::get('admin/categories', 'CategoryController@index');
     Route::get('admin/categories/{category}', 'CategoryController@show');
+    Route::get('admin/categories/{category}/edit', 'CategoryController@edit');
     Route::post('admin/categories/', 'CategoryController@store');
 });
 
