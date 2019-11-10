@@ -65,9 +65,10 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
-    {
-        //
+    public function edit(Category $category) {
+        return view('admin.category.edit', [
+            'category' => $category
+        ]);
     }
 
     /**
