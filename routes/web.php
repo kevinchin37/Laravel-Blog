@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['namespace' => 'Admin'], function () {
+Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     // Post
     Route::get('admin', 'PostController@index');
     Route::get('admin/posts', 'PostController@postIndex');

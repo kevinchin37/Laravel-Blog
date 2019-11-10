@@ -5,16 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Post;
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Services\ImageService;
 
-class PostController extends Controller
-{
+class PostController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         return view('admin.post.index', [
             'posts' => Post::all(),
         ]);
@@ -31,8 +30,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Category $category)
-    {
+    public function create(Category $category) {
         return view('admin.post.create',[
             'categories' => $category->getCategories(),
         ]);
@@ -44,17 +42,23 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Post $post)
-    {
+    public function store(ImageService $imageService) {
         $attributes = $this->validateRequest();
-        $attributes['slug'] = str_slug($attributes['title']);
+
+        $post = new Post;
+        $attributes['slug'] = $post->getSlug($attributes['title']);
+
+        if (!empty($attributes['featured_image'])) {
+            $attributes['featured_image'] = $imageService->uploadHandler($attributes['featured_image'])->store();
+        }
 
         $post = $post->create($attributes);
-        $post->categories()->attach(request('category'));
 
-        $this->storeImage($post);
+        if (!empty($attributes['category'])) {
+            $post->addCategory($attributes['category']);
+        }
 
-        return redirect('/admin/posts/' . $post->id . '/edit');
+        return redirect('/admin/posts/' . $post->slug . '/edit');
     }
 
     /**
@@ -63,8 +67,7 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
-    {
+    public function show(Post $post) {
         return view('admin.post.show', ['post' => $post]);
     }
 
@@ -74,8 +77,7 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
-    {
+    public function edit(Post $post) {
         return view('admin.post.edit', [
             'post' => $post,
             'categories' => Category::all(),
@@ -89,12 +91,19 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Post $post)
-    {
-        $post->update($this->validateRequest());
-        $post->categories()->sync(request('category'));
+    public function update(Post $post, ImageService $imageService) {
+        $attributes = $this->validateRequest();
 
-        $this->storeImage($post);
+        if (!empty($attributes['featured_image'])) {
+            $attributes['featured_image'] = $imageService->uploadHandler($attributes['featured_image'])->store();
+            $imageService->deleteImage($post->featured_image);
+        }
+
+        $post->update($attributes);
+
+        if (!empty($attributes['category'])) {
+            $post->updateCategory($attributes['category']);
+        }
 
         return back();
     }
@@ -105,29 +114,17 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
-    {
+    public function destroy(Post $post) {
         $post->delete();
         return back();
     }
 
-    public function validateRequest()
-    {
+    public function validateRequest() {
         return request()->validate([
             'title' => 'required',
-            'body' => 'required',
+            'body' => 'nullable',
             'featured_image' => 'sometimes|file|image|max:5000',
+            'category' => 'nullable'
         ]);
-    }
-
-    public function storeImage($post)
-    {
-        if (request()->hasFile('featured_image')) {
-            $file_request = request()->file('featured_image');
-            $file_name = time() . '-' . $file_request->getClientOriginalName();
-            $post->update([
-                'featured_image' => $file_request->storeAs('uploads', $file_name, 'public')
-            ]);
-        }
     }
 }

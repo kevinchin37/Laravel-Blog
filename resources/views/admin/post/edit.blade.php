@@ -5,7 +5,7 @@
 @section('main_content')
     <div class="row">
         <div class="col-md-12">
-            <form action="/admin/posts/{{ $post->id }}" method="POST" enctype="multipart/form-data">
+            <form action="/admin/posts/{{ $post->slug }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div class="form-group">
@@ -31,16 +31,34 @@
                     </select>
                 </div>
 
-                @if ($post->featured_image)
-                    <img class="img-thumbnail" src="{{ asset('storage/' . $post->featured_image ) }}" alt="">
-                @endif
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="featured-image">Update Image</label>
+                        <input type="file" id="featured-image" name="featured_image">
 
-                <div class="form-group">
-                    <label for="featured-image">Update Featured Image</label>
-                    <input type="file" id="featured-image" name="featured_image">
+                        @if (!empty($post->featured_image))
+                            <img class="img-thumbnail img-fluid" src="{{ asset('storage/' . $post->featured_image ) }}" alt="">
+                        @endif
+                    </div>
+
+                    <div class="col-md-6">
+                        <ul>
+                            <li>Post ID: {{ $post->id }}</li>
+                            <li>Post Slug: {{ $post->slug }}</li>
+
+                            @if (!empty($post->categories))
+                                @foreach ($post->categories as $category)
+                                    <li>Category: {{ $category->name }}</li>
+                                @endforeach
+                            @endif
+
+                            <li>Published Date: {{ $post->created_at }}</li>
+                            <li>Last Modified: {{ $post->updated_at }}</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="row"><button type="submit" class="btn btn-outline-dark">Update</button></div>
+                <button type="submit" class="btn btn-outline-dark mt-3">Update</button>
             </form>
         </div>
     </div>
