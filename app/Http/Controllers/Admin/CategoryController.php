@@ -75,9 +75,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
-    {
-        //
+    public function update(Category $category) {
+        $attributes = $this->validateRequest();
+        $category->update($attributes);
+
+        return back();
     }
 
     /**
@@ -93,7 +95,7 @@ class CategoryController extends Controller
 
     public function validateRequest() {
         return request()->validate([
-            'title' => 'required|unique:categories',
+            'name' => 'required|unique:categories',
         ]);
     }
 }
