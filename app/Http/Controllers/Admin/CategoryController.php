@@ -97,6 +97,9 @@ class CategoryController extends Controller
     public function validateRequest() {
         return request()->validate([
             'name' => 'required|unique:categories',
+        ],[
+            'name.required' => 'The category name is required.',
+            'name.unique' => 'The category name already exists.',
         ]);
     }
 }
