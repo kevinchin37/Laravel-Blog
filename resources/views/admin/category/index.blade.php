@@ -21,6 +21,7 @@
                     <tr>
                         <th scope="col">Category ID</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Slug</th>
                         <th scope="col">Post Count</th>
                     </tr>
                 </thead>
@@ -30,6 +31,7 @@
                         <tr>
                             <th scope="row">{{ $category->id }}</th>
                             <td><a href="/admin/categories/{{ $category->id }}/edit">{{ $category->name }}</a></td>
+                            <td><a href="/admin/categories/{{ $category->id }}/edit">{{ $category->slug }}</a></td>
                             <td><a href="/admin/categories/{{ $category->id }}">{{ $category->posts->count() }}</a></td>
                         </tr>
                     @endforeach
