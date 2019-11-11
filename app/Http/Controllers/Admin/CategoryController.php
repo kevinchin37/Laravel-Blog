@@ -36,9 +36,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Category $category) {
+    public function store() {
         $attributes = $this->validateRequest();
 
+        $category = new Category;
         $attributes['slug'] = str_slug($attributes['name']);
         $category->create($attributes);
 
