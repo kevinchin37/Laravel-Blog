@@ -29,7 +29,7 @@
                     @foreach ($categories as $category)
                         <tr>
                             <th scope="row">{{ $category->id }}</th>
-                            <td><a href="/admin/categories/{{ $category->id }}">{{ $category->name }}</a></td>
+                            <td><a href="/admin/categories/{{ $category->id }}/edit">{{ $category->name }}</a></td>
                             <td><a href="/admin/categories/{{ $category->id }}">{{ $category->posts->count() }}</a></td>
                         </tr>
                     @endforeach
