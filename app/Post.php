@@ -13,12 +13,14 @@ class Post extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function addCategory($category) {
-        $this->categories()->attach($category);
+    public function addCategories($categories) {
+        foreach($categories as $category) {
+            $this->categories()->attach($category);
+        }
     }
 
-    public function updateCategory($category) {
-        $this->categories()->sync($category);
+    public function updateCategories($categories) {
+        $this->categories()->sync($categories);
     }
 
     public function slugExist($slug) {
