@@ -16,19 +16,19 @@
                     <textarea id="post-body" class="form-control" cols="30" rows="10" name="body">{{ $post->body }}</textarea>
                 </div>
 
-                <div class="form-group">
-                    <select class="form-control" name="category">
-                        <option value="" selected> -- Select a Category -- </option>
-                        @foreach ($categories as $category)
-                            @if ($post->categories->count())
-                                @foreach ($post->categories as $post_category)
-                                    <option value="{{ $category->id }}" {{ ($post_category->id == $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
-                                @endforeach
-                            @else
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endif
-                        @endforeach
-                    </select>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Select Categories</h4>
+                        <ul class="list-group">
+                            @foreach ($post->categories as $postCategory)
+                                <li class="list-group-item"><input type="checkbox" name="category[]" value="{{$postCategory->id}}" checked>{{$postCategory->name}}</li>
+                            @endforeach
+
+                            @foreach ($categories->diff($post->categories) as $category)
+                                <li class="list-group-item"><input type="checkbox" name="category[]" value="{{$category->id}}">{{$category->name}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
 
                 <div class="row">
