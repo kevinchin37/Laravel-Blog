@@ -55,7 +55,7 @@ class PostController extends Controller {
         $post = $post->create($attributes);
 
         if (!empty($attributes['category'])) {
-            $post->addCategory($attributes['category']);
+            $post->addCategories($attributes['category']);
         }
 
         return redirect('/admin/posts/' . $post->slug . '/edit');
@@ -102,7 +102,7 @@ class PostController extends Controller {
         $post->update($attributes);
 
         if (!empty($attributes['category'])) {
-            $post->updateCategory($attributes['category']);
+            $post->updateCategories($attributes['category']);
         }
 
         return back();
