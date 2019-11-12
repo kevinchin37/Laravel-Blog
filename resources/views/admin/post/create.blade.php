@@ -15,19 +15,11 @@
                     <textarea id="" class="form-control" cols="30" rows="10" name="body"></textarea>
                 </div>
 
-                <div class="form-group ">
-                    <select class="form-control" name="category">
-                        <option disabled selected value> -- Select a Category -- </option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select>
+                <div class="form-group">
+                    @foreach ($categories as $category)
+                        <input type="checkbox" name="category[]" value="{{$category->id}}">{{$category->name}}<br/>
+                    @endforeach
                 </div>
-
-                {{-- <div class="form-group ">
-                    <label for="featured-image">Featured Image</label>
-                    <input type="file" id="featured-image" name="featured_image">
-                </div> --}}
 
                 <div class="form-group">
                     <div class="custom-file">
