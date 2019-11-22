@@ -5,7 +5,7 @@
 @section('main_content')
     <div class="row">
         <div class="col-md-12">
-            <form action="/admin/categories/{{ $category->id }}" method="POST" enctype="multipart/form-data">
+            <form action="/admin/categories/{{ $category->slug }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div class="form-group">

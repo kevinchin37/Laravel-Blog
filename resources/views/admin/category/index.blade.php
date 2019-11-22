@@ -31,12 +31,12 @@
                     @foreach ($categories as $category)
                         <tr>
                             <th scope="row">{{ $category->id }}</th>
-                            <td><a href="/admin/categories/{{ $category->id }}/edit">{{ $category->name }}</a></td>
+                            <td><a href="/admin/categories/{{ $category->slug }}/edit">{{ $category->name }}</a></td>
                             <td>{{ $category->slug }}</td>
-                            <td><a href="/admin/categories/{{ $category->id }}">{{ $category->posts->count() }}</a></td>
+                            <td><a href="/admin/categories/{{ $category->slug }}">{{ $category->posts->count() }}</a></td>
 
                             <td>
-                                <form action="/admin/categories/{{ $category->id }}" method="POST">
+                                <form action="/admin/categories/{{ $category->slug }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit">Delete</button>
