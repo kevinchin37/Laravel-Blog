@@ -16,22 +16,6 @@
                     <textarea id="post-body" class="form-control" cols="30" rows="10" name="body">{{ $post->body }}</textarea>
                 </div>
 
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4>Select Categories</h4>
-                            <ul class="list-group taxonomy-wrapper {{ (count($categories) > 5 ? 'scroll-enable' : '') }}">
-                                @foreach ($post->categories as $postCategory)
-                                    <li class="list-group-item"><input type="checkbox" name="category[]" value="{{$postCategory->id}}" checked>{{$postCategory->name}}</li>
-                                @endforeach
-
-                                @foreach ($categories->diff($post->categories) as $category)
-                                    <li class="list-group-item"><input type="checkbox" name="category[]" value="{{$category->id}}">{{$category->name}}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="row">
                     <div class="col-md-6">
@@ -57,6 +41,23 @@
                             <li>Published Date: {{ $post->created_at }}</li>
                             <li>Last Modified: {{ $post->updated_at }}</li>
                         </ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Select Categories</h4>
+                            <ul class="list-group taxonomy-wrapper {{ (count($categories) > 5 ? 'scroll-enable' : '') }}">
+                                @foreach ($post->categories as $postCategory)
+                                    <li class="list-group-item"><input type="checkbox" name="category[]" value="{{$postCategory->id}}" checked>{{$postCategory->name}}</li>
+                                @endforeach
+
+                                @foreach ($categories->diff($post->categories) as $category)
+                                    <li class="list-group-item"><input type="checkbox" name="category[]" value="{{$category->id}}">{{$category->name}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
