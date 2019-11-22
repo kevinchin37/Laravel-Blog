@@ -18,9 +18,9 @@
                     @foreach ($category->posts as $post)
                         <tr>
                             <th scope="row">{{ $post->id }}</th>
-                            <td><a href="/admin/posts/{{ $post->id }}/edit">{{ $post->title }}</a></td>
+                            <td><a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a></td>
                             <td>
-                                <form action="/admin/posts/{{ $post->id }}" method="POST">
+                                <form action="/admin/posts/{{ $post->slug }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit">Delete</button>
