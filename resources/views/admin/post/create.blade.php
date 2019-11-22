@@ -16,9 +16,16 @@
                 </div>
 
                 <div class="form-group">
-                    @foreach ($categories as $category)
-                        <input type="checkbox" name="category[]" value="{{$category->id}}">{{$category->name}}<br/>
-                    @endforeach
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Select Categories</h4>
+                            <ul class="list-group taxonomy-wrapper {{ (count($categories) > 5 ? 'scroll-enable' : '') }}">
+                                @foreach ($categories as $category)
+                                    <li class="list-group-item"><input type="checkbox" name="category[]" value="{{$category->id}}">{{$category->name}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
