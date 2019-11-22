@@ -31,13 +31,6 @@
                         <ul>
                             <li>Post ID: {{ $post->id }}</li>
                             <li>Post Slug: {{ $post->slug }}</li>
-
-                            @if (!empty($post->categories))
-                                @foreach ($post->categories as $category)
-                                    <li>Category: {{ $category->name }}</li>
-                                @endforeach
-                            @endif
-
                             <li>Published Date: {{ $post->created_at }}</li>
                             <li>Last Modified: {{ $post->updated_at }}</li>
                         </ul>
