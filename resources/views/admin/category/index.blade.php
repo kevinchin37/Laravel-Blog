@@ -23,6 +23,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Slug</th>
                         <th scope="col">Post Count</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
 
@@ -31,8 +32,16 @@
                         <tr>
                             <th scope="row">{{ $category->id }}</th>
                             <td><a href="/admin/categories/{{ $category->id }}/edit">{{ $category->name }}</a></td>
-                            <td><a href="/admin/categories/{{ $category->id }}/edit">{{ $category->slug }}</a></td>
+                            <td>{{ $category->slug }}</td>
                             <td><a href="/admin/categories/{{ $category->id }}">{{ $category->posts->count() }}</a></td>
+
+                            <td>
+                                <form action="/admin/categories/{{ $category->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
