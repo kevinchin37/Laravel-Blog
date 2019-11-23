@@ -32,6 +32,9 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::patch('admin/categories/{category}', 'CategoryController@update');
     Route::post('admin/categories/', 'CategoryController@store');
     Route::delete('admin/categories/{category}', 'CategoryController@destroy');
+
+    //Tag
+    Route::resource('admin/tags', 'TagController')->except(['create']);
 });
 
 Auth::routes();
