@@ -25,6 +25,14 @@
                                 @endforeach
                             </ul>
                         </div>
+                        <div class="col-md-6">
+                            <h4>Select Tags</h4>
+                            <ul class="list-group taxonomy-wrapper {{ (count($tags) > 5 ? 'scroll-enable' : '') }}">
+                                @foreach ($tags as $tag)
+                                    <li class="list-group-item"><input type="checkbox" name="tags[]" value="{{$tag->id}}">{{$tag->name}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
 

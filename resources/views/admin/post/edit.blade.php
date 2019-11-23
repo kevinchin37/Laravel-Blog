@@ -51,6 +51,19 @@
                                 @endforeach
                             </ul>
                         </div>
+
+                        <div class="col-md-6">
+                            <h4>Select tags</h4>
+                            <ul class="list-group taxonomy-wrapper {{ (count($tags) > 5 ? 'scroll-enable' : '') }}">
+                                @foreach ($post->tags as $postTag)
+                                    <li class="list-group-item"><input type="checkbox" name="tags[]" value="{{$postTag->id}}" checked>{{$postTag->name}}</li>
+                                @endforeach
+
+                                @foreach ($tags->diff($post->tags) as $tag)
+                                    <li class="list-group-item"><input type="checkbox" name="tags[]" value="{{$tag->id}}">{{$tag->name}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
