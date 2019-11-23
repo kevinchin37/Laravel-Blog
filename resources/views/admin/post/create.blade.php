@@ -15,19 +15,18 @@
                     <textarea id="" class="form-control" cols="30" rows="10" name="body"></textarea>
                 </div>
 
-                <div class="form-group ">
-                    <select class="form-control" name="category">
-                        <option disabled selected value> -- Select a Category -- </option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Select Categories</h4>
+                            <ul class="list-group taxonomy-wrapper {{ (count($categories) > 5 ? 'scroll-enable' : '') }}">
+                                @foreach ($categories as $category)
+                                    <li class="list-group-item"><input type="checkbox" name="category[]" value="{{$category->id}}">{{$category->name}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-
-                {{-- <div class="form-group ">
-                    <label for="featured-image">Featured Image</label>
-                    <input type="file" id="featured-image" name="featured_image">
-                </div> --}}
 
                 <div class="form-group">
                     <div class="custom-file">

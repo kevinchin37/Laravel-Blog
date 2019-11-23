@@ -36,7 +36,7 @@
                             @if ($post->categories->count())
                                 <td>
                                     @foreach ($post->categories as $category)
-                                        <a href="/admin/categories/{{ $category->id }}">{{ $category->name }}</a>
+                                        <a href="/admin/categories/{{ $category->slug }}">{{ $category->name }}</a>
                                     @endforeach
                                 </td>
                             @endif

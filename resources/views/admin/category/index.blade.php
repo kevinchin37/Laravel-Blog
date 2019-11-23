@@ -21,7 +21,9 @@
                     <tr>
                         <th scope="col">Category ID</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Slug</th>
                         <th scope="col">Post Count</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
 
@@ -29,12 +31,30 @@
                     @foreach ($categories as $category)
                         <tr>
                             <th scope="row">{{ $category->id }}</th>
-                            <td><a href="/admin/categories/{{ $category->id }}">{{ $category->name }}</a></td>
-                            <td><a href="/admin/categories/{{ $category->id }}">{{ $category->posts->count() }}</a></td>
+                            <td><a href="/admin/categories/{{ $category->slug }}/edit">{{ $category->name }}</a></td>
+                            <td>{{ $category->slug }}</td>
+                            <td><a href="/admin/categories/{{ $category->slug }}">{{ $category->posts->count() }}</a></td>
+
+                            <td>
+                                <form action="/admin/categories/{{ $category->slug }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
     </div>
 @endsection

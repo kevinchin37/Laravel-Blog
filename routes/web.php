@@ -28,7 +28,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     // Category
     Route::get('admin/categories', 'CategoryController@index');
     Route::get('admin/categories/{category}', 'CategoryController@show');
+    Route::get('admin/categories/{category}/edit', 'CategoryController@edit');
+    Route::patch('admin/categories/{category}', 'CategoryController@update');
     Route::post('admin/categories/', 'CategoryController@store');
+    Route::delete('admin/categories/{category}', 'CategoryController@destroy');
 });
 
 Auth::routes();

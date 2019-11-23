@@ -24,3 +24,15 @@ html, body {
     overflow: auto;
     padding: 25px;
 }
+
+/* Category / Tag */
+.taxonomy-wrapper {
+    max-height: 241px;
+    overflow-x: hidden;
+}
+.taxonomy-wrapper.scroll-enable {
+    overflow-y: scroll;
+}
+.taxonomy-wrapper input[type='checkbox'] {
+    margin-right: 5px;
+}

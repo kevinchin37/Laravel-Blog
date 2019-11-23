@@ -36,12 +36,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Category $category)
-    {
-        $attributes = request()->validate([
-            'name' => 'required|unique:categories',
-        ]);
+    public function store() {
+        $attributes = $this->validateRequest();
 
+        $category = new Category;
         $attributes['slug'] = str_slug($attributes['name']);
         $category->create($attributes);
 
@@ -65,9 +63,10 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
-    {
-        //
+    public function edit(Category $category) {
+        return view('admin.category.edit', [
+            'category' => $category
+        ]);
     }
 
     /**
@@ -77,9 +76,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
-    {
-        //
+    public function update(Category $category) {
+        $attributes = $this->validateRequest();
+        $category->update($attributes);
+
+        return back();
     }
 
     /**
@@ -90,6 +91,16 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return back();
+    }
+
+    public function validateRequest() {
+        return request()->validate([
+            'name' => 'required|unique:categories',
+        ],[
+            'name.required' => 'The category name is required.',
+            'name.unique' => 'The category name already exists.',
+        ]);
     }
 }
