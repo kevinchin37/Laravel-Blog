@@ -16,6 +16,7 @@
                         <th scope="col">Title</th>
                         <th scope="col">Slug</th>
                         <th scope="col">Categories</th>
+                        <th scope="col">Tags</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -25,21 +26,25 @@
                         <tr>
                             <th scope="row">{{ $post->id }}</th>
 
+                            <td><a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a></td>
+
+                            <td>{{ $post->slug }}</td>
+
                             <td>
-                                <a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a>
-                            </td>
-
-                            <td {{ $post->categories->count() ? '' : 'colspan=2' }}>
-                                {{ $post->slug }}
-                            </td>
-
-                            @if ($post->categories->count())
-                                <td>
+                                @if ($post->categories->count())
                                     @foreach ($post->categories as $category)
                                         <a href="/admin/categories/{{ $category->slug }}">{{ $category->name }}</a>
                                     @endforeach
-                                </td>
-                            @endif
+                                @endif
+                            </td>
+
+                            <td>
+                                @if ($post->tags->count())
+                                    @foreach ($post->tags as $tag)
+                                        <a href="/admin/tags/{{ $tag->slug }}">{{ $tag->name }}</a>
+                                    @endforeach
+                                @endif
+                            </td>
 
                             <td>
                                 <form action="/admin/posts/{{ $post->slug }}" method="POST">

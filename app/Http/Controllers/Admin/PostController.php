@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Post;
 use App\Category;
+use App\Tag;
 use App\Http\Controllers\Controller;
 use App\Services\ImageService;
 
@@ -30,9 +31,10 @@ class PostController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Category $category) {
+    public function create(Category $category, Tag $tags) {
         return view('admin.post.create',[
             'categories' => $category->getCategories(),
+            'tags'=> $tags->getTags(),
         ]);
     }
 
@@ -58,6 +60,10 @@ class PostController extends Controller {
             $post->addCategories($attributes['category']);
         }
 
+        if (!empty($attributes['tags'])) {
+            $post->addTags($attributes['tags']);
+        }
+
         return redirect('/admin/posts/' . $post->slug . '/edit');
     }
 
@@ -81,6 +87,7 @@ class PostController extends Controller {
         return view('admin.post.edit', [
             'post' => $post,
             'categories' => Category::all(),
+            'tags' => Tag::all(),
         ]);
     }
 
@@ -105,6 +112,10 @@ class PostController extends Controller {
             $post->updateCategories($attributes['category']);
         }
 
+        if (!empty($attributes['tags'])) {
+            $post->updateTags($attributes['tags']);
+        }
+
         return back();
     }
 
@@ -124,7 +135,8 @@ class PostController extends Controller {
             'title' => 'required',
             'body' => 'nullable',
             'featured_image' => 'sometimes|file|image|max:5000',
-            'category' => 'nullable'
+            'category' => 'nullable',
+            'tags' => 'nullable'
         ]);
     }
 }

@@ -23,6 +23,21 @@ class Post extends Model
         $this->categories()->sync($categories);
     }
 
+    public function tags() {
+        return $this->belongsToMany(Tag::class);
+    }
+
+
+    public function addTags($tags) {
+        foreach($tags as $tag) {
+            $this->tags()->attach($tag);
+        }
+    }
+
+    public function updateTags($tags) {
+        $this->tags()->sync($tags);
+    }
+
     public function slugExist($slug) {
        return $this->where('slug', '=', $slug)->get()->isNotEmpty();
     }
