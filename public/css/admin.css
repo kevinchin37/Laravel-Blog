@@ -42,3 +42,6 @@ body {
 .taxonomy-wrapper input[type='checkbox'] {
     margin-right: 5px;
 }
+.taxonomy-wrapper > label {
+    margin-bottom: 3px;
+}
