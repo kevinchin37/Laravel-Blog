@@ -35,6 +35,9 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
 
     //Tag
     Route::resource('admin/tags', 'TagController')->except(['create']);
+
+    // Users
+    Route::resource('admin/users', 'UserController')->middleware('role.admin');
 });
 
 Auth::routes();
