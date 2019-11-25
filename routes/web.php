@@ -33,11 +33,14 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::post('admin/categories/', 'CategoryController@store');
     Route::delete('admin/categories/{category}', 'CategoryController@destroy');
 
-    //Tag
+    // Tag
     Route::resource('admin/tags', 'TagController')->except(['create']);
 
-    // Users
+    // User
     Route::resource('admin/users', 'UserController')->middleware('role.admin');
+
+    //Role
+    Route::resource('admin/roles', 'RoleController')->middleware('role.admin');
 });
 
 Auth::routes();
