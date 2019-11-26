@@ -7,7 +7,7 @@
         @csrf
         <div class="form-group">
             <label class="sr-only" for="new-category">Category</label>
-            <input type="text" name="name" id="new-category" class="mr-sm-2">
+            <input type="text" name="name" id="new-category" class="mr-sm-2" value="{{old('name')}}">
             <button type="submit" class="btn btn-primary">Add Category</button>
         </div>
     </form>

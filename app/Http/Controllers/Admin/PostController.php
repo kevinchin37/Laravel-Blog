@@ -8,6 +8,8 @@ use App\Tag;
 use App\Http\Controllers\Controller;
 use App\Services\ImageService;
 
+use Illuminate\Support\Facades\Route;
+
 class PostController extends Controller {
     /**
      * Display a listing of the resource.
@@ -32,6 +34,18 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create(Category $category, Tag $tags) {
+        // var_dump(class_basename(Route::current()->controller));
+        // var_dump(Route::current()->controller);
+        // var_dump(Route::current()->getActionName());
+        // var_dump(Route::current()->getActionMethod());
+        // var_dump(Route::getRoutes()->getRoutes());
+
+        // foreach (Route::getRoutes()->getRoutes() as $key => $route) {
+        //     // var_dump(class_basename(Route::current()->controller));
+        //     // var_dump($route->getActionname());
+        // }
+        // exit;
+
         return view('admin.post.create',[
             'categories' => $category->getCategories(),
             'tags'=> $tags->getTags(),
