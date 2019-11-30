@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PostSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -10,7 +10,7 @@ class PostSeeder extends Seeder
      * @return void
      */
     public function run() {
-        DB::table('posts')->delete();
-        factory(App\Post::class, 25)->create();
+        DB::table('categories')->delete();
+        factory(App\Category::class, 25)->create();
     }
 }

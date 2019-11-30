@@ -17,6 +17,8 @@ class CreateRolesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
         });
+
+        Artisan::call('db:seed', ['--class' => RoleSeeder::class]);
     }
 
     /**

@@ -15,15 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'role.admin']], function () {
+Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     // Post
     Route::get('admin', 'PostController@index');
     Route::get('admin/posts', 'PostController@postIndex');
-    Route::get('admin/posts/create', 'PostController@create');
-    Route::get('admin/posts/{post}/edit', 'PostController@edit');
-    Route::post('admin/posts', 'PostController@store');
-    Route::patch('admin/posts/{post}', 'PostController@update');
-    Route::delete('admin/posts/{post}', 'PostController@destroy');
+    Route::get('admin/posts/create', 'PostController@create')->middleware('role.admin');
+    Route::get('admin/posts/{post}/edit', 'PostController@edit')->middleware('role.admin');
+    Route::post('admin/posts', 'PostController@store')->middleware('role.admin');
+    Route::patch('admin/posts/{post}', 'PostController@update')->middleware('role.admin');
+    Route::delete('admin/posts/{post}', 'PostController@destroy')->middleware('role.admin');
 
     // Category
     Route::get('admin/categories', 'CategoryController@index');
@@ -37,10 +37,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'role.admin']], f
     Route::resource('admin/tags', 'TagController')->except(['create']);
 
     // User
-    Route::resource('admin/users', 'UserController')->middleware('role.admin');
+    Route::resource('admin/users', 'UserController');
 
     //Role
-    Route::resource('admin/roles', 'RoleController')->middleware('role.admin');
+    Route::resource('admin/roles', 'RoleController');
 });
 
 Auth::routes();

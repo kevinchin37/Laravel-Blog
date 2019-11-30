@@ -58,9 +58,10 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
-    {
-        //
+    public function edit(Role $role) {
+        return view('admin.role.edit', [
+            'role' => $role
+        ]);
     }
 
     /**
