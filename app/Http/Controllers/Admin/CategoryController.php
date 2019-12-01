@@ -13,8 +13,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Category $category)
-    {
+    public function index(Category $category) {
         return view('admin.category.index',[
             'categories' => $category->all(),
         ]);
@@ -25,8 +24,8 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
+        $this->authorize('create', Category::class);
         return view('admin.category.create');
     }
 
@@ -37,8 +36,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store() {
-        $attributes = $this->validateRequest();
+        $this->authorize('create', Category::class);
 
+        $attributes = $this->validateRequest();
         $category = new Category;
         $attributes['slug'] = str_slug($attributes['name']);
         $category->create($attributes);
@@ -52,8 +52,7 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
-    {
+    public function show(Category $category) {
         return view('admin.category.show', ['category' => $category]);
     }
 
@@ -64,6 +63,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category) {
+        $this->authorize('update', $category);
+
         return view('admin.category.edit', [
             'category' => $category
         ]);
@@ -77,6 +78,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Category $category) {
+        $this->authorize('update', $category);
         $attributes = $this->validateRequest();
         $category->update($attributes);
 
@@ -89,9 +91,10 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
-    {
+    public function destroy(Category $category) {
+        $this->authorize('delete', $category);
         $category->delete();
+
         return back();
     }
 
