@@ -27,7 +27,6 @@ class PostController extends Controller {
      */
     public function create(Category $category, Tag $tags) {
         $this->authorize('create', Post::class);
-
         return view('admin.post.create',[
             'categories' => $category->getCategories(),
             'tags'=> $tags->getTags(),
@@ -125,8 +124,8 @@ class PostController extends Controller {
      */
     public function destroy(Post $post) {
         $this->authorize('delete', $post);
-
         $post->delete();
+
         return back();
     }
 
