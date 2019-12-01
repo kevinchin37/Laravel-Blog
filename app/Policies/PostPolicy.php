@@ -52,6 +52,17 @@ class PostPolicy
         return $user->hasRole('Editor');
     }
 
+    /**
+     * Determine whether the user can delete the post.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Post  $post
+     * @return mixed
+     */
+    public function delete(User $user, Post $post) {
+        return $user->hasRole('Admin');
+    }
+
     public function before($user, $ability) {
         if ($user->hasRole('Admin')) {
             return true;
