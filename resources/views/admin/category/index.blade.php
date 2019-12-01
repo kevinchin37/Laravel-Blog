@@ -3,14 +3,15 @@
 @section('header_title', 'Categories')
 
 @section('header_links')
-    <form action="/admin/categories" method="POST" class="form-inline">
-        @csrf
-        <div class="form-group">
-            <label class="sr-only" for="new-category">Category</label>
-            <input type="text" name="name" id="new-category" class="mr-sm-2">
-            <button type="submit" class="btn btn-primary">Add Category</button>
-        </div>
-    </form>
+    @can('create', App\Category::class)
+        <form action="/admin/categories" method="POST" class="form-inline">
+            @csrf
+            <div class="form-group">
+                <input type="text" name="name" class="mr-sm-2">
+                <button type="submit" class="btn btn-primary">Add Category</button>
+            </div>
+        </form>
+    @endcan
 @endsection
 
 @section('main_content')
@@ -36,11 +37,13 @@
                             <td><a href="/admin/categories/{{ $category->slug }}">{{ $category->posts->count() }}</a></td>
 
                             <td>
-                                <form action="/admin/categories/{{ $category->slug }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">Delete</button>
-                                </form>
+                                @can('delete', $category)
+                                    <form action="/admin/categories/{{ $category->slug }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
