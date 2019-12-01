@@ -2,11 +2,11 @@
 
 @section('header_title', 'Posts')
 
-@can('create', App\Post::class)
-    @section('header_links')
+@section('header_links')
+    @can('create', App\Post::class)
         <a class="btn btn-primary" href="/admin/posts/create">Create new Post</a>
-    @endsection
-@endcan
+    @endcan
+@endsection
 
 @section('main_content')
     <div class="row">
