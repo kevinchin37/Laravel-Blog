@@ -20,18 +20,14 @@ class PostController extends Controller {
         ]);
     }
 
-    public function postIndex(Post $post) {
-        return view('admin.post.index', [
-            'posts' => $post->all(),
-        ]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create(Category $category, Tag $tags) {
+        $this->authorize('create', Post::class);
+
         return view('admin.post.create',[
             'categories' => $category->getCategories(),
             'tags'=> $tags->getTags(),
@@ -45,6 +41,7 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(ImageService $imageService) {
+        $this->authorize('create', Post::class);
         $attributes = $this->validateRequest();
 
         $post = new Post;
@@ -99,6 +96,7 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Post $post, ImageService $imageService) {
+        $this->authorize('update', $post);
         $attributes = $this->validateRequest();
 
         if (!empty($attributes['featured_image'])) {
@@ -126,6 +124,8 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post) {
+        $this->authorize('delete', $post);
+
         $post->delete();
         return back();
     }
