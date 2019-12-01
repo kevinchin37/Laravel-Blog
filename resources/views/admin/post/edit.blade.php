@@ -75,7 +75,9 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-outline-dark mt-3">Update</button>
+                @can('update', $post)
+                    <button type="submit" class="btn btn-outline-dark mt-3">Update</button>
+                @endcan
             </form>
         </div>
     </div>
