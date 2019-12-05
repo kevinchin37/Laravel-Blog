@@ -37,8 +37,8 @@ class CategoryController extends Controller
      */
     public function store() {
         $this->authorize('create', Category::class);
-
         $attributes = $this->validateRequest();
+
         $category = new Category;
         $attributes['slug'] = str_slug($attributes['name']);
         $category->create($attributes);
@@ -78,8 +78,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Category $category) {
-        $this->authorize('update', $category);
+        $this->authorize('update', Category::class);
         $attributes = $this->validateRequest();
+
         $category->update($attributes);
 
         return back();
@@ -92,7 +93,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category) {
-        $this->authorize('delete', $category);
+        $this->authorize('delete', Category::class);
         $category->delete();
 
         return back();
