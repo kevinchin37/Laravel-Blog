@@ -13,8 +13,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Category $category)
-    {
+    public function index(Category $category) {
         return view('admin.category.index',[
             'categories' => $category->all(),
         ]);
@@ -25,8 +24,8 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
+        $this->authorize('create', Category::class);
         return view('admin.category.create');
     }
 
@@ -37,6 +36,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store() {
+        $this->authorize('create', Category::class);
         $attributes = $this->validateRequest();
 
         $category = new Category;
@@ -52,8 +52,7 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
-    {
+    public function show(Category $category) {
         return view('admin.category.show', ['category' => $category]);
     }
 
@@ -64,6 +63,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category) {
+        $this->authorize('update', $category);
+
         return view('admin.category.edit', [
             'category' => $category
         ]);
@@ -77,7 +78,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Category $category) {
+        $this->authorize('update', Category::class);
         $attributes = $this->validateRequest();
+
         $category->update($attributes);
 
         return back();
@@ -89,9 +92,10 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
-    {
+    public function destroy(Category $category) {
+        $this->authorize('delete', Category::class);
         $category->delete();
+
         return back();
     }
 

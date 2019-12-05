@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     // Post
     Route::get('admin', 'PostController@index');
-    Route::get('admin/posts', 'PostController@postIndex');
+    Route::get('admin/posts', 'PostController@index');
     Route::get('admin/posts/create', 'PostController@create');
     Route::get('admin/posts/{post}/edit', 'PostController@edit');
     Route::post('admin/posts', 'PostController@store');
@@ -33,8 +33,14 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::post('admin/categories/', 'CategoryController@store');
     Route::delete('admin/categories/{category}', 'CategoryController@destroy');
 
-    //Tag
+    // Tag
     Route::resource('admin/tags', 'TagController')->except(['create']);
+
+    // User
+    Route::resource('admin/users', 'UserController')->middleware('role.admin');
+
+    //Role
+    Route::resource('admin/roles', 'RoleController')->middleware('role.admin');
 });
 
 Auth::routes();

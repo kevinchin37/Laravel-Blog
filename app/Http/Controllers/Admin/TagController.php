@@ -13,21 +13,10 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         return view('admin.tag.index', [
             'tags' => Tag::all(),
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -36,10 +25,11 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
-    {
+    public function store() {
+        $this->authorize('create', Tag::class);
         $attributes = $this->validateRequest();
-        $tag = new tag;
+
+        $tag = new Tag;
         $attributes['slug'] = str_slug($attributes['name']);
         $tag->create($attributes);
 
@@ -52,8 +42,7 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
-    {
+    public function show(Tag $tag) {
         return view('admin.tag.show', ['tag' => $tag]);
     }
 
@@ -63,8 +52,9 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
-    {
+    public function edit(Tag $tag) {
+        $this->authorize('update', Tag::class);
+
         return view('admin.tag.edit', [
             'tag' => $tag
         ]);
@@ -77,9 +67,10 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Tag $tag)
-    {
+    public function update(Tag $tag) {
+        $this->authorize('update', Tag::class);
         $attributes = $this->validateRequest();
+
         $tag->update($attributes);
 
         return back();
@@ -91,15 +82,16 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
-    {
+    public function destroy(Tag $tag) {
+        $this->authorize('delete', Tag::class);
         $tag->delete();
+
         return back();
     }
 
     public function validateRequest() {
         return request()->validate([
-            'name' => 'required|unique:categories',
+            'name' => 'required|unique:tags',
         ],[
             'name.required' => 'The tag name is required.',
             'name.unique' => 'The tag name already exists.',

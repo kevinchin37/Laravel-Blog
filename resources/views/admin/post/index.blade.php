@@ -3,7 +3,9 @@
 @section('header_title', 'Posts')
 
 @section('header_links')
-    <a class="btn btn-primary" href="/admin/posts/create">Create new Post</a>
+    @can('create', App\Post::class)
+        <a class="btn btn-primary" href="/admin/posts/create">Create new Post</a>
+    @endcan
 @endsection
 
 @section('main_content')
@@ -47,11 +49,13 @@
                             </td>
 
                             <td>
-                                <form action="/admin/posts/{{ $post->slug }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">Delete</button>
-                                </form>
+                                @can('delete', $post)
+                                    <form action="/admin/posts/{{ $post->slug }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
