@@ -3,14 +3,15 @@
 @section('header_title', 'Tags')
 
 @section('header_links')
-    <form action="/admin/tags" method="POST" class="form-inline">
-        @csrf
-        <div class="form-group">
-            <label class="sr-only" for="new-tag">Tag</label>
-            <input type="text" name="name" id="new-tag" class="mr-sm-2">
-            <button type="submit" class="btn btn-primary">Add Tag</button>
-        </div>
-    </form>
+    @can('create', App\Tag::class)
+        <form action="/admin/tags" method="POST" class="form-inline">
+            @csrf
+            <div class="form-group">
+                <input type="text" name="name" class="mr-sm-2">
+                <button type="submit" class="btn btn-primary">Add Tag</button>
+            </div>
+        </form>
+    @endcan
 @endsection
 
 @section('main_content')
@@ -36,11 +37,13 @@
                             <td><a href="/admin/tags/{{ $tag->slug }}">{{ $tag->posts->count() }}</a></td>
 
                             <td>
-                                <form action="/admin/tags/{{ $tag->slug }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">Delete</button>
-                                </form>
+                                @can('delete', App\Tag::class)
+                                    <form action="/admin/tags/{{ $tag->slug }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
