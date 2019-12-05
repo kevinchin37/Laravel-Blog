@@ -2,17 +2,6 @@
 
 @section('header_title', 'Roles')
 
-@section('header_links')
-    <form action="/admin/roles" method="POST" class="form-inline">
-        @csrf
-        <div class="form-group">
-            <label class="sr-only" for="new-role">Role</label>
-            <input type="text" name="name" id="new-role" class="mr-sm-2">
-            <button type="submit" class="btn btn-primary">Add Role</button>
-        </div>
-    </form>
-@endsection
-
 @section('main_content')
     <div class="row">
         <div class="col-md-12">
@@ -27,7 +16,7 @@
                 <tbody>
                     @foreach ($roles as $role)
                         <tr>
-                            <td><a href="/admin/roles/{{ $role->id }}/edit">{{ $role->name }}</a></td>
+                            <td>{{ $role->name }}</td>
                             <td>
                                 <form action="/admin/roles/{{ $role->id }}" method="POST">
                                     @csrf
