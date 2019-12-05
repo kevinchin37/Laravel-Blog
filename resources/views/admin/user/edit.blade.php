@@ -14,9 +14,9 @@
 
                 <div class="form-group">
                     <h4>Role</h4>
-                    <select>
+                    <select name="role_id">
                         @foreach ($roles as $role)
-                            <option value="{{ $role->name }}" {{ ($user->role == $role) ? 'selected' : '' }}>{{ $role->name }}</option>
+                            <option value="{{ $role->id }}" {{ ($user->role->id == $role->id) ? 'selected' : '' }}>{{ $role->name }}</option>
                         @endforeach
                     </select>
                 </div>
