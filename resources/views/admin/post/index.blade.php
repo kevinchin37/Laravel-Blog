@@ -8,7 +8,7 @@
     @endcan
 @endsection
 
-@section('table_header_column')
+@section('table_header_columns')
     <th scope="col">ID</th>
     <th scope="col">Title</th>
     <th scope="col">Slug</th>

@@ -6,7 +6,7 @@
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        @yield('table_header_column')
+                        @yield('table_header_columns')
                     </tr>
                 </thead>
 
