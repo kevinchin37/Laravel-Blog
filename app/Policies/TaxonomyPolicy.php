@@ -3,17 +3,15 @@
 namespace App\Policies;
 
 use App\User;
-use App\Category;
-use App\Policies\PolicyTrait;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CategoryPolicy
+class TaxonomyPolicy
 {
     use HandlesAuthorization;
     use PolicyTrait;
 
     /**
-     * Determine whether the user can create categories.
+     * Determine whether the user can create categories or tags.
      *
      * @param  \App\User  $user
      * @return mixed
@@ -23,24 +21,22 @@ class CategoryPolicy
     }
 
     /**
-     * Determine whether the user can update the category.
+     * Determine whether the user can update the category or tag.
      *
      * @param  \App\User  $user
-     * @param  \App\Category  $category
      * @return mixed
      */
-    public function update(User $user, Category $category) {
+    public function update(User $user) {
         return $user->hasRole('Editor');
     }
 
     /**
-     * Determine whether the user can delete the category.
+     * Determine whether the user can delete the category or tag.
      *
      * @param  \App\User  $user
-     * @param  \App\Category  $category
      * @return mixed
      */
-    public function delete(User $user, Category $category) {
+    public function delete(User $user) {
         return $user->hasRole('Admin');
     }
 }
