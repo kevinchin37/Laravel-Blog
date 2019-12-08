@@ -12,7 +12,7 @@
                     <input type="text" class="form-control" name="name" placeholder="Category name" value="{{ $category->name }}"/>
                 </div>
 
-                <button type="submit" class="btn btn-outline-dark mt-3">Update</button>
+                <button type="submit" class="btn btn-primary mt-3">Update</button>
             </form>
         </div>
     </div>
