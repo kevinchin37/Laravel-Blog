@@ -21,9 +21,7 @@
     @foreach ($posts as $post)
         <tr>
             <th scope="row">{{ $post->id }}</th>
-
             <td><a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a></td>
-
             <td>{{ $post->slug }}</td>
 
             <td>
