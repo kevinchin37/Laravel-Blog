@@ -17,7 +17,6 @@
         <td class="actions">
             @include('admin.layouts.parts.buttons', [
                 'editUrl' => '/admin/users/' . $user->id . '/edit',
-                'viewUrl' => '',
             ])
 
             <form action="/admin/users/{{ $user->id }}" method="POST">
