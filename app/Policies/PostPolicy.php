@@ -29,7 +29,7 @@ class PostPolicy
      * @param  \App\Post  $post
      * @return mixed
      */
-    public function update(User $user, Post $post) {
+    public function update(User $user) {
         return $user->hasRole('Editor');
     }
 
@@ -40,7 +40,7 @@ class PostPolicy
      * @param  \App\Post  $post
      * @return mixed
      */
-    public function delete(User $user, Post $post) {
+    public function delete(User $user) {
         return $user->hasRole('Admin');
     }
 }
