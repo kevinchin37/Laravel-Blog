@@ -19,7 +19,7 @@
     <th scope="col">Name</th>
     <th scope="col">Slug</th>
     <th scope="col">Post Count</th>
-    <th scope="col">Action</th>
+    <th scope="col">Actions</th>
 @endsection
 
 @section('table_body')
@@ -30,12 +30,17 @@
         <td>{{ $tag->slug }}</td>
         <td><a href="/admin/tags/{{ $tag->slug }}">{{ $tag->posts->count() }}</a></td>
 
-        <td>
+        <td class="actions">
+            @include('admin.layouts.parts.buttons', [
+                'editUrl' => '/admin/tags/' . $tag->slug . '/edit',
+                'viewUrl' => '/tag/' . $tag->slug,
+            ])
+
             @can('delete', App\Tag::class)
                 <form action="/admin/tags/{{ $tag->slug }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
             @endcan
         </td>

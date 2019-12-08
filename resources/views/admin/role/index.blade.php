@@ -4,7 +4,7 @@
 
 @section('table_header_columns')
     <th scope="col">Name</th>
-    <th scope="col">Action</th>
+    <th scope="col">Actions</th>
 @endsection
 
 @section('table_body')
@@ -13,7 +13,7 @@
             <tr>
                 <td>{{ $role->name }}</td>
 
-                <td>
+                <td class="actions">
                     <form action="/admin/roles/{{ $role->id }}" method="POST">
                         @csrf
                         @method('DELETE')

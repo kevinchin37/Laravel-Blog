@@ -19,7 +19,7 @@
     <th scope="col">Name</th>
     <th scope="col">Slug</th>
     <th scope="col">Post Count</th>
-    <th scope="col">Action</th>
+    <th scope="col">Actions</th>
 @endsection
 
 @section('table_body')
@@ -30,7 +30,12 @@
         <td>{{ $category->slug }}</td>
         <td><a href="/admin/categories/{{ $category->slug }}">{{ $category->posts->count() }}</a></td>
 
-        <td>
+        <td class="actions">
+            @include('admin.layouts.parts.buttons', [
+                'editUrl' => '/admin/categories/' . $category->slug . '/edit',
+                'viewUrl' => '/category/' . $category->slug,
+            ])
+
             @can('delete', App\Category::class)
                 <form action="/admin/categories/{{ $category->slug }}" method="POST">
                     @csrf

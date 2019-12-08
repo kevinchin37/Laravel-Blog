@@ -5,7 +5,7 @@
 @section('table_header_columns')
     <th scope="col">User ID</th>
     <th scope="col">Name</th>
-    <th scope="col">Action</th>
+    <th scope="col">Actions</th>
 @endsection
 
 @section('table_body')
@@ -14,7 +14,12 @@
         <th scope="row">{{ $user->id }}</th>
         <td><a href="/admin/users/{{ $user->id }}/edit">{{ $user->name }}</a></td>
 
-        <td>
+        <td class="actions">
+            @include('admin.layouts.parts.buttons', [
+                'editUrl' => '/admin/users/' . $user->id . '/edit',
+                'viewUrl' => '',
+            ])
+
             <form action="/admin/users/{{ $user->id }}" method="POST">
                 @csrf
                 @method('DELETE')

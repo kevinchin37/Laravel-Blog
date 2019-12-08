@@ -5,7 +5,7 @@
 @section('table_header_columns')
     <th scope="col">Post ID</th>
     <th scope="col">Title</th>
-    <th scope="col">Action</th>
+    <th scope="col">Actions</th>
 @endsection
 
 @section('table_body')
@@ -14,12 +14,19 @@
         <th scope="row">{{ $post->id }}</th>
         <td><a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a></td>
 
-        <td>
-            <form action="/admin/posts/{{ $post->slug }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-            </form>
+        <td class="actions">
+            @include('admin.layouts.parts.buttons', [
+                'editUrl' => '/admin/posts/' . $post->slug . '/edit',
+                'viewUrl' => '/post/' . $post->slug,
+            ])
+
+            @can('delete', App\Category::class)
+                <form action="/admin/posts/{{ $post->slug }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            @endcan
         </td>
     </tr>
     @endforeach

@@ -14,7 +14,7 @@
     <th scope="col">Slug</th>
     <th scope="col">Categories</th>
     <th scope="col">Tags</th>
-    <th scope="col">Action</th>
+    <th scope="col">Actions</th>
 @endsection
 
 @section('table_body')
@@ -40,7 +40,12 @@
                 @endif
             </td>
 
-            <td>
+            <td class="actions">
+                @include('admin.layouts.parts.buttons', [
+                    'editUrl' => '/admin/posts/' . $post->slug . '/edit',
+                    'viewUrl' => '/post/' . $post->slug,
+                ])
+
                 @can('delete', App\Post::class)
                     <form action="/admin/posts/{{ $post->slug }}" method="POST">
                         @csrf

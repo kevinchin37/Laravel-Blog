@@ -10,7 +10,7 @@
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody class="model-data">
                     @yield('table_body')
                 </tbody>
             </table>
