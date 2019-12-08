@@ -41,7 +41,7 @@
             </td>
 
             <td>
-                @can('delete', $post)
+                @can('delete', App\Post::class)
                     <form action="/admin/posts/{{ $post->slug }}" method="POST">
                         @csrf
                         @method('DELETE')

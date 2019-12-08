@@ -31,7 +31,7 @@
         <td><a href="/admin/categories/{{ $category->slug }}">{{ $category->posts->count() }}</a></td>
 
         <td>
-            @can('delete', $category)
+            @can('delete', App\Category::class)
                 <form action="/admin/categories/{{ $category->slug }}" method="POST">
                     @csrf
                     @method('DELETE')
