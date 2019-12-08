@@ -3,7 +3,7 @@
 @section('header_title', 'Edit')
 
 @section('main_content')
-    <div class="row">
+    <div class="row post-edit-wrapper">
         <div class="col-md-12">
             <form action="/admin/posts/{{ $post->slug }}" method="POST" enctype="multipart/form-data">
                 @csrf
