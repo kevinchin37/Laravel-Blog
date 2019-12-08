@@ -13,11 +13,12 @@
     <tr>
         <th scope="row">{{ $post->id }}</th>
         <td><a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a></td>
+
         <td>
             <form action="/admin/posts/{{ $post->slug }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Delete</button>
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
             </form>
         </td>
     </tr>

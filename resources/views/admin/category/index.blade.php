@@ -35,7 +35,7 @@
                 <form action="/admin/categories/{{ $category->slug }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
             @endcan
         </td>
