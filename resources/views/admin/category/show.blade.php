@@ -31,3 +31,7 @@
     </tr>
     @endforeach
 @endsection
+
+@section('pagination_links')
+    {{ $category->posts->links() }}
+@endsection

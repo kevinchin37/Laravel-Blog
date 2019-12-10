@@ -47,3 +47,7 @@
     </tr>
     @endforeach
 @endsection
+
+@section('pagination_links')
+    {{ $categories->links() }}
+@endsection
