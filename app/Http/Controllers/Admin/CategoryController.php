@@ -53,7 +53,10 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category) {
-        return view('admin.category.show', ['category' => $category]);
+        return view('admin.category.show', [
+            'category' => $category,
+            'posts' => $category->posts()->paginate(15),
+        ]);
     }
 
     /**
