@@ -57,3 +57,7 @@
         </tr>
     @endforeach
 @endsection
+
+@section('pagination_links')
+    {{ $posts->links() }}
+@endsection
