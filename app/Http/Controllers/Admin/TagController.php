@@ -15,7 +15,7 @@ class TagController extends Controller
      */
     public function index() {
         return view('admin.tag.index', [
-            'tags' => Tag::all(),
+            'tags' => Tag::paginate(15),
         ]);
     }
 
@@ -43,7 +43,10 @@ class TagController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Tag $tag) {
-        return view('admin.tag.show', ['tag' => $tag]);
+        return view('admin.tag.show', [
+            'tag' => $tag,
+            'posts' => $tag->posts()->paginate(15),
+        ]);
     }
 
     /**
