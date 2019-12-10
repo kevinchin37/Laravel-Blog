@@ -9,7 +9,7 @@
 @endsection
 
 @section('table_body')
-    @foreach ($posts as $post)
+    @foreach ($tagPosts as $post)
     <tr>
         <th scope="row">{{ $post->id }}</th>
         <td><a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a></td>
@@ -31,6 +31,6 @@
 @endsection
 
 @section('pagination_links')
-    {{ $posts->links() }}
+    {{ $tagPosts->links() }}
 @endsection
 
