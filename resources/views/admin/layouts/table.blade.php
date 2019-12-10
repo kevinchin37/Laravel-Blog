@@ -15,5 +15,6 @@
                 </tbody>
             </table>
         </div>
+        @yield('pagination_links')
     </div>
 @endsection
