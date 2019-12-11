@@ -3,7 +3,7 @@
 @section('header_title', 'Users')
 
 @section('table_header_columns')
-    <th scope="col">User ID</th>
+    <th scope="col">ID</th>
     <th scope="col">Name</th>
     <th scope="col">Actions</th>
 @endsection

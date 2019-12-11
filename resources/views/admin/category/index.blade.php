@@ -15,7 +15,7 @@
 @endsection
 
 @section('table_header_columns')
-    <th scope="col">Category ID</th>
+    <th scope="col">ID</th>
     <th scope="col">Name</th>
     <th scope="col">Slug</th>
     <th scope="col">Post Count</th>
