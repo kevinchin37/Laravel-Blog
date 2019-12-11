@@ -1,36 +1,37 @@
-@extends('admin.layouts.master')
+@extends('admin.layouts.table')
 
-@section('header_title', $category->name)
+@section('header_title', $category->name . ' Posts')
 
-@section('main_content')
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Post ID</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach ($category->posts as $post)
-                        <tr>
-                            <th scope="row">{{ $post->id }}</th>
-                            <td><a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a></td>
-                            <td>
-                                <form action="/admin/posts/{{ $post->slug }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
+@section('table_header_columns')
+    <th scope="col">ID</th>
+    <th scope="col">Title</th>
+    <th scope="col">Actions</th>
 @endsection
 
+@section('table_body')
+    @foreach ($categoryPosts as $post)
+    <tr>
+        <th scope="row">{{ $post->id }}</th>
+        <td><a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a></td>
+
+        <td class="actions">
+            @include('admin.layouts.parts.buttons', [
+                'editUrl' => '/admin/posts/' . $post->slug . '/edit',
+                'viewUrl' => '/post/' . $post->slug,
+            ])
+
+            @can('delete', App\Category::class)
+                <form action="/admin/posts/{{ $post->slug }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            @endcan
+        </td>
+    </tr>
+    @endforeach
+@endsection
+
+@section('pagination_links')
+    {{ $categoryPosts->links() }}
+@endsection

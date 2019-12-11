@@ -30,6 +30,19 @@ body {
     overflow: auto;
     padding: 25px;
 }
+.main-admin-panel > .container {
+    max-width: 100%;
+}
+.main-admin-panel .post-edit-wrapper .img-thumbnail {
+    margin-bottom: 20px;
+    max-width: 300px;
+}
+.main-admin-panel .model-data .actions {
+    white-space: nowrap
+}
+.main-admin-panel .model-data .actions > form {
+    display: inline-block;
+}
 
 /* Category / Tag */
 .taxonomy-wrapper {

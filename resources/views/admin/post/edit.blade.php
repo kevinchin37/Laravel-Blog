@@ -3,7 +3,7 @@
 @section('header_title', 'Edit')
 
 @section('main_content')
-    <div class="row">
+    <div class="row post-edit-wrapper">
         <div class="col-md-12">
             <form action="/admin/posts/{{ $post->slug }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -29,8 +29,8 @@
 
                     <div class="col-md-6">
                         <ul>
-                            <li>Post ID: {{ $post->id }}</li>
-                            <li>Post Slug: {{ $post->slug }}</li>
+                            <li>ID: {{ $post->id }}</li>
+                            <li>Slug: {{ $post->slug }}</li>
                             <li>Published Date: {{ $post->created_at }}</li>
                             <li>Last Modified: {{ $post->updated_at }}</li>
                         </ul>
@@ -76,7 +76,7 @@
                 </div>
 
                 @can('update', $post)
-                    <button type="submit" class="btn btn-outline-dark mt-3">Update</button>
+                    <button type="submit" class="btn btn-primary mt-3">Update</button>
                 @endcan
             </form>
         </div>

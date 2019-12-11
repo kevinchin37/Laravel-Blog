@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Tag;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
@@ -15,7 +15,7 @@ class TagController extends Controller
      */
     public function index() {
         return view('admin.tag.index', [
-            'tags' => Tag::all(),
+            'tags' => Tag::paginate(15),
         ]);
     }
 
@@ -30,7 +30,7 @@ class TagController extends Controller
         $attributes = $this->validateRequest();
 
         $tag = new Tag;
-        $attributes['slug'] = str_slug($attributes['name']);
+        $attributes['slug'] = Str::slug($attributes['name']);
         $tag->create($attributes);
 
         return redirect('/admin/tags');
@@ -43,7 +43,10 @@ class TagController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Tag $tag) {
-        return view('admin.tag.show', ['tag' => $tag]);
+        return view('admin.tag.show', [
+            'tag' => $tag,
+            'tagPosts' => $tag->posts()->paginate(15),
+        ]);
     }
 
     /**

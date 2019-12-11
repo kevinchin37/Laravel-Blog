@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
@@ -13,9 +13,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Category $category) {
+    public function index() {
         return view('admin.category.index',[
-            'categories' => $category->all(),
+            'categories' => Category::paginate(15),
         ]);
     }
 
@@ -40,7 +40,7 @@ class CategoryController extends Controller
         $attributes = $this->validateRequest();
 
         $category = new Category;
-        $attributes['slug'] = str_slug($attributes['name']);
+        $attributes['slug'] = Str::slug($attributes['name']);
         $category->create($attributes);
 
         return redirect('/admin/categories');
@@ -53,7 +53,10 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category) {
-        return view('admin.category.show', ['category' => $category]);
+        return view('admin.category.show', [
+            'category' => $category,
+            'categoryPosts' => $category->posts()->paginate(15),
+        ]);
     }
 
     /**

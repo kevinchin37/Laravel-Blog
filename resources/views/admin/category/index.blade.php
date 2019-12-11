@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('admin.layouts.table')
 
 @section('header_title', 'Categories')
 
@@ -14,50 +14,40 @@
     @endcan
 @endsection
 
-@section('main_content')
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Category ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Slug</th>
-                        <th scope="col">Post Count</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
+@section('table_header_columns')
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Slug</th>
+    <th scope="col">Post Count</th>
+    <th scope="col">Actions</th>
+@endsection
 
-                <tbody>
-                    @foreach ($categories as $category)
-                        <tr>
-                            <th scope="row">{{ $category->id }}</th>
-                            <td><a href="/admin/categories/{{ $category->slug }}/edit">{{ $category->name }}</a></td>
-                            <td>{{ $category->slug }}</td>
-                            <td><a href="/admin/categories/{{ $category->slug }}">{{ $category->posts->count() }}</a></td>
+@section('table_body')
+    @foreach ($categories as $category)
+    <tr>
+        <th scope="row">{{ $category->id }}</th>
+        <td><a href="/admin/categories/{{ $category->slug }}/edit">{{ $category->name }}</a></td>
+        <td>{{ $category->slug }}</td>
+        <td><a href="/admin/categories/{{ $category->slug }}">{{ $category->posts->count() }}</a></td>
 
-                            <td>
-                                @can('delete', $category)
-                                    <form action="/admin/categories/{{ $category->slug }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">Delete</button>
-                                    </form>
-                                @endcan
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
-    </div>
+        <td class="actions">
+            @include('admin.layouts.parts.buttons', [
+                'editUrl' => '/admin/categories/' . $category->slug . '/edit',
+                'viewUrl' => '/category/' . $category->slug,
+            ])
+
+            @can('delete', App\Category::class)
+                <form action="/admin/categories/{{ $category->slug }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            @endcan
+        </td>
+    </tr>
+    @endforeach
+@endsection
+
+@section('pagination_links')
+    {{ $categories->links() }}
 @endsection

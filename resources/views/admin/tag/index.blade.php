@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('admin.layouts.table')
 
 @section('header_title', 'Tags')
 
@@ -14,50 +14,40 @@
     @endcan
 @endsection
 
-@section('main_content')
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Tag ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Slug</th>
-                        <th scope="col">Post Count</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
+@section('table_header_columns')
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Slug</th>
+    <th scope="col">Post Count</th>
+    <th scope="col">Actions</th>
+@endsection
 
-                <tbody>
-                    @foreach ($tags as $tag)
-                        <tr>
-                            <th scope="row">{{ $tag->id }}</th>
-                            <td><a href="/admin/tags/{{ $tag->slug }}/edit">{{ $tag->name }}</a></td>
-                            <td>{{ $tag->slug }}</td>
-                            <td><a href="/admin/tags/{{ $tag->slug }}">{{ $tag->posts->count() }}</a></td>
+@section('table_body')
+    @foreach ($tags as $tag)
+    <tr>
+        <th scope="row">{{ $tag->id }}</th>
+        <td><a href="/admin/tags/{{ $tag->slug }}/edit">{{ $tag->name }}</a></td>
+        <td>{{ $tag->slug }}</td>
+        <td><a href="/admin/tags/{{ $tag->slug }}">{{ $tag->posts->count() }}</a></td>
 
-                            <td>
-                                @can('delete', App\Tag::class)
-                                    <form action="/admin/tags/{{ $tag->slug }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">Delete</button>
-                                    </form>
-                                @endcan
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
-    </div>
+        <td class="actions">
+            @include('admin.layouts.parts.buttons', [
+                'editUrl' => '/admin/tags/' . $tag->slug . '/edit',
+                'viewUrl' => '/tag/' . $tag->slug,
+            ])
+
+            @can('delete', App\Tag::class)
+                <form action="/admin/tags/{{ $tag->slug }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            @endcan
+        </td>
+    </tr>
+    @endforeach
+@endsection
+
+@section('pagination_links')
+    {{ $tags->links() }}
 @endsection
