@@ -1,9 +1,9 @@
 @extends('admin.layouts.table')
 
-@section('header_title', $tag->name)
+@section('header_title', $tag->name . ' Posts')
 
 @section('table_header_columns')
-    <th scope="col">Post ID</th>
+    <th scope="col">ID</th>
     <th scope="col">Title</th>
     <th scope="col">Actions</th>
 @endsection
