@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Tag;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
@@ -30,7 +30,7 @@ class TagController extends Controller
         $attributes = $this->validateRequest();
 
         $tag = new Tag;
-        $attributes['slug'] = str_slug($attributes['name']);
+        $attributes['slug'] = Str::slug($attributes['name']);
         $tag->create($attributes);
 
         return redirect('/admin/tags');

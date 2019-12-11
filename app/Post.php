@@ -2,8 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Category;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
@@ -48,7 +49,7 @@ class Post extends Model
     }
 
     public function getSlug($title) {
-        $slug = str_slug($title);
+        $slug = Str::slug($title);
         if ($this->slugExist($slug)) {
             $slug = $this->incrementSlug($slug);
         }
