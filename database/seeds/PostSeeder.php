@@ -12,6 +12,10 @@ class PostSeeder extends Seeder
      */
     public function run() {
         DB::table('posts')->delete();
-        factory(App\Post::class, 50)->create();
+        DB::table('categories')->delete();
+
+        factory(App\Post::class, 50)->create()->each(function($post) {
+            $post->categories()->save(factory(App\Category::class)->make());
+        });
     }
 }
