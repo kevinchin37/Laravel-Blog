@@ -1,0 +1,110 @@
+#main-menu,
+#main-footer {
+    background: #222831;
+    height: 60px;
+    width: 100%;
+}
+#main-menu {
+    margin-bottom: 20px;
+}
+#main-footer {
+    margin-top: 20px;
+}
+
+.thumbnail-wrapper {
+    background: #eaeaea;
+    height: 140px;
+    position: relative;
+    width: 100%;
+}
+.thumbnail-wrapper > .thumbnail {
+    bottom: 0;
+    display:block;
+    left: 0;
+    margin: auto;
+    max-height: 100%;
+    max-width:100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.meta-wrapper .meta-list {
+    list-style: none;
+    padding-left: inherit;
+}
+.meta-wrapper .meta-list .taxonomy-link {
+    border: 1px solid #29a19c;
+    border-radius: 5px;
+    color: #333;
+    display: inline-block;
+    margin: 3px;
+    padding: 2px 5px;
+}
+.meta-wrapper .meta-list .taxonomy-link:hover {
+    background: #21827e;
+    color: white;
+    text-decoration: none;
+}
+.meta-wrapper .meta-list .post-meta > span {
+    color: #21827e;
+}
+
+.header-title {
+    border-bottom: 2px solid #29a19c;
+}
+
+#post-blocks .block {
+    border:1px solid #eaeaea;
+    display: block;
+    min-height: 170px;
+    position: relative;
+}
+#post-blocks .block:hover {
+    box-shadow: 1px 2px 5px #a5a5a5;
+    text-decoration: none;
+}
+#post-blocks .meta-wrapper {
+    color: #212529;
+    padding: 10px;
+}
+#post-blocks .meta-wrapper:after {
+    background: #29a19c;
+    border-radius: 5px;
+    bottom: 3px;
+    color: white;
+    content: 'Read More';
+    display: block;
+    position: absolute;
+    right: 5px;
+    text-align: center;
+    width: 35%;
+}
+#post-blocks .meta-wrapper .title {
+    max-height: 3.6em;
+    overflow: hidden;
+}
+
+#post-detail {
+    background: white;
+    box-shadow: 1px 2px 5px #a5a5a5;
+}
+#post-detail .meta-wrapper {
+    background: #eaeaea;
+    border-bottom: 2px solid #29a19c;
+    margin-bottom: 20px;
+    padding: 10% 15px;
+}
+#post-detail .body-content {
+    margin: 15px 30px;
+}
+
+.btn-read-more {
+    background: #29a19c;
+    border: none;
+    color: white;
+}
+.btn-read-more:hover {
+    background: #21827e;
+    color: white;
+}
