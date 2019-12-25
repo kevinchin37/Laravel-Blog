@@ -15,7 +15,7 @@ class PostSeeder extends Seeder
         DB::table('categories')->delete();
         DB::table('tags')->delete();
 
-        factory(App\Post::class, 50)->create()->each(function($post) {
+        factory(App\Post::class, 20)->create()->each(function($post) {
             $post->categories()->save(factory(App\Category::class)->make());
             $post->tags()->save(factory(App\Tag::class)->make());
         });
