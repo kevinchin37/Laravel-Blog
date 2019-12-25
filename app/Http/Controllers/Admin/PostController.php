@@ -99,8 +99,7 @@ class PostController extends Controller {
         $attributes = $this->validateRequest();
 
         if (!empty($attributes['featured_image'])) {
-            $attributes['featured_image'] = $imageService->uploadHandler($attributes['featured_image'])->store();
-            $imageService->deleteImage($post->featured_image);
+            $attributes['featured_image'] = $imageService->uploadHandler($attributes['featured_image'])->update($post->featured_image);
         }
 
         $post->update($attributes);
