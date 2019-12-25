@@ -13,6 +13,7 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         'title' => $title,
         'slug' => $slug,
-        'body' => $faker->paragraph,
+        'body' => $faker->paragraphs(mt_rand(15, 25), true),
+        'featured_image' => $faker->image('public/storage', 300, 250, 'cats', false),
     ];
 });
