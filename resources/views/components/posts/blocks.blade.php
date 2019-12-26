@@ -13,7 +13,7 @@
 
                     <div class="meta-wrapper">
                         <h4 class="title">{{ $post->title }}</h4>
-                        <p>{{ str_limit($post->body, 100) }}</p>
+                        <p class="description">{{ Str::words($post->body, 15) }}</p>
                     </div>
                 </a>
             </div>

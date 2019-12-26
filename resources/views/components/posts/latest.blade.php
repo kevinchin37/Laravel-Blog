@@ -39,7 +39,7 @@
 
             <div class="col-md-9">
                 <h1>{{ $post->title }}</h1>
-                <p>{{ str_limit($post->body, 900) }}</p>
+                <div>{{ Str::words($post->body, 150) }}</div>
                 <a class="btn btn-read-more" href="{{ '/post/' . $post->slug }}">Continue Reading</a>
             </div>
         </div>
