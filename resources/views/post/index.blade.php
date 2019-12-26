@@ -2,7 +2,7 @@
 
 @section('latest_post')
     @component('components.posts.latest', [
-        'post' => $posts->first(),
+        'post' => $posts->shift(),
         'headerTitle' => 'Latest'
     ])
     @endcomponent
@@ -10,7 +10,7 @@
 
 @section('more_posts')
     @component('components.posts.blocks', [
-        'posts' => $posts->slice(1),
+        'posts' => $posts,
         'headerTitle' => 'Older Posts'
     ])
     @endcomponent
