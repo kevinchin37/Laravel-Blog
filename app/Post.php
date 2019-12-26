@@ -4,6 +4,7 @@ namespace App;
 
 use App\Category;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -64,5 +65,9 @@ class Post extends Model
      */
     public function getRouteKeyName() {
         return 'slug';
+    }
+
+    public function getCreatedAtAttribute($date) {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('m/d/y, g:i:s A');
     }
 }
