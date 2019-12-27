@@ -93,18 +93,18 @@
     overflow: hidden;
 }
 
-#post-detail {
+#post-wrapper {
     background: white;
-    box-shadow: 1px 2px 5px #a5a5a5;
 }
-#post-detail .meta-wrapper {
+#post-wrapper .body-content {
+    margin: 40px auto;
+    width: 800px;
+}
+#post-detail.meta-wrapper {
     background: #eaeaea;
     border-bottom: 2px solid #29a19c;
     margin-bottom: 20px;
     padding: 10% 15px;
-}
-#post-detail .body-content {
-    margin: 15px 30px;
 }
 
 .btn-read-more {
