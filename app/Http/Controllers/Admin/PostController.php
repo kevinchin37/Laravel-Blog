@@ -45,6 +45,7 @@ class PostController extends Controller {
 
         $post = new Post;
         $attributes['slug'] = $post->getSlug($attributes['title']);
+        $attributes['user_id'] = auth()->user()->id;
 
         if (!empty($attributes['featured_image'])) {
             $attributes['featured_image'] = $imageService->uploadHandler($attributes['featured_image'])->store();
