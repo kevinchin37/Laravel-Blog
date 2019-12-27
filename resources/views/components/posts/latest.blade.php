@@ -13,7 +13,7 @@
                 <div class="meta-wrapper">
                     <ul class="meta-list">
                         <li class="post-meta">
-                            <span>By:</span> Author Placeholder
+                            <span>By:</span> {{ $post->author->name }}
                         </li>
 
                         <li class="post-meta">

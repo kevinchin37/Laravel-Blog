@@ -3,7 +3,7 @@
 
     <ul class="col-md-6 meta-list">
         <li class="post-meta">
-            <span>By:</span> Author Placeholder
+            <span>By:</span> {{ $post->author->name }}
         </li>
         <li class="post-meta">
             <span>Published:</span> {{ $post->created_at }}
