@@ -1,4 +1,4 @@
-<div class="row meta-wrapper">
+<div id="post-detail" class="row meta-wrapper">
     <h1 class="col-md-12">{{ $post->title }}</h1>
 
     <ul class="col-md-6 meta-list">
