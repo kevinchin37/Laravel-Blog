@@ -1,18 +1,18 @@
-<div class="row meta-wrapper">
+<div id="post-detail" class="row meta-wrapper">
     <h1 class="col-md-12">{{ $post->title }}</h1>
 
     <ul class="col-md-6 meta-list">
         <li class="post-meta">
-            <span>By:</span> Author Placeholder
+            <span>By:</span> {{ $post->author->name }}
         </li>
         <li class="post-meta">
             <span>Published:</span> {{ $post->created_at }}
         </li>
     </ul>
 
-    @if (!empty($post->categories) || !empty($post->tags))
+    @if ($post->categories->isNotEmpty() || $post->tags->isNotEmpty())
         <ul class="col-md-6 meta-list">
-            @if (!empty($post->categories))
+            @if ($post->categories->isNotEmpty())
                 <li class="post-meta">
                     <span>Categories:</span>
                     @foreach ($post->categories as $category)
@@ -21,7 +21,7 @@
                 </li>
             @endif
 
-            @if (!empty($post->tags))
+            @if ($post->tags->isNotEmpty())
                 <li class="post-meta">
                     <span>Tags:</span>
                     @foreach ($post->tags as $tag)

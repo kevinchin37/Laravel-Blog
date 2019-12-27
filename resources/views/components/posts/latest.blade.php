@@ -1,6 +1,5 @@
-<h1 class="header-title">{{ (empty($headerTitle)) ? 'Latest' : $headerTitle }}</h1>
-
 @if (!empty($post))
+    <h1 class="header-title">{{ (empty($headerTitle)) ? 'Latest' : $headerTitle }}</h1>
     <div id="latest-post" class="jumbotron">
         <div class="row">
             <div class="col-md-3">
@@ -13,7 +12,7 @@
                 <div class="meta-wrapper">
                     <ul class="meta-list">
                         <li class="post-meta">
-                            <span>By:</span> Author Placeholder
+                            <span>By:</span> {{ $post->author->name }}
                         </li>
 
                         <li class="post-meta">
