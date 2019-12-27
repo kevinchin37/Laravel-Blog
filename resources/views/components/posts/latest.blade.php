@@ -1,6 +1,5 @@
-<h1 class="header-title">{{ (empty($headerTitle)) ? 'Latest' : $headerTitle }}</h1>
-
 @if (!empty($post))
+    <h1 class="header-title">{{ (empty($headerTitle)) ? 'Latest' : $headerTitle }}</h1>
     <div id="latest-post" class="jumbotron">
         <div class="row">
             <div class="col-md-3">
