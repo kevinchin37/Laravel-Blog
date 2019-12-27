@@ -2,14 +2,13 @@
 
 namespace App;
 
-use App\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['title', 'body', 'featured_image', 'slug'];
+    protected $fillable = ['title', 'body', 'featured_image', 'slug', 'user_id'];
 
     public function categories() {
         return $this->belongsToMany(Category::class);
@@ -29,7 +28,6 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-
     public function addTags($tags) {
         foreach($tags as $tag) {
             $this->tags()->attach($tag);
@@ -38,6 +36,10 @@ class Post extends Model
 
     public function updateTags($tags) {
         $this->tags()->sync($tags);
+    }
+
+    public function author() {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function slugExist($slug) {

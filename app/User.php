@@ -45,4 +45,8 @@ class User extends Authenticatable
     public function hasRole($role) {
         return $this->role->name == $role;
     }
+
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
 }
