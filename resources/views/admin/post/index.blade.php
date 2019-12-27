@@ -12,6 +12,7 @@
     <th scope="col">ID</th>
     <th scope="col">Title</th>
     <th scope="col">Slug</th>
+    <th scope="col">Author</th>
     <th scope="col">Categories</th>
     <th scope="col">Tags</th>
     <th scope="col">Actions</th>
@@ -23,6 +24,8 @@
             <th scope="row">{{ $post->id }}</th>
             <td><a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a></td>
             <td>{{ $post->slug }}</td>
+
+            <td>{{ $post->author->name }}</td>
 
             <td>
                 @if ($post->categories->count())
