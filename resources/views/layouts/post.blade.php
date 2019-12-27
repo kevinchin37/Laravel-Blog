@@ -11,7 +11,7 @@
 
         <div class="container">
             <div class="row">
-                <div id="post-detail" class="col-md-9">
+                <div id="post-wrapper" class="col-md-9">
                     @yield('content')
                 </div>
 
