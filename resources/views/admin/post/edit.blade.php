@@ -31,6 +31,7 @@
                         <ul>
                             <li>ID: {{ $post->id }}</li>
                             <li>Slug: {{ $post->slug }}</li>
+                            <li>Author: {{ $post->author->name }}</li>
                             <li>Published Date: {{ $post->created_at }}</li>
                             <li>Last Modified: {{ $post->updated_at }}</li>
                         </ul>
