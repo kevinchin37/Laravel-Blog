@@ -1,6 +1,5 @@
-<h1 class="header-title">{{ (empty($headerTitle)) ? 'Older Posts' : $headerTitle }}</h1>
-
 @if ($posts->isNotEmpty())
+    <h1 class="header-title">{{ (empty($headerTitle)) ? 'Older Posts' : $headerTitle }}</h1>
     <div id="post-blocks" class="row">
         @foreach ($posts as $post)
             <div class="col-sm-6 col-lg-4 mb-2">
@@ -18,9 +17,5 @@
                 </a>
             </div>
         @endforeach
-    </div>
-@else
-    <div class="alert alert-danger" role="alert">
-        There are no more posts to show.
     </div>
 @endif
