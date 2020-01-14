@@ -17,7 +17,8 @@ Route::get('/', function () {
 
 Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     // Post
-    Route::get('admin', 'PostController@index');
+    Route::get('admin', 'DashboardController@index');
+    Route::get('admin/dashboard', 'DashboardController@index');
     Route::get('admin/posts', 'PostController@index');
     Route::get('admin/posts/create', 'PostController@create');
     Route::get('admin/posts/{post}/edit', 'PostController@edit');
