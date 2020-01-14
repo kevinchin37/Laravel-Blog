@@ -43,33 +43,3 @@
         </div>
     </div>
 @endsection
-
-
-{{-- @extends('admin.layouts.table')
-
-@section('table_header_columns')
-    <th scope="col">Log ID</th>
-    <th scope="col">Model</th>
-    <th scope="col">Post ID</th>
-    <th scope="col">Type</th>
-    <th scope="col">Message</th>
-    <th scope="col">Date</th>
-@endsection
-
-
-@section('table_body')
-    @foreach ($eventLogs as $eventLog)
-        <tr>
-            <th scope="row">{{ $eventLog->id }}</th>
-            <td>{{ $eventLog->loggable_type }}</td>
-            <td>{{ $eventLog->loggable_id }}</td>
-            <td>{{ $eventLog->type }}</td>
-            <td>{{ $eventLog->message }}</td>
-            <td>{{ $eventLog->created_at }}</td>
-        </tr>
-    @endforeach
-@endsection
-
-@section('pagination_links')
-    {{ $eventLogs->links() }}
-@endsection --}}
