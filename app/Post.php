@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\PostTag;
+use App\Activity;
+use App\CategoryPost;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +14,7 @@ class Post extends Model
     protected $fillable = ['title', 'body', 'featured_image', 'slug', 'user_id'];
 
     public function categories() {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class)->using(CategoryPost::class);
     }
 
     public function addCategories($categories) {
@@ -25,7 +28,7 @@ class Post extends Model
     }
 
     public function tags() {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class)->using(PostTag::class);;
     }
 
     public function addTags($tags) {
@@ -40,6 +43,10 @@ class Post extends Model
 
     public function author() {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function logs() {
+        return $this->morphMany(Activity::class, 'loggable');
     }
 
     public function slugExist($slug) {
