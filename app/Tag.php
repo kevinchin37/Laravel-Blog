@@ -16,6 +16,10 @@ class Tag extends Model
         return $this->all();
     }
 
+    public function logs() {
+        return $this->morphMany(Activity::class, 'loggable');
+    }
+
     /**
      * Get the route key for the model.
      *
