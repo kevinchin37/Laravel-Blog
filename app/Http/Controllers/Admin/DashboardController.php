@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Post;
 use App\Activity;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
