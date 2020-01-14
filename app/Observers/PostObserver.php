@@ -27,7 +27,6 @@ class PostObserver
      */
     public function updated(Post $post) {
         $updatedFields = $post->getChanges();
-        // dd($post->getOriginal(), $post->getChanges(), $post->syncChanges());
         $updatedFields = array_keys($updatedFields);
 
         if (!empty($updatedFields)) {
@@ -41,9 +40,6 @@ class PostObserver
         }
     }
 
-    public function saving(Post $post) {
-    }
-
     /**
      * Handle the post "deleted" event.
      *
@@ -55,27 +51,5 @@ class PostObserver
             'type' => 'delete',
             'message' => '\'' . $post->title  . '\' was deleted.'
         ]);
-    }
-
-    /**
-     * Handle the post "restored" event.
-     *
-     * @param  \App\Post  $post
-     * @return void
-     */
-    public function restored(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Handle the post "force deleted" event.
-     *
-     * @param  \App\Post  $post
-     * @return void
-     */
-    public function forceDeleted(Post $post)
-    {
-        //
     }
 }

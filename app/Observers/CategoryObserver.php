@@ -44,26 +44,4 @@ class CategoryObserver
             'message' => '\'' . $category->name . '\' was deleted.'
         ]);
     }
-
-    /**
-     * Handle the category "restored" event.
-     *
-     * @param  \App\Category  $category
-     * @return void
-     */
-    public function restored(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Handle the category "force deleted" event.
-     *
-     * @param  \App\Category  $category
-     * @return void
-     */
-    public function forceDeleted(Category $category)
-    {
-        //
-    }
 }

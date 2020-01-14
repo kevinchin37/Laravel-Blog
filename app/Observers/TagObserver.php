@@ -44,26 +44,4 @@ class TagObserver
             'message' => '\'' . $tag->name . '\' was deleted.'
         ]);
     }
-
-    /**
-     * Handle the tag "restored" event.
-     *
-     * @param  \App\Tag  $tag
-     * @return void
-     */
-    public function restored(Tag $tag)
-    {
-        //
-    }
-
-    /**
-     * Handle the tag "force deleted" event.
-     *
-     * @param  \App\Tag  $tag
-     * @return void
-     */
-    public function forceDeleted(Tag $tag)
-    {
-        //
-    }
 }
