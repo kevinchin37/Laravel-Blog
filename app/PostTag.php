@@ -11,18 +11,14 @@ class PostTag extends Pivot
 
         static::saved(function ($postTag) {
             $currentPost = Post::find($postTag->post_id);
-            $currentPost->logs()->create([
-                'type' => 'update',
-                'message' => 'The tag \'' . Tag::find($postTag->tag_id)->name . '\' was set.'
-            ]);
+            $message = 'The tag \'' . Tag::find($postTag->tag_id)->name . '\' was set.';
+            $currentPost->recordActvity('update', $message);
         });
 
         static::deleted(function ($postTag) {
             $currentPost = Post::find($postTag->post_id);
-            $currentPost->logs()->create([
-                'type' => 'delete',
-                'message' => 'The tag \'' . Tag::find($postTag->tag_id)->name . '\' was unset.'
-            ]);
+            $message = 'The tag \'' . Tag::find($postTag->tag_id)->name . '\' was unset.';
+            $currentPost->recordActvity('delete', $message);
         });
     }
 }

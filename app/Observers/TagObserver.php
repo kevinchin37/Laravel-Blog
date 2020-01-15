@@ -13,10 +13,8 @@ class TagObserver
      * @return void
      */
     public function created(Tag $tag) {
-        $tag->logs()->create([
-            'type' => 'create',
-            'message' => '\'' . $tag->name  . '\' was created.'
-        ]);
+        $message = '\'' . $tag->name  . '\' was created.';
+        $tag->recordActvity('create', $message);
     }
 
     /**
@@ -26,10 +24,8 @@ class TagObserver
      * @return void
      */
     public function updated(Tag $tag) {
-        $tag->logs()->create([
-            'type' => 'update',
-            'message' => 'Name was updated.'
-        ]);
+        $message = 'Name was updated.';
+        $tag->recordActvity('create', $message);
     }
 
     /**
@@ -39,9 +35,7 @@ class TagObserver
      * @return void
      */
     public function deleted(Tag $tag) {
-        $tag->logs()->create([
-            'type' => 'delete',
-            'message' => '\'' . $tag->name . '\' was deleted.'
-        ]);
+        $message = '\'' . $tag->name  . '\' was created.';
+        $tag->recordActvity('create', $message);
     }
 }

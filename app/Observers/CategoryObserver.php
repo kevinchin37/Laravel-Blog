@@ -13,10 +13,8 @@ class CategoryObserver
      * @return void
      */
     public function created(Category $category) {
-        $category->logs()->create([
-            'type' => 'create',
-            'message' => '\'' . $category->name  . '\' was created.'
-        ]);
+        $message = '\'' . $category->name  . '\' was created.';
+        $category->recordActvity('create', $message);
     }
 
     /**
@@ -26,10 +24,8 @@ class CategoryObserver
      * @return void
      */
     public function updated(Category $category) {
-        $category->logs()->create([
-            'type' => 'update',
-            'message' => 'Name was updated.'
-        ]);
+        $message = 'Name was updated.';
+        $category->recordActvity('create', $message);
     }
 
     /**
@@ -39,9 +35,7 @@ class CategoryObserver
      * @return void
      */
     public function deleted(Category $category) {
-        $category->logs()->create([
-            'type' => 'delete',
-            'message' => '\'' . $category->name . '\' was deleted.'
-        ]);
+        $message = '\'' . $category->name . '\' was deleted.';
+        $category->recordActvity('create', $message);
     }
 }

@@ -13,10 +13,8 @@ class PostObserver
      * @return void
      */
     public function created(Post $post) {
-        $post->logs()->create([
-            'type' => 'create',
-            'message' => '\'' . $post->title  . '\' was created.'
-        ]);
+        $message = '\'' . $post->title  . '\' was created.';
+        $post->recordActvity('create', $message);
     }
 
     /**
@@ -32,10 +30,8 @@ class PostObserver
         if (!empty($updatedFields)) {
             foreach ($updatedFields as $field) {
                 if ($field === 'updated_at') continue;
-                $post->logs()->create([
-                    'type' => 'update',
-                    'message' => ucfirst($field) . ' was updated.'
-                ]);
+                $message = ucfirst($field) . ' was updated.';
+                $post->recordActvity('update', $message);
             }
         }
     }
@@ -47,9 +43,7 @@ class PostObserver
      * @return void
      */
     public function deleted(Post $post) {
-        $post->logs()->create([
-            'type' => 'delete',
-            'message' => '\'' . $post->title  . '\' was deleted.'
-        ]);
+        $message = '\'' . $post->title  . '\' was deleted.';
+        $post->storeActvityLog('delete', $message);
     }
 }

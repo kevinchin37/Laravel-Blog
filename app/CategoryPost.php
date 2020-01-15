@@ -11,18 +11,14 @@ class CategoryPost extends Pivot
 
         static::saved(function ($categoryPost) {
             $currentPost = Post::find($categoryPost->post_id);
-            $currentPost->logs()->create([
-                'type' => 'update',
-                'message' => 'The category \'' . Category::find($categoryPost->category_id)->name . '\' was set.'
-            ]);
+            $message = 'The category \'' . Category::find($categoryPost->category_id)->name . '\' was set.';
+            $currentPost->recordActvity('update', $message);
         });
 
         static::deleted(function ($categoryPost) {
             $currentPost = Post::find($categoryPost->post_id);
-            $currentPost->logs()->create([
-                'type' => 'update',
-                'message' => 'The category \'' . Category::find($categoryPost->category_id)->name . '\' was unset.'
-            ]);
+            $message = 'The category \'' . Category::find($categoryPost->category_id)->name . '\' was unset.';
+            $currentPost->recordActvity('update', $message);
         });
     }
 }
