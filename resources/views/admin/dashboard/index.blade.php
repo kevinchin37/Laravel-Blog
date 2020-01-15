@@ -20,7 +20,7 @@
                     @component('admin.components.table.head', [
                         'columns' => [
                             'Log ID', 'Model', 'Item ID',
-                            'Type', 'Message', 'Date'
+                            'Type', 'Message', 'User', 'Date'
                         ]
                     ]) @endcomponent
 
@@ -33,6 +33,7 @@
                                     <td>{{ $activity->loggable_id }}</td>
                                     <td>{{ $activity->type }}</td>
                                     <td>{{ $activity->message }}</td>
+                                    <td>{{ $activity->user->name }}</td>
                                     <td>{{ $activity->created_at }}</td>
                                 </tr>
                             @endforeach
