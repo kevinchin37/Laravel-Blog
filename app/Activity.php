@@ -2,14 +2,19 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\User;
 use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model {
     protected $guarded = [];
 
     public function loggable() {
         return $this->morphTo();
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 
     public function createLog($type, $message) {
