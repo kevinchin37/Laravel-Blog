@@ -3,15 +3,17 @@
 namespace App;
 
 use App\PostTag;
-use App\Activity;
 use App\CategoryPost;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use App\Http\Support\Traits\LoggableActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
     protected $fillable = ['title', 'body', 'featured_image', 'slug', 'user_id'];
+
+    use LoggableActivity;
 
     public function categories() {
         return $this->belongsToMany(Category::class)->using(CategoryPost::class);
@@ -43,10 +45,6 @@ class Post extends Model
 
     public function author() {
         return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function logs() {
-        return $this->morphMany(Activity::class, 'loggable');
     }
 
     public function slugExist($slug) {
