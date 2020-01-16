@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\Services;
+namespace App\Http\Support\Services;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;

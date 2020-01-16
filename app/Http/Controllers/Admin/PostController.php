@@ -6,7 +6,7 @@ use App\Post;
 use App\Category;
 use App\Tag;
 use App\Http\Controllers\Controller;
-use App\Support\Services\ImageService;
+use App\Http\Support\Services\ImageService;
 
 class PostController extends Controller {
     /**
