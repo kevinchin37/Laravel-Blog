@@ -83,10 +83,10 @@ class CategoryController extends Controller
     public function update(Category $category) {
         $this->authorize('update', Category::class);
         $attributes = $this->validateRequest();
-
+        $attributes['slug'] = Str::slug($attributes['name']);
         $category->update($attributes);
 
-        return back();
+        return redirect('admin/categories/' . $attributes['slug'] . '/edit');
     }
 
     /**
