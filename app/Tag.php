@@ -2,11 +2,14 @@
 
 namespace App;
 
+use App\Http\Support\Traits\LoggableActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
     protected $guarded = [];
+
+    use LoggableActivity;
 
     public function posts() {
         return $this->belongsToMany(Post::class);
@@ -14,6 +17,10 @@ class Tag extends Model
 
     public function getTags() {
         return $this->all();
+    }
+
+    public function logs() {
+        return $this->morphMany(Activity::class, 'loggable');
     }
 
     /**

@@ -2,12 +2,15 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Post;
+use App\Http\Support\Traits\LoggableActivity;
+use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
     protected $guarded = [];
+
+    use LoggableActivity;
 
     public function posts() {
         return $this->belongsToMany(Post::class);

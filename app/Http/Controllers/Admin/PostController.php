@@ -6,7 +6,7 @@ use App\Post;
 use App\Category;
 use App\Tag;
 use App\Http\Controllers\Controller;
-use App\Services\ImageService;
+use App\Support\Services\ImageService;
 
 class PostController extends Controller {
     /**
@@ -103,8 +103,6 @@ class PostController extends Controller {
             $attributes['featured_image'] = $imageService->uploadHandler($attributes['featured_image'])->update($post->featured_image);
         }
 
-        $post->update($attributes);
-
         if (!empty($attributes['category'])) {
             $post->updateCategories($attributes['category']);
         }
@@ -112,6 +110,8 @@ class PostController extends Controller {
         if (!empty($attributes['tags'])) {
             $post->updateTags($attributes['tags']);
         }
+
+        $post->update($attributes);
 
         return back();
     }

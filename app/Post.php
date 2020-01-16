@@ -2,16 +2,21 @@
 
 namespace App;
 
+use App\PostTag;
+use App\CategoryPost;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use App\Http\Support\Traits\LoggableActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
     protected $fillable = ['title', 'body', 'featured_image', 'slug', 'user_id'];
 
+    use LoggableActivity;
+
     public function categories() {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class)->using(CategoryPost::class);
     }
 
     public function addCategories($categories) {
@@ -25,7 +30,7 @@ class Post extends Model
     }
 
     public function tags() {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class)->using(PostTag::class);;
     }
 
     public function addTags($tags) {

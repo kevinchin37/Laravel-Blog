@@ -73,10 +73,10 @@ class TagController extends Controller
     public function update(Tag $tag) {
         $this->authorize('update', Tag::class);
         $attributes = $this->validateRequest();
-
+        $attributes['slug'] = Str::slug($attributes['name']);
         $tag->update($attributes);
 
-        return back();
+        return redirect('admin/tags/' . $attributes['slug'] . '/edit');
     }
 
     /**
