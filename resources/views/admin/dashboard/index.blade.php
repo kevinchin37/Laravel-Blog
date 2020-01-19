@@ -12,6 +12,7 @@
                         @endslot
                     @endcomponent
                 @endif
+
                 <ul class="post-list">
                     @foreach ($posts as $post)
                         <li><a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a></li>
