@@ -15,11 +15,19 @@
 @endsection
 
 @section('table_header_columns')
-    <th scope="col">ID</th>
-    <th scope="col">Name</th>
-    <th scope="col">Slug</th>
-    <th scope="col">Post Count</th>
-    <th scope="col">Actions</th>
+    @if ($categories->isEmpty())
+        @component('admin.components.alerts.empty')
+            @slot('message')
+                No categories to show.
+            @endslot
+        @endcomponent
+    @else
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Slug</th>
+        <th scope="col">Post Count</th>
+        <th scope="col">Actions</th>
+    @endif
 @endsection
 
 @section('table_body')
@@ -31,10 +39,13 @@
         <td><a href="/admin/categories/{{ $category->slug }}">{{ $category->posts->count() }}</a></td>
 
         <td class="actions">
-            @include('admin.layouts.parts.buttons', [
-                'editUrl' => '/admin/categories/' . $category->slug . '/edit',
-                'viewUrl' => '/category/' . $category->slug,
-            ])
+            @component('admin.components.buttons.edit', [
+                'url' => '/admin/categories/' . $category->slug . '/edit'
+            ]) @endcomponent
+
+            @component('admin.components.buttons.view', [
+                'url' => '/category/' . $category->slug
+            ]) @endcomponent
 
             @can('delete', App\Category::class)
                 <form action="/admin/categories/{{ $category->slug }}" method="POST">
