@@ -2,15 +2,12 @@
 
 namespace App\Policies;
 
-use App\Post;
 use App\User;
-use App\Policies\PolicyTrait;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PostPolicy
 {
     use HandlesAuthorization;
-    use PolicyTrait;
 
     /**
      * Determine whether the user can create posts.
@@ -42,5 +39,14 @@ class PostPolicy
      */
     public function delete(User $user) {
         return $user->hasRole('Admin');
+    }
+
+    /**
+     * Give admin access to everything
+     */
+    public function before($user, $ability) {
+        if ($user->hasRole('Admin')) {
+            return true;
+        }
     }
 }

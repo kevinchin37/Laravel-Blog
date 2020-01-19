@@ -8,7 +8,6 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class TaxonomyPolicy
 {
     use HandlesAuthorization;
-    use PolicyTrait;
 
     /**
      * Determine whether the user can create categories or tags.
@@ -38,5 +37,14 @@ class TaxonomyPolicy
      */
     public function delete(User $user) {
         return $user->hasRole('Admin');
+    }
+
+    /**
+     * Give admin access to everything
+     */
+    public function before($user, $ability) {
+        if ($user->hasRole('Admin')) {
+            return true;
+        }
     }
 }
