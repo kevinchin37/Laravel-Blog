@@ -21,6 +21,7 @@ class PostSeeder extends Seeder
         DB::table('tags')->delete();
 
         // Disable event listeners
+        Post::flushEventListeners();
         Category::flushEventListeners();
         Tag::flushEventListeners();
         CategoryPost::flushEventListeners();
