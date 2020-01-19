@@ -13,8 +13,12 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         'title' => $title,
         'slug' => $slug,
-        'user_id' => 1, //admin
+        'user_id' => 1, // admin
         'body' => $faker->paragraphs(mt_rand(15, 25), true),
-        'featured_image' => $faker->image('public/storage', 300, 250, 'cats', false),
+        'featured_image' => ''
+
+
+        // https://github.com/fzaninotto/Faker/issues/1884
+        // 'featured_image' => $faker->image('public/storage', 300, 250, 'cats', false),
     ];
 });
