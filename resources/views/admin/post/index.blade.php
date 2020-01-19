@@ -60,7 +60,6 @@
                     'url' => '/post/' . $post->slug
                 ]) @endcomponent
 
-
                 @can('delete', App\Post::class)
                     <form action="/admin/posts/{{ $post->slug }}" method="POST">
                         @csrf
