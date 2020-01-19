@@ -44,6 +44,6 @@ class PostObserver
      */
     public function deleted(Post $post) {
         $message = '\'' . $post->title  . '\' was deleted.';
-        $post->storeActvityLog('delete', $message);
+        $post->recordActvity('delete', $message);
     }
 }
