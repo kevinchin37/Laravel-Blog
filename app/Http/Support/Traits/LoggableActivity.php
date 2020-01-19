@@ -8,7 +8,7 @@ trait LoggableActivity {
         $this->logs()->create([
             'type' => $type,
             'message' => $message,
-            'user_id' => auth()->user()->id
+            'user_id' => $this->author->id
         ]);
     }
 
