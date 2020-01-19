@@ -19,7 +19,7 @@
                 <table class="table table-sm">
                     @component('admin.components.table.head', [
                         'columns' => [
-                            'Log ID', 'Model', 'Item ID',
+                            'Log', 'Model', 'ID',
                             'Type', 'Message', 'Author', 'Date'
                         ]
                     ]) @endcomponent
