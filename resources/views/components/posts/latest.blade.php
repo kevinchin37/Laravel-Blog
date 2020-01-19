@@ -3,7 +3,7 @@
     <div id="latest-post" class="jumbotron">
         <div class="row">
             <div class="col-md-3">
-                <div class="thumbnail-wrapper">
+                <div class="thumbnail-wrapper{{ (empty($post->featured_image))? ' placeholder' : '' }}">
                     @if (!empty($post->featured_image))
                         <img class="thumbnail" src="{{ asset('storage/' . $post->featured_image) }}"/>
                     @endif

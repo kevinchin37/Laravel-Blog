@@ -4,11 +4,11 @@
         @foreach ($posts as $post)
             <div class="col-sm-6 col-lg-4 mb-2">
                 <a class="block" href="/post/{{ $post->slug }}">
-                    @if (!empty($post->featured_image))
-                        <div class="thumbnail-wrapper">
+                    <div class="thumbnail-wrapper{{ (empty($post->featured_image))? ' placeholder' : '' }}">
+                        @if (!empty($post->featured_image))
                             <img class="thumbnail" src="{{ asset('storage/' . $post->featured_image) }}"/>
-                        </div>
-                    @endif
+                        @endif
+                    </div>
 
                     <div class="meta-wrapper">
                         <h4 class="title">{{ $post->title }}</h4>
