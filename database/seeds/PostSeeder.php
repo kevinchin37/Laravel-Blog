@@ -1,5 +1,10 @@
 <?php
 
+use App\Tag;
+use App\Post;
+use App\PostTag;
+use App\Category;
+use App\CategoryPost;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,9 +20,15 @@ class PostSeeder extends Seeder
         DB::table('categories')->delete();
         DB::table('tags')->delete();
 
-        factory(App\Post::class, 20)->create()->each(function($post) {
-            $post->categories()->save(factory(App\Category::class)->make());
-            $post->tags()->save(factory(App\Tag::class)->make());
+        // Disable event listeners
+        Category::flushEventListeners();
+        Tag::flushEventListeners();
+        CategoryPost::flushEventListeners();
+        PostTag::flushEventListeners();
+
+        factory(Post::class, 20)->create()->each(function($post) {
+            $post->categories()->save(factory(Category::class)->make());
+            $post->tags()->save(factory(Tag::class)->make());
         });
     }
 }

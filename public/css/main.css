@@ -17,6 +17,10 @@
     position: relative;
     width: 100%;
 }
+.thumbnail-wrapper.placeholder {
+    background: url('../images/placeholders/lorem-logo.svg');
+    background-color: #eaeaea;
+}
 .thumbnail-wrapper > .thumbnail {
     bottom: 0;
     display:block;
