@@ -15,10 +15,13 @@
         <td><a href="/admin/posts/{{ $post->slug }}/edit">{{ $post->title }}</a></td>
 
         <td class="actions">
-            @include('admin.layouts.parts.buttons', [
-                'editUrl' => '/admin/posts/' . $post->slug . '/edit',
-                'viewUrl' => '/post/' . $post->slug,
-            ])
+            @component('admin.components.buttons.edit', [
+                'url' => '/admin/posts/' . $post->slug . '/edit'
+            ]) @endcomponent
+
+            @component('admin.components.buttons.view', [
+                'url' => '/post/' . $post->slug
+            ]) @endcomponent
 
             <form action="/admin/posts/{{ $post->slug }}" method="POST">
                 @csrf

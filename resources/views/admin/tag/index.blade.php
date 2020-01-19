@@ -15,11 +15,19 @@
 @endsection
 
 @section('table_header_columns')
-    <th scope="col">ID</th>
-    <th scope="col">Name</th>
-    <th scope="col">Slug</th>
-    <th scope="col">Post Count</th>
-    <th scope="col">Actions</th>
+    @if ($tags->isEmpty())
+        @component('admin.components.alerts.empty')
+            @slot('message')
+                No Tags to show.
+            @endslot
+        @endcomponent
+    @else
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Slug</th>
+        <th scope="col">Post Count</th>
+        <th scope="col">Actions</th>
+    @endif
 @endsection
 
 @section('table_body')
@@ -31,10 +39,13 @@
         <td><a href="/admin/tags/{{ $tag->slug }}">{{ $tag->posts->count() }}</a></td>
 
         <td class="actions">
-            @include('admin.layouts.parts.buttons', [
-                'editUrl' => '/admin/tags/' . $tag->slug . '/edit',
-                'viewUrl' => '/tag/' . $tag->slug,
-            ])
+            @component('admin.components.buttons.edit', [
+                'url' => '/admin/tags/' . $tag->slug . '/edit'
+            ]) @endcomponent
+
+            @component('admin.components.buttons.view', [
+                'url' => '/tag/' . $tag->slug
+            ]) @endcomponent
 
             @can('delete', App\Tag::class)
                 <form action="/admin/tags/{{ $tag->slug }}" method="POST">

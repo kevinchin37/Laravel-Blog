@@ -15,9 +15,9 @@
         <td><a href="/admin/users/{{ $user->id }}/edit">{{ $user->name }}</a></td>
 
         <td class="actions">
-            @include('admin.layouts.parts.buttons', [
-                'editUrl' => '/admin/users/' . $user->id . '/edit',
-            ])
+            @component('admin.components.buttons.edit', [
+                'url' => '/admin/users/' . $user->id . '/edit'
+            ]) @endcomponent
 
             <form action="/admin/users/{{ $user->id }}" method="POST">
                 @csrf

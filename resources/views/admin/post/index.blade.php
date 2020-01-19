@@ -9,13 +9,21 @@
 @endsection
 
 @section('table_header_columns')
-    <th scope="col">ID</th>
-    <th scope="col">Title</th>
-    <th scope="col">Slug</th>
-    <th scope="col">Author</th>
-    <th scope="col">Categories</th>
-    <th scope="col">Tags</th>
-    <th scope="col">Actions</th>
+    @if ($posts->isEmpty())
+        @component('admin.components.alerts.empty')
+            @slot('message')
+                No posts to show.
+            @endslot
+        @endcomponent
+    @else
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Slug</th>
+        <th scope="col">Author</th>
+        <th scope="col">Categories</th>
+        <th scope="col">Tags</th>
+        <th scope="col">Actions</th>
+    @endif
 @endsection
 
 @section('table_body')
@@ -44,10 +52,13 @@
             </td>
 
             <td class="actions">
-                @include('admin.layouts.parts.buttons', [
-                    'editUrl' => '/admin/posts/' . $post->slug . '/edit',
-                    'viewUrl' => '/post/' . $post->slug,
-                ])
+                @component('admin.components.buttons.edit', [
+                    'url' => '/admin/posts/' . $post->slug . '/edit'
+                ]) @endcomponent
+
+                @component('admin.components.buttons.view', [
+                    'url' => '/post/' . $post->slug
+                ]) @endcomponent
 
                 @can('delete', App\Post::class)
                     <form action="/admin/posts/{{ $post->slug }}" method="POST">
