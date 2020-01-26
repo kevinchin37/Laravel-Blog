@@ -1,6 +1,8 @@
 @extends('admin.layouts.master')
 
 @section('main_content')
+    @include('admin.layouts.search')
+
     <div class="row">
         <div class="col-md-12">
             <table class="table">
