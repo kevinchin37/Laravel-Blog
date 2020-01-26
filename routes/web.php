@@ -40,8 +40,12 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     // User
     Route::resource('admin/users', 'UserController')->middleware('role.admin');
 
-    //Role
+    // Role
     Route::resource('admin/roles', 'RoleController')->middleware('role.admin');
+
+    // Search
+    Route::get('admin/search', 'SearchController@index');
+    Route::post('admin/search', 'SearchController@index');
 });
 
 Auth::routes();
@@ -54,3 +58,4 @@ Route::get('/post/{post}', 'PostController@show');
 Route::get('/category/{category}', 'CategoryController@show');
 
 Route::get('/tag/{tag}', 'TagController@show');
+
