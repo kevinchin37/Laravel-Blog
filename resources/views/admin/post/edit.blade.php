@@ -16,7 +16,6 @@
                     <textarea id="post-body" class="form-control" cols="30" rows="10" name="body">{{ $post->body }}</textarea>
                 </div>
 
-
                 <div class="row">
                     <div class="col-md-6">
                         <label for="featured-image">Update Image</label>
