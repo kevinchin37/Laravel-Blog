@@ -8,6 +8,10 @@
     @endcan
 @endsection
 
+@section('search_bar')
+    @include('admin.layouts.search')
+@endsection
+
 @section('table_header_columns')
     @if ($posts->isEmpty())
         @component('admin.components.alerts.empty')
