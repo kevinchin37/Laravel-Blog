@@ -21,10 +21,6 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-4">
-                    <label for="search-tag">Tag</label>
-                    <input type="text" class="form-control" id="search-tag" name="taxonomy[tag]" placeholder="Tag Name"/>
-                </div>
             </div>
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
