@@ -14,18 +14,18 @@ class SearchController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $author = User::where('name', '=', request()->author);
+        $author = User::where('name', '=', request()->author)->get();
         $filters = [
             'title' => [
                 'column' => 'title',
                 'operator' => 'like',
-                'value' => '%' . request()->title . '%'
+                'value' => (request()->has('title')) ? '%' . request()->title . '%' : ''
             ],
             'author' => [
                 'column' => 'user_id',
                 'operator' => '=',
-                'value' => (!empty($author->id)) ? $author->id : ''
-            ]
+                'value' => (!empty($author->first()->id)) ? $author->first()->id : ''
+            ],
         ];
 
         $filterConditions = [];
@@ -34,9 +34,15 @@ class SearchController extends Controller
             $filterConditions[] = [$filter['column'], $filter['operator'], $filter['value']];
         }
 
-        $posts = Post::where($filterConditions)->paginate(15);
+        $posts = Post::where($filterConditions);
+        if (request()->has('category')) {
+            $posts = Post::whereHas('categories', function ($query) use($filterConditions) {
+                return $query->where('category_post.category_id', request()->category)->where($filterConditions);
+            });
+        }
+
         return view('admin.search.index', [
-            'posts' => $posts
+            'posts' => $posts->paginate(15)
         ]);
     }
 }
