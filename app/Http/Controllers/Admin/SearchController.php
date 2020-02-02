@@ -14,7 +14,6 @@ class SearchController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $author = User::where('name', '=', request()->author)->get();
         $filters = [
             'title' => [
                 'column' => 'title',
@@ -24,7 +23,7 @@ class SearchController extends Controller
             'author' => [
                 'column' => 'user_id',
                 'operator' => '=',
-                'value' => (!empty($author->first()->id)) ? $author->first()->id : ''
+                'value' => (request()->has('author')) ? request()->author : ''
             ],
         ];
 
