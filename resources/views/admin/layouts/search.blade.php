@@ -10,8 +10,14 @@
             <div class="row">
                 <div class="col-md-4">
                     <label for="search-author">Author</label>
-                    <input type="text" class="form-control" id="search-author" name="author" placeholder="Author Name" value="{{ old('author') }}"/>
+                    <select class="custom-select" id="search-author" name="author">
+                        <option value="none" selected disabled hidden>Select Author</option>
+                        @foreach ($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
+
                 <div class="col-md-4">
                     <label for="search-category">Category</label>
                     <select class="custom-select" id="search-category" name="category">
