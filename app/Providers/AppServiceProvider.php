@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Tag;
 use App\Post;
+use App\User;
 use App\Category;
 use App\Observers\TagObserver;
 use App\Observers\PostObserver;
@@ -38,6 +39,10 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(['admin.post.create', 'admin.layouts.search'], function($view) {
             $view->with('categories', Category::all());
+        });
+
+        View::composer(['admin.user.index', 'admin.layouts.search'], function($view) {
+            $view->with('users', User::all());
         });
     }
 }
