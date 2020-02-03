@@ -64,7 +64,6 @@
     @endforeach
 @endsection
 
-{{-- {{ dd(request()->query()) }} --}}
 @section('pagination_links')
     {{ $posts->links() }}
 @endsection
