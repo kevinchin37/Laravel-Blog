@@ -16,10 +16,6 @@ class Category extends Model
         return $this->belongsToMany(Post::class);
     }
 
-    public function getCategories() {
-        return $this->all();
-    }
-
     /**
      * Get the route key for the model.
      *

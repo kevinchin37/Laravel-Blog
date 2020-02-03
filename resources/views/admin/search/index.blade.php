@@ -1,17 +1,5 @@
 @extends('admin.layouts.table')
 
-@section('header_title', 'Posts')
-
-@section('header_links')
-    @can('create', App\Post::class)
-        <a class="btn btn-primary" href="/admin/posts/create">Create new Post</a>
-    @endcan
-@endsection
-
-@section('search_bar')
-    @include('admin.layouts.search')
-@endsection
-
 @section('table_header_columns')
     @if ($posts->isEmpty())
         @component('admin.components.alerts.empty')

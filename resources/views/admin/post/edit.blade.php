@@ -16,7 +16,6 @@
                     <textarea id="post-body" class="form-control" cols="30" rows="10" name="body">{{ $post->body }}</textarea>
                 </div>
 
-
                 <div class="row">
                     <div class="col-md-6">
                         <label for="featured-image">Update Image</label>
@@ -29,11 +28,12 @@
 
                     <div class="col-md-6">
                         <ul>
-                            <li>ID: {{ $post->id }}</li>
-                            <li>Slug: {{ $post->slug }}</li>
-                            <li>Author: {{ $post->author->name }}</li>
-                            <li>Published Date: {{ $post->created_at }}</li>
-                            <li>Last Modified: {{ $post->updated_at }}</li>
+                            <li><strong>ID:</strong> {{ $post->id }}</li>
+                            <li><strong>Slug:</strong> {{ $post->slug }}</li>
+                            <li><strong>Link:</strong> <a href="/post/{{ $post->slug }}">{{ url('post/' . $post->slug) }}</a></li>
+                            <li><strong>Author:</strong> {{ $post->author->name }}</li>
+                            <li><strong>Published Date:</strong> {{ $post->created_at }}</li>
+                            <li><strong>Last Modified:</strong> {{ $post->updated_at }}</li>
                         </ul>
                     </div>
                 </div>

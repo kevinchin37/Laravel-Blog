@@ -14,6 +14,7 @@
             <div class="container">
                 @include('admin.layouts.header')
                 @include('admin.layouts.error')
+                @yield('search_bar')
                 @yield('main_content')
             </div>
         </section>
