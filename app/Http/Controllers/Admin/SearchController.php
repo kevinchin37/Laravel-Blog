@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\admin;
 
 use App\Post;
-use App\User;
 use App\Http\Controllers\Controller;
 
 class SearchController extends Controller
