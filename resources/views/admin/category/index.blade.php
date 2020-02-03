@@ -7,7 +7,7 @@
         <form action="/admin/categories" method="POST" class="form-inline">
             @csrf
             <div class="form-group">
-                <input type="text" name="name" class="mr-sm-2">
+                <input type="text" name="name" class="form-control mr-sm-2">
                 <button type="submit" class="btn btn-primary">Add Category</button>
             </div>
         </form>

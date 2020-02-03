@@ -3,9 +3,17 @@
 @section('header_title', $category->name . ' Posts')
 
 @section('table_header_columns')
-    <th scope="col">ID</th>
-    <th scope="col">Title</th>
-    <th scope="col">Actions</th>
+    @if ($category->posts->isEmpty())
+        @component('admin.components.alerts.empty')
+            @slot('message')
+                No posts to show.
+            @endslot
+        @endcomponent
+    @else
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Actions</th>
+    @endif
 @endsection
 
 @section('table_body')
