@@ -17,4 +17,14 @@ class PostController extends Controller
             'posts' => Post::orderBy('created_at', 'desc')->paginate(16),
         ]);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Post $post){
+        return view('post.show', ['post'=> $post]);
+    }
 }
