@@ -24,13 +24,4 @@ class Invitation extends Model {
 
         return Hash::check($email, $invitation->token);
     }
-
-    /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName() {
-        return 'token';
-    }
 }
