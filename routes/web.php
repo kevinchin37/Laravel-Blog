@@ -61,7 +61,7 @@ Route::get('/category/{category}', 'CategoryController@show');
 Route::get('/tag/{tag}', 'TagController@show');
 
 // Invitation
-Route::get('/invitation/{invitation}', 'Admin\InvitationController@show');
+Route::get('/invitation/{invitation}', 'Admin\InvitationController@show')->middleware('invitation.token');
 
 // Login / Registration
 Auth::routes();
