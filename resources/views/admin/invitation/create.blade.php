@@ -9,7 +9,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="user-email">E-mail</label>
-                    <input type="text" id="user-email" class="form-control w-25" name="email" placeholder="person@email.com"/>
+                    <input type="email" id="user-email" class="form-control w-25" name="email" placeholder="person@email.com"/>
                 </div>
 
                 <div class="form-group">
