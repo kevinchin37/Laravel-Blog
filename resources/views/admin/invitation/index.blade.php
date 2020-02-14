@@ -26,7 +26,7 @@
     <tr>
         <th scope="row">{{ $invitation->id }}</th>
         <td>{{ $invitation->email }}</td>
-        <td><a href="{{ '/invitation/' . $invitation->id . '/?invitation_token=' . $invitation->token  }}">Invite Link</a></td>
+        <td><a href="{{ $invitation->getInviteLink() }}">Invite Link</a></td>
         <td>{{ $invitation->status }}</td>
     </tr>
     @endforeach
