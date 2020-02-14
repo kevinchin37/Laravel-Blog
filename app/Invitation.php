@@ -24,4 +24,8 @@ class Invitation extends Model {
 
         return Hash::check($email, $invitation->token);
     }
+
+    public function getInviteLink() {
+        return url('/invitation/' . $this->id . '/?invitation_token=' . $this->token);
+    }
 }
