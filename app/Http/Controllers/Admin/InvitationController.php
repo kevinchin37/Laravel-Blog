@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Role;
 use App\Invitation;
+use App\Mail\InviteLink;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class InvitationController extends Controller
 {
@@ -44,7 +46,10 @@ class InvitationController extends Controller
 
         $invitation = new Invitation();
         $attributes['token'] = $invitation->generateToken($attributes['email']);
-        $invitation->create($attributes);
+        $newInvitation = $invitation->create($attributes);
+
+        Mail::to(request()->email)
+            ->send(new InviteLink($newInvitation->getInviteLink()));
 
         return back();
     }
@@ -57,7 +62,7 @@ class InvitationController extends Controller
      */
     public function show(Invitation $invitation) {
         return view('auth.register', [
-            'invitation' => $invitation
+            'invitation' => $invitation,
         ]);
     }
 
