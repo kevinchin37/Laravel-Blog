@@ -6,6 +6,7 @@ use App\Role;
 use App\Invitation;
 use App\Mail\InviteLink;
 use App\Http\Controllers\Controller;
+use App\Rules\EmailExist;
 use Illuminate\Support\Facades\Mail;
 
 class InvitationController extends Controller
@@ -40,7 +41,7 @@ class InvitationController extends Controller
      */
     public function store() {
         $attributes = request()->validate([
-            'email' => 'required',
+            'email' => ['required', new EmailExist],
             'role_id' => 'required',
         ]);
 
@@ -95,9 +96,11 @@ class InvitationController extends Controller
      * @param  \App\Invitation  $invitation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invitation $invitation)
-    {
-        //
+    public function destroy(Invitation $invitation) {
+        $this->authorize('delete', $invitation);
+        $invitation->delete();
+
+        return back();
     }
 
     public function validateRequest() {
