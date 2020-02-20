@@ -74,7 +74,6 @@ class InvitationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Invitation $invitation) {
-        $this->authorize('delete', $invitation);
         $invitation->delete();
 
         return back();
