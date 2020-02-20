@@ -68,29 +68,6 @@ class InvitationController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Invitation  $invitation
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Invitation $invitation)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Invitation  $invitation
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Invitation $invitation)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Invitation  $invitation
