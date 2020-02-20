@@ -44,9 +44,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::post('admin/search', 'SearchController@index');
 
     // Invitation
-    Route::get('admin/invitations', 'InvitationController@index');
+    Route::get('admin/invitations', 'InvitationController@index')->middleware('role.admin');
     Route::get('admin/invitations/create', 'InvitationController@create');
     Route::post('admin/invitations', 'InvitationController@store');
+    Route::delete('admin/invitations/{invitation}', 'InvitationController@destroy');
 });
 
 // Post
