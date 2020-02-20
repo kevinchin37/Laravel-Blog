@@ -14,20 +14,26 @@
             @endslot
         @endcomponent
     @else
-        <th scope="col">ID</th>
         <th scope="col">Email</th>
         <th scope="col">Link</th>
         <th scope="col">Status</th>
+        <th scope="col">Actions</th>
     @endif
 @endsection
 
 @section('table_body')
     @foreach ($invitations as $invitation)
     <tr>
-        <th scope="row">{{ $invitation->id }}</th>
         <td>{{ $invitation->email }}</td>
         <td><a href="{{ $invitation->getInviteLink() }}">Invite Link</a></td>
         <td>{{ $invitation->status }}</td>
+        <td>
+            <form action="/admin/invitations/{{ $invitation->id }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+        </td>
     </tr>
     @endforeach
 @endsection
