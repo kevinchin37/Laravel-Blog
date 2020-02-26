@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\InvitationAccepted;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\Invitation;
@@ -52,15 +53,15 @@ class RegisterController extends Controller
     {
         $this->validator(request()->all())->validate();
 
-       if (!$invitation->validateToken(request()->email)) {
-           return redirect($this->redirectPath());
-       }
+        if (!$invitation->validateToken(request()->email)) {
+            return redirect($this->redirectPath());
+        }
 
-        event(new Registered($user = $this->create(request()->all())));
+        event(new InvitationAccepted($user = $this->create(request()->all(), $invitation)));
         $this->guard()->login($user);
 
         return $this->registered(request(), $user)
-                ?: redirect($this->redirectPath());
+            ?: redirect($this->redirectPath());
     }
 
     /**
@@ -74,7 +75,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:1', 'confirmed'],
+            'role' => ['required', 'string']
         ]);
     }
 
@@ -90,6 +92,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role_id' => $data['role']
         ]);
     }
 }
