@@ -6,7 +6,8 @@ use App\Post;
 use App\Category;
 use App\Tag;
 use App\Http\Controllers\Controller;
-use App\Http\Support\Services\ImageService;
+use Illuminate\Support\Facades\Storage;
+
 
 class PostController extends Controller {
     /**
@@ -38,7 +39,7 @@ class PostController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ImageService $imageService) {
+    public function store() {
         $this->authorize('create', Post::class);
         $attributes = $this->validateRequest();
 
@@ -47,7 +48,7 @@ class PostController extends Controller {
         $attributes['user_id'] = auth()->user()->id;
 
         if (!empty($attributes['featured_image'])) {
-            $attributes['featured_image'] = $imageService->uploadHandler($attributes['featured_image'])->store();
+            $attributes['featured_image'] = $attributes['featured_image']->store('uploads', 'public');
         }
 
         $post = $post->create($attributes);
@@ -94,12 +95,13 @@ class PostController extends Controller {
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Post $post, ImageService $imageService) {
+    public function update(Post $post) {
         $this->authorize('update', $post);
         $attributes = $this->validateRequest();
 
         if (!empty($attributes['featured_image'])) {
-            $attributes['featured_image'] = $imageService->uploadHandler($attributes['featured_image'])->update($post->featured_image);
+            Storage::disk('public')->delete($post->featured_image);
+            $attributes['featured_image'] = $attributes['featured_image']->store('uploads', 'public');
         }
 
         if (!empty($attributes['category'])) {
