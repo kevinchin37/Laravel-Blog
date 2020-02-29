@@ -4,6 +4,7 @@ namespace App;
 
 use App\Role;
 use App\Activity;
+use App\Http\Support\Traits\LoggableActivity;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,6 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+    use LoggableActivity;
 
     /**
      * The attributes that are mass assignable.

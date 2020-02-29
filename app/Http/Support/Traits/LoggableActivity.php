@@ -4,7 +4,8 @@ namespace App\Http\Support\Traits;
 use App\Activity;
 
 trait LoggableActivity {
-    public function recordActvity($type, $message) {
+    public function recordActivity($type, $message) {
+        dd(auth()->user());
         $this->logs()->create([
             'type' => $type,
             'message' => $message,

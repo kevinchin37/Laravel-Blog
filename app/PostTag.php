@@ -12,13 +12,13 @@ class PostTag extends Pivot
         static::saved(function ($postTag) {
             $currentPost = Post::find($postTag->post_id);
             $message = 'The tag \'' . Tag::find($postTag->tag_id)->name . '\' was set.';
-            $currentPost->recordActvity('update', $message);
+            $currentPost->recordActivity('update', $message);
         });
 
         static::deleted(function ($postTag) {
             $currentPost = Post::find($postTag->post_id);
             $message = 'The tag \'' . Tag::find($postTag->tag_id)->name . '\' was unset.';
-            $currentPost->recordActvity('delete', $message);
+            $currentPost->recordActivity('delete', $message);
         });
     }
 }
