@@ -5,12 +5,16 @@ use App\Activity;
 
 trait LoggableActivity {
     public function recordActivity($type, $message) {
-        dd(auth()->user());
-        $this->logs()->create([
+        $attributes = [
             'type' => $type,
             'message' => $message,
-            'user_id' => auth()->user()->id
-        ]);
+        ];
+
+        if (!empty(auth()->user()->id)) {
+            $attributes['user_id'] = auth()->user()->id;
+        }
+
+        $this->logs()->create($attributes);
     }
 
     public function logs() {
