@@ -18,7 +18,7 @@ class CreateActivitiesTable extends Migration
             $table->morphs('loggable');
             $table->string('type');
             $table->string('message');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->default(1);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
