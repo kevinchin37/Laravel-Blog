@@ -26,6 +26,7 @@ class Invitation extends Model {
     }
 
     public function getInviteLink() {
+        if (empty($this->token)) return null;
         return url('/invitation/' . $this->id . '/?invitation_token=' . $this->token);
     }
 }
