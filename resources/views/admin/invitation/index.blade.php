@@ -26,7 +26,7 @@
     <tr>
         <td>{{ $invitation->email }}</td>
         <td><a href="{{ $invitation->getInviteLink() }}">Invite Link</a></td>
-        <td>{{ $invitation->status }}</td>
+        <td class="{{ $invitation->status === 'accepted' ? 'text-success' : 'text-danger' }}">{{ $invitation->status }}</td>
         <td>
             <form action="/admin/invitations/{{ $invitation->id }}" method="POST">
                 @csrf

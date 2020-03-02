@@ -34,12 +34,11 @@
                     @else
                         <thead class="thead-dark">
                             <tr>
-                                <th scope="col">Log</th>
-                                <th scope="col">Model</th>
                                 <th scope="col">ID</th>
+                                <th scope="col">Model</th>
                                 <th scope="col">Type</th>
                                 <th scope="col">Message</th>
-                                <th scope="col">Author</th>
+                                <th scope="col">Source</th>
                                 <th scope="col">Date</th>
                             </tr>
                         </thead>
@@ -50,7 +49,6 @@
                             <tr>
                                 <th scope="row">{{ $activity->id }}</th>
                                 <td>{{ $activity->loggable_type }}</td>
-                                <td>{{ $activity->loggable_id }}</td>
                                 <td>{{ $activity->type }}</td>
                                 <td>{{ $activity->message }}</td>
                                 <td>{{ $activity->author->name }}</td>

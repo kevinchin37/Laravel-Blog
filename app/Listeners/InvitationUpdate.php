@@ -14,6 +14,8 @@ class InvitationUpdate
      * @return void
      */
     public function handle(InvitationAccepted $event) {
+        $event->user->recordActivity('register', $event->user->name . ' has registered');
+
         Invitation::where('email', $event->user->email)->update([
             'token' => NULL,
             'status' => 'accepted'

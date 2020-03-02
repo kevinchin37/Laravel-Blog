@@ -12,13 +12,13 @@ class CategoryPost extends Pivot
         static::saved(function ($categoryPost) {
             $currentPost = Post::find($categoryPost->post_id);
             $message = 'The category \'' . Category::find($categoryPost->category_id)->name . '\' was set.';
-            $currentPost->recordActvity('update', $message);
+            $currentPost->recordActivity('update', $message);
         });
 
         static::deleted(function ($categoryPost) {
             $currentPost = Post::find($categoryPost->post_id);
             $message = 'The category \'' . Category::find($categoryPost->category_id)->name . '\' was unset.';
-            $currentPost->recordActvity('update', $message);
+            $currentPost->recordActivity('update', $message);
         });
     }
 }

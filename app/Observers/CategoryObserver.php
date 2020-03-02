@@ -14,7 +14,7 @@ class CategoryObserver
      */
     public function created(Category $category) {
         $message = '\'' . $category->name  . '\' was created.';
-        $category->recordActvity('create', $message);
+        $category->recordActivity('create', $message);
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoryObserver
      */
     public function updated(Category $category) {
         $message = 'Name was updated.';
-        $category->recordActvity('update', $message);
+        $category->recordActivity('update', $message);
     }
 
     /**
@@ -36,6 +36,6 @@ class CategoryObserver
      */
     public function deleted(Category $category) {
         $message = '\'' . $category->name . '\' was deleted.';
-        $category->recordActvity('delete', $message);
+        $category->recordActivity('delete', $message);
     }
 }
