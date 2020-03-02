@@ -18,7 +18,7 @@ class CreateInvitationsTable extends Migration
             $table->unsignedBigInteger('role_id');
             $table->string('email')->unique();
             $table->string('token')->unique()->nullable();
-            $table->string('status')->default('pending');
+            $table->string('status')->default('Pending');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->nullable();
             $table->timestamps();
         });

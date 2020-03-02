@@ -18,7 +18,7 @@ class InvitationUpdate
 
         Invitation::where('email', $event->user->email)->update([
             'token' => NULL,
-            'status' => 'accepted'
+            'status' => 'Accepted'
         ]);
     }
 }
