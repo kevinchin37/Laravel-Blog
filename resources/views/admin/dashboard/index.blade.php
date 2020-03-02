@@ -34,7 +34,7 @@
                     @else
                         <thead class="thead-dark">
                             <tr>
-                                <th scope="col">ID</th>
+                                <th scope="col">Log</th>
                                 <th scope="col">Model</th>
                                 <th scope="col">Type</th>
                                 <th scope="col">Message</th>
@@ -48,9 +48,9 @@
                         @foreach ($activities as $activity)
                             <tr>
                                 <th scope="row">{{ $activity->id }}</th>
-                                <td>{{ $activity->loggable_type }}</td>
+                                <td class="text-success">{{ $activity->loggable_type }}</td>
                                 <td>{{ $activity->type }}</td>
-                                <td>{{ $activity->message }}</td>
+                                <td><span class="text-primary">{{ '[ID: ' . $activity->loggable_id . ']' }}</span> {{ $activity->message }}</td>
                                 <td>{{ $activity->author->name }}</td>
                                 <td>{{ $activity->created_at }}</td>
                             </tr>
