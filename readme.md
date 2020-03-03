@@ -1,6 +1,6 @@
 # Laravel Blog
 
-A ongoing project for learning Laravel.
+A project for learning Laravel.
 
 ### Features: 
 * __Admin__:
@@ -25,6 +25,7 @@ A ongoing project for learning Laravel.
 ```
 git clone https://github.com/kevinchin37/Laravel-Blog.git
 
+cd Laravel-blog
 composer install
 php artisan key:generate
 php artisan storage:link
@@ -62,6 +63,6 @@ Categorys: ```http://127.0.0.1:8000/category/category-name```\
 Tags: ```http://127.0.0.1:8000/tag/tag-name```
 
 # Future Project Ideas
-[] Look into adding a text editor(WYSIWYG?) for post content
-[] Add the ability to create roles on `/admin/roles`
-[] Think of sidebar content
+[] Look into adding a text editor(WYSIWYG?) for post content  
+[] Add the ability to create roles on `/admin/roles`  
+[] Think of sidebar content  
