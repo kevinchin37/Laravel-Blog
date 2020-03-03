@@ -1,6 +1,19 @@
 # Laravel Blog
 
-A project for learning Laravel.
+A ongoing project for learning Laravel.
+
+### Features: 
+* __Admin__:
+    * CRUD operations for Posts, Categories and Tags.
+    * User Invitation - can generate an invite link with a unique token to send out to people
+    * Search functionality - Can search posts by title, author, category (or all)
+    *  __Dashboard__:
+        * Latest Posts
+        * Activity logger (create, update, edit, delete, user registration)
+* __User Roles (WIP)__:
+    * Permissions - As of now certain roles do not have permission to certain actions and page access
+
+
 
 # Screenshots
 [View more screenshots here](https://imgur.com/a/M5jmzEb)
