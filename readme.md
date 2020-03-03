@@ -62,7 +62,7 @@ Posts: ```http://127.0.0.1:8000/posts```\
 Categorys: ```http://127.0.0.1:8000/category/category-name```\
 Tags: ```http://127.0.0.1:8000/tag/tag-name```
 
-# Future Project Ideas
+## Future Project Ideas
 [] Look into adding a text editor(WYSIWYG?) for post content  
 [] Add the ability to create roles on `/admin/roles`  
 [] Think of sidebar content  
