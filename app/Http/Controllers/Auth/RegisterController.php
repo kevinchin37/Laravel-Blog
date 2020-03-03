@@ -54,7 +54,7 @@ class RegisterController extends Controller
         $this->validator(request()->all())->validate();
 
         if (!$invitation->validateToken(request()->email)) {
-            return redirect($this->redirectPath());
+            return abort(404);
         }
 
         event(new InvitationAccepted($user = $this->create(request()->all(), $invitation)));

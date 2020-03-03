@@ -25,8 +25,16 @@
     @foreach ($invitations as $invitation)
     <tr>
         <td>{{ $invitation->email }}</td>
-        <td><a href="{{ $invitation->getInviteLink() }}">Invite Link</a></td>
-        <td class="{{ $invitation->status === 'accepted' ? 'text-success' : 'text-danger' }}">{{ $invitation->status }}</td>
+        <td>
+            @if (!empty($invitation->getInviteLink()))
+                <a href="{{ $invitation->getInviteLink() }}">Invite Link</a>
+            @else
+                <span>Registered</span>
+            @endif
+        </td>
+
+        <td class="{{ $invitation->status === 'Accepted' ? 'text-success' : 'text-danger' }}">{{ $invitation->status }}</td>
+
         <td>
             <form action="/admin/invitations/{{ $invitation->id }}" method="POST">
                 @csrf
