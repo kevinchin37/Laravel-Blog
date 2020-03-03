@@ -14,7 +14,7 @@ class TagObserver
      */
     public function created(Tag $tag) {
         $message = '\'' . $tag->name  . '\' was created.';
-        $tag->recordActvity('create', $message);
+        $tag->recordActivity('create', $message);
     }
 
     /**
@@ -25,7 +25,7 @@ class TagObserver
      */
     public function updated(Tag $tag) {
         $message = 'Name was updated.';
-        $tag->recordActvity('update', $message);
+        $tag->recordActivity('update', $message);
     }
 
     /**
@@ -36,6 +36,6 @@ class TagObserver
      */
     public function deleted(Tag $tag) {
         $message = '\'' . $tag->name  . '\' was created.';
-        $tag->recordActvity('delete', $message);
+        $tag->recordActivity('delete', $message);
     }
 }

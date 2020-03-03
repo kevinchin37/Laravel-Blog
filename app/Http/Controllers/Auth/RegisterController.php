@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\InvitationAccepted;
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Invitation;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -28,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -38,6 +41,27 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Invitation $invitation)
+    {
+        $this->validator(request()->all())->validate();
+
+        if (!$invitation->validateToken(request()->email)) {
+            return abort(404);
+        }
+
+        event(new InvitationAccepted($user = $this->create(request()->all(), $invitation)));
+        $this->guard()->login($user);
+
+        return $this->registered(request(), $user)
+            ?: redirect($this->redirectPath());
     }
 
     /**
@@ -52,6 +76,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required', 'string']
         ]);
     }
 
@@ -67,6 +92,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role_id' => $data['role']
         ]);
     }
 }

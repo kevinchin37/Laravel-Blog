@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     // Post
     Route::get('admin', 'DashboardController@index');
@@ -46,16 +42,28 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     // Search
     Route::get('admin/search', 'SearchController@index');
     Route::post('admin/search', 'SearchController@index');
+
+    // Invitation
+    Route::get('admin/invitations', 'InvitationController@index')->middleware('role.admin');
+    Route::get('admin/invitations/create', 'InvitationController@create');
+    Route::post('admin/invitations', 'InvitationController@store');
+    Route::delete('admin/invitations/{invitation}', 'InvitationController@destroy');
 });
 
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-
+// Post
 Route::get('/', 'PostController@index');
 Route::get('/posts', 'PostController@index');
 Route::get('/post/{post}', 'PostController@show');
 
+// Category
 Route::get('/category/{category}', 'CategoryController@show');
 
+// Tag
 Route::get('/tag/{tag}', 'TagController@show');
 
+// Invitation
+Route::get('/invitation/{invitation}', 'Admin\InvitationController@show')->middleware('invitation.token');
+
+// Login / Registration
+Auth::routes();
+Route::post('/invitation', 'auth\RegisterController@register');

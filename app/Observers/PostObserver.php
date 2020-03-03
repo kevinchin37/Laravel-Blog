@@ -14,7 +14,7 @@ class PostObserver
      */
     public function created(Post $post) {
         $message = '\'' . $post->title  . '\' was created.';
-        $post->recordActvity('create', $message);
+        $post->recordActivity('create', $message);
     }
 
     /**
@@ -31,7 +31,7 @@ class PostObserver
             foreach ($updatedFields as $field) {
                 if ($field === 'updated_at') continue;
                 $message = ucfirst($field) . ' was updated.';
-                $post->recordActvity('update', $message);
+                $post->recordActivity('update', $message);
             }
         }
     }
@@ -44,6 +44,6 @@ class PostObserver
      */
     public function deleted(Post $post) {
         $message = '\'' . $post->title  . '\' was deleted.';
-        $post->recordActvity('delete', $message);
+        $post->recordActivity('delete', $message);
     }
 }
