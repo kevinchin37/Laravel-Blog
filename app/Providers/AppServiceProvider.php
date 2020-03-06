@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
         Category::observe(CategoryObserver::class);
         Tag::observe(TagObserver::class);
 
-        View::composer(['admin.post.create', 'admin.layouts.search'], function($view) {
+        View::composer(['admin.post.create', 'admin.post.edit', 'admin.layouts.search'], function($view) {
             $view->with('categories', Category::all());
         });
 
