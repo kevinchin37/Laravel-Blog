@@ -45,7 +45,9 @@ class TagController extends Controller
     public function show(Tag $tag) {
         return view('admin.tag.show', [
             'tag' => $tag,
-            'tagPosts' => $tag->posts()->paginate(15),
+            'tagPosts' => $tag->posts()
+                ->orderBy('created_at', 'desc')
+                ->paginate(15),
         ]);
     }
 
