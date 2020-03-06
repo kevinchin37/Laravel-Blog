@@ -15,7 +15,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category) {
         return view('category.show', [
-            'posts' => $category->posts()->orderBy('created_at', 'desc')->paginate(16),
+            'posts' => $category->posts()
+                ->orderBy('created_at', 'desc')
+                ->paginate(16),
             'categoryName' => $category->name
         ]);
     }

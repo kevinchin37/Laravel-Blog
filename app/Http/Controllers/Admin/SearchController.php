@@ -40,7 +40,9 @@ class SearchController extends Controller
         }
 
         return view('admin.search.index', [
-            'posts' => $posts->orderBy('created_at', 'desc')->paginate(15)
+            'posts' => $posts
+                ->orderBy('created_at', 'desc')
+                ->paginate(15)
         ]);
     }
 }
