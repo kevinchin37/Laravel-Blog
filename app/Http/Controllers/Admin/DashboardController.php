@@ -13,10 +13,10 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Post $post, Activity $activity) {
+    public function index() {
         return view('admin.dashboard.index', [
-            'posts' => $post->latest()->get()->take(5),
-            'activities' => $activity->latest()->get()->take(5),
+            'posts' => Post::latest()->get()->take(5),
+            'activities' => Activity::latest()->get()->take(5),
         ]);
     }
 }
