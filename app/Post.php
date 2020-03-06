@@ -4,9 +4,9 @@ namespace App;
 
 use App\PostTag;
 use App\CategoryPost;
-use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use App\Http\Support\Traits\LoggableActivity;
+use App\Http\Support\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -14,6 +14,7 @@ class Post extends Model
     protected $fillable = ['title', 'body', 'featured_image', 'slug', 'user_id'];
 
     use LoggableActivity;
+    use Sluggable;
 
     public function categories() {
         return $this->belongsToMany(Category::class)->using(CategoryPost::class);
@@ -45,24 +46,6 @@ class Post extends Model
 
     public function author() {
         return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function slugExist($slug) {
-       return $this->where('slug', '=', $slug)->get()->isNotEmpty();
-    }
-
-    public function incrementSlug($slug) {
-        $slugCount = $this->where('slug', 'like', $slug . '-%')->get()->count() + 1;
-        return $slug . '-' . $slugCount;
-    }
-
-    public function getSlug($title) {
-        $slug = Str::slug($title);
-        if ($this->slugExist($slug)) {
-            $slug = $this->incrementSlug($slug);
-        }
-
-        return $slug;
     }
 
     /**
