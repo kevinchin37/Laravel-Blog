@@ -83,7 +83,6 @@ class PostController extends Controller {
     public function edit(Post $post) {
         return view('admin.post.edit', [
             'post' => $post,
-            'categories' => Category::all(),
             'tags' => Tag::all(),
         ]);
     }
