@@ -78,11 +78,4 @@ class InvitationController extends Controller
 
         return back();
     }
-
-    public function validateRequest() {
-        return request()->validate([
-            'email' => 'required',
-            'role' => 'required',
-        ]);
-    }
 }
