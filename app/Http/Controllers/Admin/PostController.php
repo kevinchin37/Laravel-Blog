@@ -51,14 +51,8 @@ class PostController extends Controller {
         }
 
         $post = $post->create($attributes);
-
-        if (!empty($attributes['category'])) {
-            $post->addCategories($attributes['category']);
-        }
-
-        if (!empty($attributes['tags'])) {
-            $post->addTags($attributes['tags']);
-        }
+        $post->addCategories($attributes);
+        $post->addTags($attributes);
 
         return redirect('/admin/posts/' . $post->slug . '/edit');
     }
@@ -102,14 +96,8 @@ class PostController extends Controller {
             $attributes['featured_image'] = $attributes['featured_image']->store('uploads', 'public');
         }
 
-        if (!empty($attributes['category'])) {
-            $post->updateCategories($attributes['category']);
-        }
-
-        if (!empty($attributes['tags'])) {
-            $post->updateTags($attributes['tags']);
-        }
-
+        $post->updateCategories($attributes);
+        $post->updateTags($attributes);
         $post->update($attributes);
 
         return back();
@@ -133,7 +121,7 @@ class PostController extends Controller {
             'title' => 'required',
             'body' => 'nullable',
             'featured_image' => 'sometimes|file|image|max:5000',
-            'category' => 'nullable',
+            'categories' => 'nullable',
             'tags' => 'nullable'
         ]);
     }
