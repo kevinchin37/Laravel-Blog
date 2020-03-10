@@ -22,7 +22,7 @@
                             <ul class="list-group taxonomy-wrapper {{ (count($categories) > 5 ? 'scroll-enable' : '') }}">
                                 @foreach ($categories as $category)
                                     <label>
-                                        <li class="list-group-item"><input type="checkbox" name="category[]" value="{{$category->id}}">{{$category->name}}</li>
+                                        <li class="list-group-item"><input type="checkbox" name="categories[]" value="{{ $category->id }}">{{ $category->name }}</li>
                                     </label>
                                 @endforeach
                             </ul>
@@ -33,7 +33,7 @@
                             <ul class="list-group taxonomy-wrapper {{ (count($tags) > 5 ? 'scroll-enable' : '') }}">
                                 @foreach ($tags as $tag)
                                 <label>
-                                    <li class="list-group-item"><input type="checkbox" name="tags[]" value="{{$tag->id}}">{{$tag->name}}</li>
+                                    <li class="list-group-item"><input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->name }}</li>
                                 </label>
                                 @endforeach
                             </ul>
