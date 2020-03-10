@@ -20,13 +20,16 @@ class Post extends Model
         return $this->belongsToMany(Category::class)->using(CategoryPost::class);
     }
 
-    public function addCategories($categories) {
-        foreach($categories as $category) {
+    public function addCategories($attributes) {
+        if (empty($attributes['categories'])) return;
+
+        foreach($attributes['categories'] as $category) {
             $this->categories()->attach($category);
         }
     }
 
-    public function updateCategories($categories) {
+    public function updateCategories($attributes) {
+        $categories = !empty($attributes['categories']) ? $attributes['categories'] : null;
         $this->categories()->sync($categories);
     }
 
@@ -34,13 +37,16 @@ class Post extends Model
         return $this->belongsToMany(Tag::class)->using(PostTag::class);;
     }
 
-    public function addTags($tags) {
-        foreach($tags as $tag) {
+    public function addTags($attributes) {
+        if (empty($attributes['tags'])) return;
+
+        foreach($attributes['tags'] as $tag) {
             $this->tags()->attach($tag);
         }
     }
 
-    public function updateTags($tags) {
+    public function updateTags($attributes) {
+        $tags = !empty($attributes['tags']) ? $attributes['tags'] : null;
         $this->tags()->sync($tags);
     }
 
