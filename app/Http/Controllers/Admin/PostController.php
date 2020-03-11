@@ -54,7 +54,8 @@ class PostController extends Controller {
         $post->addCategories($attributes);
         $post->addTags($attributes);
 
-        return redirect('/admin/posts/' . $post->slug . '/edit');
+        return redirect('/admin/posts/' . $post->slug . '/edit')
+            ->with('status', 'Post has been created.');
     }
 
     /**
@@ -100,7 +101,7 @@ class PostController extends Controller {
         $post->updateTags($attributes);
         $post->update($attributes);
 
-        return back();
+        return back()->with('status', 'Post updated.');
     }
 
     /**
@@ -113,7 +114,7 @@ class PostController extends Controller {
         $this->authorize('delete', $post);
         $post->delete();
 
-        return back();
+        return back()->with('status', 'Post has been deleted.');
     }
 
     public function validateRequest() {
