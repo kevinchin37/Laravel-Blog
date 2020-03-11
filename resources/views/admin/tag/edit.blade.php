@@ -9,7 +9,8 @@
                 @csrf
                 @method('PATCH')
                 <div class="form-group">
-                    <input type="text" class="form-control" name="name" placeholder="Tag name" value="{{ $tag->name }}"/>
+                    <label for="tag">Tag name</label>
+                    <input type="text" id="tag" class="form-control w-25" name="name" placeholder="Tag name" value="{{ $tag->name }}"/>
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-3">Update</button>
