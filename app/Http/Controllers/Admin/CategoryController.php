@@ -43,7 +43,8 @@ class CategoryController extends Controller
         $attributes['slug'] = Str::slug($attributes['name']);
         $category->create($attributes);
 
-        return redirect('/admin/categories');
+        return redirect('/admin/categories')
+            ->with('status', 'Category has been added.');
     }
 
     /**
@@ -88,7 +89,8 @@ class CategoryController extends Controller
         $attributes['slug'] = Str::slug($attributes['name']);
         $category->update($attributes);
 
-        return redirect('admin/categories/' . $attributes['slug'] . '/edit');
+        return redirect('admin/categories/' . $attributes['slug'] . '/edit')
+            ->with('status', 'Category updated.');
     }
 
     /**
@@ -101,7 +103,7 @@ class CategoryController extends Controller
         $this->authorize('delete', Category::class);
         $category->delete();
 
-        return back();
+        return back()->with('status', 'Category has been deleted.');
     }
 
     public function validateRequest() {
