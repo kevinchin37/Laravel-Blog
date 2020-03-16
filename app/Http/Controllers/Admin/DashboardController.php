@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Tag;
 use App\Post;
 use App\Activity;
+use App\Category;
+use App\Widgets\Widget;
+use App\Widgets\ActivityLog;
+use App\Widgets\LatestEntries;
 use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
@@ -13,10 +18,14 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Post $post, Activity $activity) {
+    public function index() {
         return view('admin.dashboard.index', [
-            'posts' => $post->latest()->get()->take(5),
-            'activities' => $activity->latest()->get()->take(5),
+            'widgets' => [
+                (new Widget(new LatestEntries(new Post, 5), 'Latest Posts'))->getSettings(),
+                (new Widget(new LatestEntries(new Category, 5), 'Latest Categories'))->getSettings(),
+                (new Widget(new LatestEntries(new Tag, 5), 'Latest Tags', 4))->getSettings(),
+                (new Widget(new ActivityLog(new Activity, 3), 'Activities', 8))->getSettings(),
+            ]
         ]);
     }
 }
