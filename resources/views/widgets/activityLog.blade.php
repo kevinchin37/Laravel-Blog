@@ -2,7 +2,7 @@
     <div class="widget">
         <h2 class="widget-title">{{ $widget['title'] }}</h2>
         <table class="table table-sm">
-            @if ($widget['activities']->isEmpty())
+            @if ($widget['entries']->isEmpty())
                 @component('admin.components.alerts.empty')
                     @slot('message')
                         No recent activities.
@@ -21,8 +21,8 @@
                 </thead>
             @endif
 
-            <tbody class="model-data">
-                @foreach ($widget['activities'] as $activity)
+            <tbody>
+                @foreach ($widget['entries'] as $activity)
                     <tr>
                         <th scope="row">{{ $activity->id }}</th>
                         <td class="text-success">{{ $activity->loggable_type }}</td>
