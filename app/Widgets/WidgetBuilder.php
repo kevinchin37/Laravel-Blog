@@ -2,14 +2,14 @@
 
 namespace App\Widgets;
 
-use App\Widgets\Contracts\Widget as WidgetContract;
+use App\Widgets\Contracts\Widget;
 
 class WidgetBuilder {
     protected $widget;
     protected $title;
     protected $columns;
 
-    public function __construct(WidgetContract $widget, $title = 'Widget', $columns = 6) {
+    public function __construct(Widget $widget, $title = 'Widget', $columns = 6) {
         $this->widget = $widget;
         $this->title = $title;
         $this->columns = $columns;
