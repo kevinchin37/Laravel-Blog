@@ -3,13 +3,14 @@
 namespace App\Widgets\Latest;
 
 use App\Tag;
-use App\Widgets\Latest\Entry;
+use App\Widgets\Contracts\Latest\Entry;
+use App\Widgets\Contracts\Widget;
 
-class LatestTags extends Entry {
+class LatestTags implements Entry, Widget {
     protected $count;
     protected $template;
 
-    public function __construct($count = 5, $template = 'widgets.latestEntries') {
+    public function __construct($count = 5, $template = 'widgets.latest.tag') {
         $this->count = $count;
         $this->template = $template;
     }
@@ -24,5 +25,17 @@ class LatestTags extends Entry {
             ->latest()
             ->get()
             ->take($this->count);
+    }
+
+    /**
+     * Get the widget's settings
+     *
+     * @return array
+     */
+    public function getSettings() {
+        return [
+            'tags' => $this->getLatest(),
+            'template' => $this->template
+        ];
     }
 }
