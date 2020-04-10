@@ -6,7 +6,6 @@ use App\Activity;
 use App\Widgets\Contracts\Latest\Entry;
 use App\Widgets\Contracts\Widget;
 
-
 class LatestActivities implements Entry, Widget {
     protected $count;
     protected $template;
