@@ -19,7 +19,7 @@ class DashboardController extends Controller
     public function index() {
         return view('admin.dashboard.index', [
             'widgets' => [
-                (new WidgetBuilder(new LatestActivities, 'Activities'))->getSettings(),
+                (new WidgetBuilder(new LatestActivities, 'Activities', 12))->getSettings(),
                 (new WidgetBuilder(new LatestPosts, 'Latest Posts'))->getSettings(),
                 (new WidgetBuilder(new LatestCategories, 'Latest Categories'))->getSettings(),
                 (new WidgetBuilder(new LatestTags, 'Latest Tags'))->getSettings(),
