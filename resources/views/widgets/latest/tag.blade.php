@@ -2,7 +2,7 @@
     <div class="widget latest-entries">
         <h2 class="widget-title">{{ $widget['title'] }}</h2>
         @if ($widget['tags']->isEmpty())
-            @component('admin.components.alerts.empty')
+            @component('components.alerts.empty')
                 @slot('message')
                     No tags to show.
                 @endslot

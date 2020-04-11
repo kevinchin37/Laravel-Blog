@@ -16,7 +16,7 @@
 
 @section('table_header_columns')
     @if ($tags->isEmpty())
-        @component('admin.components.alerts.empty')
+        @component('components.alerts.empty')
             @slot('message')
                 No Tags to show.
             @endslot

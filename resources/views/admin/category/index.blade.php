@@ -16,7 +16,7 @@
 
 @section('table_header_columns')
     @if ($categories->isEmpty())
-        @component('admin.components.alerts.empty')
+        @component('components.alerts.empty')
             @slot('message')
                 No categories to show.
             @endslot

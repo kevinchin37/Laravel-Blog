@@ -3,7 +3,7 @@
         <h2 class="widget-title">{{ $widget['title'] }}</h2>
         <table class="table table-sm">
             @if ($widget['activities']->isEmpty())
-                @component('admin.components.alerts.empty')
+                @component('components.alerts.empty')
                     @slot('message')
                         No recent activities.
                     @endslot

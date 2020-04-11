@@ -8,7 +8,7 @@
 
 @section('table_header_columns')
     @if ($invitations->isEmpty())
-        @component('admin.components.alerts.empty')
+        @component('components.alerts.empty')
             @slot('message')
                 No current invitations.
             @endslot
