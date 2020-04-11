@@ -1,10 +1,12 @@
 @extends('admin.layouts.table')
 
+@section('header_title', 'Search Results')
+
 @section('table_header_columns')
     @if ($posts->isEmpty())
         @component('admin.components.alerts.empty')
             @slot('message')
-                No posts to show.
+                No posts found.
             @endslot
         @endcomponent
     @else

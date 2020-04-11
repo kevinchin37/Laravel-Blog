@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
-use App\Category;
 use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -52,16 +51,11 @@ class PostController extends Controller {
         }
 
         $post = $post->create($attributes);
+        $post->addCategories($attributes);
+        $post->addTags($attributes);
 
-        if (!empty($attributes['category'])) {
-            $post->addCategories($attributes['category']);
-        }
-
-        if (!empty($attributes['tags'])) {
-            $post->addTags($attributes['tags']);
-        }
-
-        return redirect('/admin/posts/' . $post->slug . '/edit');
+        return redirect('/admin/posts/' . $post->slug . '/edit')
+            ->with('status', 'Post has been created.');
     }
 
     /**
@@ -83,7 +77,6 @@ class PostController extends Controller {
     public function edit(Post $post) {
         return view('admin.post.edit', [
             'post' => $post,
-            'categories' => Category::all(),
             'tags' => Tag::all(),
         ]);
     }
@@ -104,17 +97,11 @@ class PostController extends Controller {
             $attributes['featured_image'] = $attributes['featured_image']->store('uploads', 'public');
         }
 
-        if (!empty($attributes['category'])) {
-            $post->updateCategories($attributes['category']);
-        }
-
-        if (!empty($attributes['tags'])) {
-            $post->updateTags($attributes['tags']);
-        }
-
+        $post->updateCategories($attributes);
+        $post->updateTags($attributes);
         $post->update($attributes);
 
-        return back();
+        return back()->with('status', 'Post updated.');
     }
 
     /**
@@ -127,7 +114,7 @@ class PostController extends Controller {
         $this->authorize('delete', $post);
         $post->delete();
 
-        return back();
+        return back()->with('status', 'Post has been deleted.');
     }
 
     public function validateRequest() {
@@ -135,7 +122,7 @@ class PostController extends Controller {
             'title' => 'required',
             'body' => 'nullable',
             'featured_image' => 'sometimes|file|image|max:5000',
-            'category' => 'nullable',
+            'categories' => 'nullable',
             'tags' => 'nullable'
         ]);
     }

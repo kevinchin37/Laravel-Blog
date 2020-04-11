@@ -33,7 +33,8 @@ class TagController extends Controller
         $attributes['slug'] = Str::slug($attributes['name']);
         $tag->create($attributes);
 
-        return redirect('/admin/tags');
+        return redirect('/admin/tags')
+            ->with('status', 'Tag has been added.');
     }
 
     /**
@@ -45,7 +46,9 @@ class TagController extends Controller
     public function show(Tag $tag) {
         return view('admin.tag.show', [
             'tag' => $tag,
-            'tagPosts' => $tag->posts()->paginate(15),
+            'tagPosts' => $tag->posts()
+                ->orderBy('created_at', 'desc')
+                ->paginate(15),
         ]);
     }
 
@@ -76,7 +79,8 @@ class TagController extends Controller
         $attributes['slug'] = Str::slug($attributes['name']);
         $tag->update($attributes);
 
-        return redirect('admin/tags/' . $attributes['slug'] . '/edit');
+        return redirect('admin/tags/' . $attributes['slug'] . '/edit')
+            ->with('status', 'Tag updated.');
     }
 
     /**
@@ -89,7 +93,7 @@ class TagController extends Controller
         $this->authorize('delete', Tag::class);
         $tag->delete();
 
-        return back();
+        return back()->with('status', 'Tag has been deleted.');
     }
 
     public function validateRequest() {
