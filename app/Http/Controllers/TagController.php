@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
-use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
@@ -15,7 +14,9 @@ class TagController extends Controller
      */
     public function show(Tag $tag) {
         return view('tag.show', [
-            'posts' => $tag->posts()->orderBy('created_at', 'desc')->paginate(16),
+            'posts' => $tag->posts()
+                ->orderBy('created_at', 'desc')
+                ->paginate(16),
             'tagName' => $tag->name
         ]);
     }

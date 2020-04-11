@@ -52,7 +52,7 @@ class InvitationController extends Controller
         Mail::to(request()->email)
             ->send(new InviteLink($newInvitation->getInviteLink()));
 
-        return back();
+        return back()->with('status', 'Invitation has been created.');
     }
 
     /**
@@ -76,13 +76,6 @@ class InvitationController extends Controller
     public function destroy(Invitation $invitation) {
         $invitation->delete();
 
-        return back();
-    }
-
-    public function validateRequest() {
-        return request()->validate([
-            'email' => 'required',
-            'role' => 'required',
-        ]);
+        return back()->with('status', 'Invitation has been deleted.');
     }
 }

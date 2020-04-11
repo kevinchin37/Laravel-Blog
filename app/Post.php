@@ -4,9 +4,9 @@ namespace App;
 
 use App\PostTag;
 use App\CategoryPost;
-use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use App\Http\Support\Traits\LoggableActivity;
+use App\Http\Support\Traits\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -14,55 +14,83 @@ class Post extends Model
     protected $fillable = ['title', 'body', 'featured_image', 'slug', 'user_id'];
 
     use LoggableActivity;
+    use Sluggable;
 
+    /**
+     * Post's categories
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function categories() {
         return $this->belongsToMany(Category::class)->using(CategoryPost::class);
     }
 
-    public function addCategories($categories) {
-        foreach($categories as $category) {
+    /**
+     * Attach categories to a post
+     *
+     * @param array $attributes
+     * @return void
+     */
+    public function addCategories($attributes) {
+        if (empty($attributes['categories'])) return;
+
+        foreach($attributes['categories'] as $category) {
             $this->categories()->attach($category);
         }
     }
 
-    public function updateCategories($categories) {
+    /**
+     * Update categories of a post
+     *
+     * @param array $attributes
+     * @return void
+     */
+    public function updateCategories($attributes) {
+        $categories = !empty($attributes['categories']) ? $attributes['categories'] : null;
         $this->categories()->sync($categories);
     }
 
+    /**
+     * Post's tags
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function tags() {
         return $this->belongsToMany(Tag::class)->using(PostTag::class);;
     }
 
-    public function addTags($tags) {
-        foreach($tags as $tag) {
+    /**
+     * Attach tag(s) to a post
+     *
+     * @param array $attributes
+     * @return void
+     */
+    public function addTags($attributes) {
+        if (empty($attributes['tags'])) return;
+
+        foreach($attributes['tags'] as $tag) {
             $this->tags()->attach($tag);
         }
     }
 
-    public function updateTags($tags) {
+    /**
+     * Update tag(s) of a post
+     *
+     * @param array $attributes
+     * @return void
+     */
+    public function updateTags($attributes) {
+        $tags = !empty($attributes['tags']) ? $attributes['tags'] : null;
         $this->tags()->sync($tags);
     }
 
+    /**
+     * Post's author
+     *
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function author() {
         return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function slugExist($slug) {
-       return $this->where('slug', '=', $slug)->get()->isNotEmpty();
-    }
-
-    public function incrementSlug($slug) {
-        $slugCount = $this->where('slug', 'like', $slug . '-%')->get()->count() + 1;
-        return $slug . '-' . $slugCount;
-    }
-
-    public function getSlug($title) {
-        $slug = Str::slug($title);
-        if ($this->slugExist($slug)) {
-            $slug = $this->incrementSlug($slug);
-        }
-
-        return $slug;
     }
 
     /**
@@ -74,6 +102,12 @@ class Post extends Model
         return 'slug';
     }
 
+    /**
+     * Format a post's date
+     *
+     * @param string $date
+     * @return string
+     */
     public function getCreatedAtAttribute($date) {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('m/d/y, g:i:s A');
     }

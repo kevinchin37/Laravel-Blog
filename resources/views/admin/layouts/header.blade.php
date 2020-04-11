@@ -7,3 +7,6 @@
         <div class="float-right">@yield('header_links')</div>
     </div>
 </div>
+
+@component('admin.components.alerts.error') @endcomponent
+@component('admin.components.alerts.flash') @endcomponent
