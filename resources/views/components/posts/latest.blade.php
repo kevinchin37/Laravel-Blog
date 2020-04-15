@@ -44,7 +44,9 @@
         </div>
     </div>
 @else
-    <div class="alert alert-danger" role="alert">
-        There are no posts to show.
-    </div>
+    @component('components.alerts.empty')
+        @slot('message')
+            There are no posts to show.
+        @endslot
+    @endcomponent
 @endif

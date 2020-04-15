@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->longText('body')->nullable();
             $table->string('slug')->unique();
             $table->string('featured_image')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->default(1);
             $table->timestamps();
         });
     }

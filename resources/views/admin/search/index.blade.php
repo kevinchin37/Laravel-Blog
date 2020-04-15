@@ -4,7 +4,7 @@
 
 @section('table_header_columns')
     @if ($posts->isEmpty())
-        @component('admin.components.alerts.empty')
+        @component('components.alerts.empty')
             @slot('message')
                 No posts found.
             @endslot

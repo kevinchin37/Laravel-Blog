@@ -51,11 +51,11 @@ body {
     min-height: 310px;
     padding: 20px;
 }
-.widget.latest-post .post-list {
+.widget.latest-entries ul {
     list-style: none;
     padding-left: 0;
 }
-.widget.latest-post .post-list li {
+.widget.latest-entries ul li {
     border-bottom: 1px solid #eaeaea;
     padding: 8px;
 }

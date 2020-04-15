@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Post;
-use App\Activity;
+use App\Widgets\WidgetBuilder;
+use App\Widgets\Latest\LatestTags;
+use App\Widgets\Latest\LatestPosts;
 use App\Http\Controllers\Controller;
+use App\Widgets\Latest\LatestActivities;
+use App\Widgets\Latest\LatestCategories;
 
 class DashboardController extends Controller
 {
@@ -15,8 +18,12 @@ class DashboardController extends Controller
      */
     public function index() {
         return view('admin.dashboard.index', [
-            'posts' => Post::latest()->get()->take(5),
-            'activities' => Activity::latest()->get()->take(5),
+            'widgets' => [
+                (new WidgetBuilder(new LatestActivities, 'Activities', 12))->getSettings(),
+                (new WidgetBuilder(new LatestPosts, 'Latest Posts'))->getSettings(),
+                (new WidgetBuilder(new LatestCategories, 'Latest Categories'))->getSettings(),
+                (new WidgetBuilder(new LatestTags, 'Latest Tags'))->getSettings(),
+            ]
         ]);
     }
 }
