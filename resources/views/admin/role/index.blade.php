@@ -11,7 +11,7 @@
     <tbody>
         @foreach ($roles as $role)
             <tr>
-                <td>{{ $role->name }}</td>
+            <td><a href="/admin/roles/{{ $role->slug }}/edit">{{ $role->name }}</a></td>
 
                 <td class="actions">
                     <form action="/admin/roles/{{ $role->id }}" method="POST">
