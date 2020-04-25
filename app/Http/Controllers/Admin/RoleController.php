@@ -83,7 +83,7 @@ class RoleController extends Controller
 
         $role->update($attributes);
 
-        return back();
+        return back()->with('status', 'Role has been updated.');
     }
 
     /**
