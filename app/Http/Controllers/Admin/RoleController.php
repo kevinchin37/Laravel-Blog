@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Role;
+use App\Permission;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -61,6 +61,7 @@ class RoleController extends Controller
     public function edit(Role $role) {
         return view('admin.role.edit', [
             'role' => $role,
+            'permissions' => Permission::all(),
         ]);
     }
 
@@ -71,9 +72,18 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
-    {
-        //
+    public function update(Role $role) {
+        $attributes = request()->validate([
+            'name' => 'required',
+            'permissions' => 'nullable'
+        ]);
+
+        $attributes['permissions'] = empty($attributes['permissions']) ? [] : $attributes['permissions'];
+        $role->permissions()->sync($attributes['permissions']);
+
+        $role->update($attributes);
+
+        return back();
     }
 
     /**
