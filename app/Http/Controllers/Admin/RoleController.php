@@ -81,9 +81,12 @@ class RoleController extends Controller
         $attributes['permissions'] = empty($attributes['permissions']) ? [] : $attributes['permissions'];
         $role->permissions()->sync($attributes['permissions']);
 
+        $attributes['slug'] = $role->getSlug($attributes['name']);
+
         $role->update($attributes);
 
-        return back()->with('status', 'Role has been updated.');
+        return redirect('/admin/roles/' . $role->slug . '/edit')
+            ->with('status', 'Role has been updated.');
     }
 
     /**
