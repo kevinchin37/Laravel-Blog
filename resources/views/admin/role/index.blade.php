@@ -11,8 +11,7 @@
     <tbody>
         @foreach ($roles as $role)
             <tr>
-            <td><a href="/admin/roles/{{ $role->slug }}/edit">{{ $role->name }}</a></td>
-
+                <td><a href="/admin/roles/{{ $role->slug }}/edit">{{ $role->name }}</a></td>
                 <td class="actions">
                     <form action="/admin/roles/{{ $role->id }}" method="POST">
                         @csrf
