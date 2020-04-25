@@ -14,10 +14,8 @@ class PermissionSeeder extends Seeder
     {
         DB::table('permissions')->insert([
             ['action' => 'create'],
-            ['action' => 'edit'],
-            ['action' => 'store'],
             ['action' => 'update'],
-            ['action' => 'destroy'],
+            ['action' => 'delete'],
         ]);
     }
 }
