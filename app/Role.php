@@ -2,13 +2,16 @@
 
 namespace App;
 
+use App\Http\Support\Traits\Sluggable;
 use App\User;
 use App\Permission;
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'slug'];
+
+    use Sluggable;
 
     public function users() {
         return $this->hasMany(User::class);
