@@ -78,8 +78,11 @@ class RoleController extends Controller
             'permissions' => 'nullable'
         ]);
 
-        $attributes['permissions'] = empty($attributes['permissions']) ? [] : $attributes['permissions'];
-        $role->permissions()->sync($attributes['permissions']);
+        if (empty($attributes['permissions'])) {
+            $role->permissions()->detach();
+        } else {
+            $role->permissions()->sync($attributes['permissions']);
+        }
 
         $attributes['slug'] = $role->getSlug($attributes['name']);
 
