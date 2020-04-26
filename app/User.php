@@ -45,8 +45,24 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    /**
+     * Check if user has a specific role
+     *
+     * @param string $role
+     * @return bool
+     */
     public function hasRole($role) {
         return $this->role->name == $role;
+    }
+
+    /**
+     * Check if user has permissions to perform certain actions
+     *
+     * @param string $action
+     * @return bool
+     */
+    public function hasPermission($action) {
+        return $this->role->permissions->contains('action', $action);
     }
 
     public function posts() {
