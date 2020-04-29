@@ -78,14 +78,9 @@ class RoleController extends Controller
             'permissions' => 'nullable'
         ]);
 
-        if (empty($attributes['permissions'])) {
-            $role->permissions()->detach();
-        } else {
-            $role->permissions()->sync($attributes['permissions']);
-        }
-
         $attributes['slug'] = $role->getSlug($attributes['name']);
 
+        $role->updatePermissions(request('permissions'));
         $role->update($attributes);
 
         return redirect('/admin/roles/' . $role->slug . '/edit')

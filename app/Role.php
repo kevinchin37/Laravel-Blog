@@ -22,6 +22,20 @@ class Role extends Model
     }
 
     /**
+     * Update permissions of a role
+     *
+     * @param array $actions
+     * @return void
+     */
+    public function updatePermissions($actions) {
+        if (empty($actions)) {
+            $this->permissions()->detach();
+        } else {
+            $this->permissions()->sync($actions);
+        }
+    }
+
+    /**
      * Get the route key for the model.
      *
      * @return string
