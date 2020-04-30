@@ -14,7 +14,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('admin.user.index');
+        return view('admin.user.index', [
+            'users' => User::all(),
+        ]);
     }
 
     /**
@@ -45,7 +47,7 @@ class UserController extends Controller
 
         $user->update($attributes);
 
-        return back();
+        return back()->with('status', 'User has been updated.');
     }
 
     /**
@@ -57,6 +59,6 @@ class UserController extends Controller
     public function destroy(User $user) {
         $this->delete($user);
 
-        return back();
+        return back()->with('status', 'User has been deleted.');
     }
 }
