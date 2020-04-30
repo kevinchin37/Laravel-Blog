@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class RoleSeeder extends Seeder
@@ -11,10 +12,14 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
-            ['name' => 'Admin', 'slug' => 'admin'],
-            ['name' => 'Editor', 'slug' => 'editor'],
-            ['name' => 'Guest', 'slug' => 'guest'],
-        ]);
+        $roles = [];
+        foreach (['Owner', 'Admin', 'Editor', 'Guest'] as $role) {
+            $roles[] = [
+                'name' => $role,
+                'slug' => Str::slug($role)
+            ];
+        }
+
+        DB::table('roles')->insert($roles);
     }
 }
