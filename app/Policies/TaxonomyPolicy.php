@@ -43,8 +43,6 @@ class TaxonomyPolicy
      * Give admin access to everything
      */
     public function before($user, $ability) {
-        if ($user->hasRole('Admin')) {
-            return true;
-        }
+        if ($user->hasRole('admin')) return true;
     }
 }
