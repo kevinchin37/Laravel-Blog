@@ -16,7 +16,7 @@ class RoleController extends Controller
     public function index()
     {
         return view('admin.role.index', [
-            'roles' => Role::all(),
+            'roles' => Role::whereNotIn('slug', ['owner'])->get(),
         ]);
     }
 
