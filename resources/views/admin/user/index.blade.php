@@ -2,6 +2,10 @@
 
 @section('header_title', 'Users')
 
+@section('header_links')
+        <a class="btn btn-primary" href="/admin/invitations">Invite</a>
+@endsection
+
 @section('table_header_columns')
     <th scope="col">ID</th>
     <th scope="col">Name</th>
