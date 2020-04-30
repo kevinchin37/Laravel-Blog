@@ -52,7 +52,7 @@ class User extends Authenticatable
      * @return bool
      */
     public function hasRole($role) {
-        return $this->role->name == $role;
+        return ($this->role->slug === 'owner') ? true : $this->role->slug === $role;
     }
 
     /**
