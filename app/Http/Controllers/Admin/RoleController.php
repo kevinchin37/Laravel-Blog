@@ -78,10 +78,13 @@ class RoleController extends Controller
             'permissions' => 'nullable'
         ]);
 
-        $attributes['slug'] = $role->getSlug($attributes['name']);
+        if ($role->name !== $attributes['name']) {
+            $attributes['slug'] = $role->getSlug($attributes['name']);
+        }
 
         $role->updatePermissions(request('permissions'));
         $role->update($attributes);
+
 
         return redirect('/admin/roles/' . $role->slug . '/edit')
             ->with('status', 'Role has been updated.');
