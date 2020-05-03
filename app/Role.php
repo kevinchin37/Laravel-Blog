@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    const OWNER_ROLE_ID = 1;
+    const ADMIN_ROLE_ID = 2;
+    const EDITOR_ROLE_ID = 3;
+    const GUEST_ROLE_ID = 4;
+
     protected $fillable = ['name', 'slug'];
 
     use Sluggable;
