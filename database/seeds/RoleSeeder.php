@@ -17,26 +17,26 @@ class RoleSeeder extends Seeder
                 'name' => 'Owner',
                 'slug' => 'owner',
                 'permissions' => [
-                    ['role_id' => 1, 'permission_id' => 1],
-                    ['role_id' => 1, 'permission_id' => 2],
-                    ['role_id' => 1, 'permission_id' => 3]
+                    ['role_id' => Role::OWNER_ROLE_ID, 'permission_id' => 1],
+                    ['role_id' => Role::OWNER_ROLE_ID, 'permission_id' => 2],
+                    ['role_id' => Role::OWNER_ROLE_ID, 'permission_id' => 3]
                 ],
             ],
             [
                 'name' => 'Admin',
                 'slug' => 'admin',
                 'permissions' => [
-                    ['role_id' => 2, 'permission_id' => 1],
-                    ['role_id' => 2, 'permission_id' => 2],
-                    ['role_id' => 2, 'permission_id' => 3]
+                    ['role_id' => Role::ADMIN_ROLE_ID, 'permission_id' => 1],
+                    ['role_id' => Role::ADMIN_ROLE_ID, 'permission_id' => 2],
+                    ['role_id' => Role::ADMIN_ROLE_ID, 'permission_id' => 3]
                 ],
             ],
             [
                 'name' => 'Editor',
                 'slug' => 'editor',
                 'permissions' => [
-                    ['role_id' => 3, 'permission_id' => 1],
-                    ['role_id' => 3, 'permission_id' => 2],
+                    ['role_id' => Role::EDITOR_ROLE_ID, 'permission_id' => 1],
+                    ['role_id' => Role::EDITOR_ROLE_ID, 'permission_id' => 2],
                 ],
             ],
             [
