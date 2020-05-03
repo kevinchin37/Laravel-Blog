@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('categories', Category::all());
         });
 
-        View::composer(['admin.user.index', 'admin.layouts.search'], function($view) {
+        View::composer(['admin.layouts.search'], function($view) {
             $view->with('users', User::all());
         });
     }
