@@ -14,6 +14,12 @@
 @endsection
 
 @section('table_body')
+    <tr>
+        <th scope="row">1</th>
+        <td>admin</td>
+        <td>Owner</td>
+    </tr>
+
     @foreach ($users as $user)
     <tr>
         <th scope="row">{{ $user->id }}</th>
