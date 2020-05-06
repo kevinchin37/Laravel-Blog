@@ -104,8 +104,9 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
-    {
-        //
+    public function destroy(Role $role) {
+        $role->delete();
+
+        return back()->with('status', 'Role has been deleted.');
     }
 }
