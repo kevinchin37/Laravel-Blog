@@ -27,6 +27,16 @@ class Role extends Model
     }
 
     /**
+     * Add permissions to a role
+     *
+     * @param array $actions
+     * @return void
+     */
+    public function addPermissions($actions) {
+        $this->permissions()->attach($actions);
+    }
+
+    /**
      * Update permissions of a role
      *
      * @param array $actions
