@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Role;
-use App\Permission;
 use App\Http\Controllers\Controller;
 
 class RoleController extends Controller
@@ -25,9 +24,8 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('admin.role.create');
     }
 
     /**
@@ -36,9 +34,21 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store() {
+        $attributes = request()->validate([
+            'name' => 'required',
+            'permissions' => 'nullable'
+        ]);
+
+        $role = new Role;
+        $attributes['slug'] = $role->getSlug($attributes['name']);
+        $createdRole = $role->create($attributes);
+
+        if (!empty($attributes['permissions'])) {
+            $createdRole->addPermissions($attributes['permissions']);
+        }
+
+        return back()->with('status', 'Role has been created.');
     }
 
     /**
@@ -61,7 +71,6 @@ class RoleController extends Controller
     public function edit(Role $role) {
         return view('admin.role.edit', [
             'role' => $role,
-            'permissions' => Permission::all(),
         ]);
     }
 
@@ -84,7 +93,6 @@ class RoleController extends Controller
 
         $role->updatePermissions(request('permissions'));
         $role->update($attributes);
-
 
         return redirect('/admin/roles/' . $role->slug . '/edit')
             ->with('status', 'Role has been updated.');
