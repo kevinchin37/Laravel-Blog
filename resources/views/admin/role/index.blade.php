@@ -19,7 +19,7 @@
             <tr>
                 <td><a href="/admin/roles/{{ $role->slug }}/edit">{{ $role->name }}</a></td>
                 <td class="actions">
-                    <form action="/admin/roles/{{ $role->id }}" method="POST">
+                    <form action="/admin/roles/{{ $role->slug }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
