@@ -2,6 +2,12 @@
 
 @section('header_title', 'Roles')
 
+@section('header_links')
+    @can('create', App\Post::class)
+        <a class="btn btn-primary" href="/admin/roles/create">Create Role</a>
+    @endcan
+@endsection
+
 @section('table_header_columns')
     <th scope="col">Name</th>
     <th scope="col">Actions</th>
