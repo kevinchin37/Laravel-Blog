@@ -6,6 +6,7 @@ use App\Tag;
 use App\Post;
 use App\User;
 use App\Category;
+use App\Permission;
 use App\Observers\TagObserver;
 use App\Observers\PostObserver;
 use App\Observers\CategoryObserver;
@@ -43,6 +44,10 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(['admin.layouts.search'], function($view) {
             $view->with('users', User::all());
+        });
+
+        View::composer(['admin.role.create', 'admin.role.edit'], function($view) {
+            $view->with('permissions', Permission::all());
         });
     }
 }
