@@ -12,8 +12,7 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         return view('admin.role.index', [
             'roles' => Role::whereNotIn('slug', ['owner'])->get(),
         ]);
@@ -37,16 +36,13 @@ class RoleController extends Controller
     public function store() {
         $attributes = request()->validate([
             'name' => 'required',
-            'permissions' => 'nullable'
         ]);
 
         $role = new Role;
         $attributes['slug'] = $role->getSlug($attributes['name']);
-        $createdRole = $role->create($attributes);
 
-        if (!empty($attributes['permissions'])) {
-            $createdRole->addPermissions($attributes['permissions']);
-        }
+        $createdRole = $role->create($attributes);
+        $createdRole->addPermissions(request('permissions'));
 
         return redirect('/admin/roles/' . $createdRole->slug . '/edit')
             ->with('status', 'Role has been created.');
@@ -74,7 +70,6 @@ class RoleController extends Controller
     public function update(Role $role) {
         $attributes = request()->validate([
             'name' => 'required',
-            'permissions' => 'nullable'
         ]);
 
         if ($role->name !== $attributes['name']) {
