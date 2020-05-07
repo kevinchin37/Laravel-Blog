@@ -6,7 +6,7 @@
 	<div class="row post-edit-wrapper">
 		<div class="col-md-12">
 			<form action="/admin/roles" method="POST">
-				@csrf
+			    @csrf
 			   <div class="form-group">
 					<label for="role-name">Name</label>
 					<input id="role-name" class="form-control w-25" type="text" name="name" placeholder="Editor" />
