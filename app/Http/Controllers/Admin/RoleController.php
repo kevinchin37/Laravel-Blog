@@ -48,7 +48,8 @@ class RoleController extends Controller
             $createdRole->addPermissions($attributes['permissions']);
         }
 
-        return back()->with('status', 'Role has been created.');
+        return redirect('/admin/roles/' . $createdRole->slug . '/edit')
+            ->with('status', 'Role has been created.');
     }
 
     /**
