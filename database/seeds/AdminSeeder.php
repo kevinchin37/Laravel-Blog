@@ -1,5 +1,6 @@
 <?php
 
+use App\Role;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Seeder;
 
