@@ -13,8 +13,12 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
+        $roles = Role::all();
+        $defaults = $roles->splice(0, 4);
+
         return view('admin.role.index', [
-            'roles' => Role::whereNotIn('slug', ['owner'])->get(),
+            'defaults' => $defaults,
+            'roles' => $roles,
         ]);
     }
 
