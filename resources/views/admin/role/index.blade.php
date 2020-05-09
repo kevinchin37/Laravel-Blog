@@ -14,7 +14,12 @@
 @endsection
 
 @section('table_body')
-    <tbody>
+        @foreach ($defaults as $defaultRole)
+            <tr>
+                <td colspan="100%"><a href="/admin/roles/{{ $defaultRole->slug }}/edit">{{ $defaultRole->name }}</a></td>
+            </tr>
+        @endforeach
+
         @foreach ($roles as $role)
             <tr>
                 <td><a href="/admin/roles/{{ $role->slug }}/edit">{{ $role->name }}</a></td>
@@ -27,5 +32,4 @@
                 </td>
             </tr>
         @endforeach
-    </tbody>
 @endsection
