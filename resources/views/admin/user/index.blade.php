@@ -27,6 +27,10 @@
         <td>{{ $user->role->name }}</td>
 
         <td class="actions">
+            @component('admin.components.buttons.edit', [
+                'url' => '/admin/users/' . $user->id . '/edit'
+            ]) @endcomponent
+
             <form action="/admin/users/{{ $user->id }}" method="POST">
                 @csrf
                 @method('DELETE')

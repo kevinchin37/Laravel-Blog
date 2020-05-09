@@ -16,7 +16,12 @@
 @section('table_body')
         @foreach ($defaults as $defaultRole)
             <tr>
-                <td colspan="100%"><a href="/admin/roles/{{ $defaultRole->slug }}/edit">{{ $defaultRole->name }}</a></td>
+                <td><a href="/admin/roles/{{ $defaultRole->slug }}/edit">{{ $defaultRole->name }}</a></td>
+                <td class="actions">
+                    @component('admin.components.buttons.edit', [
+                        'url' => '/admin/roles/' . $defaultRole->slug . '/edit'
+                    ]) @endcomponent
+                </td>
             </tr>
         @endforeach
 
@@ -24,6 +29,10 @@
             <tr>
                 <td><a href="/admin/roles/{{ $role->slug }}/edit">{{ $role->name }}</a></td>
                 <td class="actions">
+                    @component('admin.components.buttons.edit', [
+                        'url' => '/admin/roles/' . $role->slug . '/edit'
+                    ]) @endcomponent
+
                     <form action="/admin/roles/{{ $role->slug }}" method="POST">
                         @csrf
                         @method('DELETE')
