@@ -14,11 +14,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('admin.user.index', [
-            'users' => User::whereNotIn('role_id', [Role::OWNER_ROLE_ID])
+        $users = User::with('role')
             ->orderBy('id', 'asc')
-            ->with('role')
-            ->get()
+            ->get();
+
+        return view('admin.user.index', [
+            'owner' => $users->shift(),
+            'users' => $users,
         ]);
     }
 
