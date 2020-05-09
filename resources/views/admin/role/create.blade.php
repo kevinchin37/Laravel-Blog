@@ -6,18 +6,18 @@
 	<div class="row post-edit-wrapper">
 		<div class="col-md-12">
 			<form action="/admin/roles" method="POST">
-			    @csrf
-			   <div class="form-group">
+				@csrf
+				<div class="form-group">
 					<label for="role-name">Name</label>
 					<input id="role-name" class="form-control w-25" type="text" name="name" placeholder="Editor" />
-			   </div>
+				</div>
 
 				<label>Permissions</label>
 				<div class="form-group">
 					@foreach ($permissions as $permission)
 						<div class="form-check form-check-inline">
 							<div class="form-check-input">
-							<input type="checkbox" name="permissions[]" value="{{ $permission->id }}" id="{{ $permission->action }}"/>
+								<input type="checkbox" name="permissions[]" value="{{ $permission->id }}" id="{{ $permission->action }}"/>
 								<label class="form-check-label" for="{{ $permission->action }}">
 									{{ $permission->action }}
 								</label>
