@@ -33,7 +33,7 @@ class UserController extends Controller
     public function edit(User $user) {
         return view('admin.user.edit', [
             'user' => $user,
-            'roles' => Role::all(),
+            'roles' => Role::whereNotIn('id', [Role::OWNER_ROLE_ID])->get(),
         ]);
     }
 
