@@ -15,7 +15,10 @@ class UserController extends Controller
      */
     public function index() {
         return view('admin.user.index', [
-            'users' => User::whereNotIn('role_id', [Role::OWNER_ROLE_ID])->with('role')->get(),
+            'users' => User::whereNotIn('role_id', [Role::OWNER_ROLE_ID])
+            ->orderBy('id', 'asc')
+            ->with('role')
+            ->get()
         ]);
     }
 
