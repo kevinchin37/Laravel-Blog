@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Role;
-use App\Activity;
 use App\Http\Support\Traits\LoggableActivity;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -52,7 +51,7 @@ class User extends Authenticatable
      * @return bool
      */
     public function hasRole($role) {
-        return ($this->role->slug === 'owner') ? true : $this->role->slug === $role;
+        return ($this->role->id === Role::OWNER_ROLE_ID) ? true : $this->role->slug === $role;
     }
 
     /**
