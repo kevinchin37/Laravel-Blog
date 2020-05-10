@@ -3,9 +3,7 @@
 @section('header_title', 'Roles')
 
 @section('header_links')
-    @can('create', App\Post::class)
-        <a class="btn btn-primary" href="/admin/roles/create">Create Role</a>
-    @endcan
+    <a class="btn btn-primary" href="/admin/roles/create">Create Role</a>
 @endsection
 
 @section('table_header_columns')
