@@ -3,7 +3,7 @@
 @section('header_title', 'Users')
 
 @section('header_links')
-        <a class="btn btn-primary" href="/admin/invitations">Invite</a>
+    <a class="btn btn-primary" href="/admin/invitations">Invite</a>
 @endsection
 
 @section('table_header_columns')
