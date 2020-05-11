@@ -14,7 +14,14 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('admin.user.index');
+        $users = User::with('role')
+            ->orderBy('id', 'asc')
+            ->get();
+
+        return view('admin.user.index', [
+            'owner' => $users->shift(),
+            'users' => $users,
+        ]);
     }
 
     /**
@@ -26,7 +33,7 @@ class UserController extends Controller
     public function edit(User $user) {
         return view('admin.user.edit', [
             'user' => $user,
-            'roles' => Role::all(),
+            'roles' => Role::whereNotIn('id', [Role::OWNER_ROLE_ID])->get(),
         ]);
     }
 
@@ -45,7 +52,7 @@ class UserController extends Controller
 
         $user->update($attributes);
 
-        return back();
+        return back()->with('status', 'User has been updated.');
     }
 
     /**
@@ -55,8 +62,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user) {
-        $this->delete($user);
+        $user->delete();
 
-        return back();
+        return back()->with('status', 'User has been deleted.');
     }
 }

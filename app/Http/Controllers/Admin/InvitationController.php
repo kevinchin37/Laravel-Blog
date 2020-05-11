@@ -29,7 +29,7 @@ class InvitationController extends Controller
      */
     public function create() {
         return view('admin.invitation.create', [
-            'roles' => Role::all()
+            'roles' => Role::whereNotIn('id', [Role::OWNER_ROLE_ID])->get()
         ]);
     }
 

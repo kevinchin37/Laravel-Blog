@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Role;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -13,10 +12,12 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
+        $roles = Role::all();
+
         return view('admin.role.index', [
-            'roles' => Role::all(),
+            'defaultRoles' => $roles->splice(0, 4),
+            'roles' => $roles,
         ]);
     }
 
@@ -25,9 +26,8 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('admin.role.create');
     }
 
     /**
@@ -36,20 +36,19 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store() {
+        $attributes = request()->validate([
+            'name' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Role $role)
-    {
-        //
+        $role = new Role;
+        $attributes['slug'] = $role->getSlug($attributes['name']);
+
+        $createdRole = $role->create($attributes);
+        $createdRole->addPermissions(request('permissions'));
+
+        return redirect('/admin/roles/' . $createdRole->slug . '/edit')
+            ->with('status', 'Role has been created.');
     }
 
     /**
@@ -58,9 +57,10 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
-    {
-        //
+    public function edit(Role $role) {
+        return view('admin.role.edit', [
+            'role' => $role,
+        ]);
     }
 
     /**
@@ -70,9 +70,20 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
-    {
-        //
+    public function update(Role $role) {
+        $attributes = request()->validate([
+            'name' => 'required',
+        ]);
+
+        if ($role->name !== $attributes['name']) {
+            $attributes['slug'] = $role->getSlug($attributes['name']);
+        }
+
+        $role->updatePermissions(request('permissions'));
+        $role->update($attributes);
+
+        return redirect('/admin/roles/' . $role->slug . '/edit')
+            ->with('status', 'Role has been updated.');
     }
 
     /**
@@ -81,8 +92,9 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
-    {
-        //
+    public function destroy(Role $role) {
+        $role->delete();
+
+        return back()->with('status', 'Role has been deleted.');
     }
 }

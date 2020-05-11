@@ -16,7 +16,7 @@ class PostPolicy
      * @return mixed
      */
     public function create(User $user) {
-        return $user->hasRole('Editor');
+        return $user->hasPermission('create');
     }
 
     /**
@@ -27,7 +27,7 @@ class PostPolicy
      * @return mixed
      */
     public function update(User $user) {
-        return $user->hasRole('Editor');
+        return $user->hasPermission('update');
     }
 
     /**
@@ -38,15 +38,13 @@ class PostPolicy
      * @return mixed
      */
     public function delete(User $user) {
-        return $user->hasRole('Admin');
+        return $user->hasPermission('delete');
     }
 
     /**
      * Give admin access to everything
      */
     public function before($user, $ability) {
-        if ($user->hasRole('Admin')) {
-            return true;
-        }
+        if ($user->hasRole('admin')) return true;
     }
 }

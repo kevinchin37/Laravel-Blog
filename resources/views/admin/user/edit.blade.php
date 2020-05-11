@@ -9,12 +9,12 @@
                 @csrf
                 @method('PATCH')
                 <div class="form-group">
-                    <input type="text" class="form-control" name="name" placeholder="Username" value="{{ $user->name }}"/>
+                    <input type="text" class="form-control w-25" name="name" placeholder="Username" value="{{ $user->name }}"/>
                 </div>
 
                 <div class="form-group">
                     <h4>Role</h4>
-                    <select name="role_id">
+                    <select class="custom-select w-25" name="role_id">
                         @foreach ($roles as $role)
                             <option value="{{ $role->id }}" {{ ($user->role->id == $role->id) ? 'selected' : '' }}>{{ $role->name }}</option>
                         @endforeach
