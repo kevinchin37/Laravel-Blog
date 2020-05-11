@@ -12,7 +12,7 @@
 @endsection
 
 @section('table_body')
-        @foreach ($defaults as $defaultRole)
+        @foreach ($defaultRoles as $defaultRole)
             <tr>
                 <td><a href="/admin/roles/{{ $defaultRole->slug }}/edit">{{ $defaultRole->name }}</a></td>
                 <td class="actions">

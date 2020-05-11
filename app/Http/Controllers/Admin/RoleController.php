@@ -14,10 +14,9 @@ class RoleController extends Controller
      */
     public function index() {
         $roles = Role::all();
-        $defaults = $roles->splice(0, 4);
 
         return view('admin.role.index', [
-            'defaults' => $defaults,
+            'defaultRoles' => $roles->splice(0, 4),
             'roles' => $roles,
         ]);
     }
