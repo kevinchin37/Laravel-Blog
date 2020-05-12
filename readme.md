@@ -7,6 +7,7 @@ A project for learning Laravel.
     * CRUD operations for Posts, Categories and Tags.
     * User Invitation - can generate an invite link with a unique token to send out to people
     * Search functionality - Can search posts by title, author, category (or all)
+    * Role Management - can assign Users to roles that have certain permissions(create, update, delete)
     *  __Dashboard__:
         * Latest Posts
         * Activity logger (create, update, edit, delete, user registration)
@@ -30,22 +31,21 @@ composer install
 php artisan key:generate
 php artisan storage:link
 php artisan migrate
+
+// This will run all required and optional seeders
 php artisan db:seed --class=DatabaseSeeder
 ```
 Set `MAIL_DRIVER` in your .env to `log` or `stmp`(with your Mailtrap info). This is to test out User invitation.
 
 ## Database seeding
-
 ```
 // Required
+php artisan db:seed --class=PermissionSeeder
 php artisan db:seed --class=RoleSeeder
 php artisan db:seed --class=AdminSeeder
 
-// Optional (Will also create categories and tags per post)
+// Optional (This will create and assign categories and tags for each post)
 php artisan db:seed --class=PostSeeder
-
-// This will run all 3 seeders
-php artisan db:seed --class=DatabaseSeeder
 
 ```
 
@@ -64,6 +64,6 @@ Tags: ```http://127.0.0.1:8000/tag/tag-name```
 
 ## Future Project Ideas
 [] Look into adding a text editor(WYSIWYG?) for post content  
-[] Add the ability to create roles on `/admin/roles`  
+[x] Add the ability to create roles on `/admin/roles`  
 [] Think of sidebar content  
 [] Add tests
