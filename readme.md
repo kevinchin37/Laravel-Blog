@@ -5,16 +5,14 @@ A project for learning Laravel.
 ### Features: 
 * __Admin__:
     * CRUD operations for Posts, Categories and Tags.
-    * User Invitation - can generate an invite link with a unique token to send out to people
-    * Search functionality - Can search posts by title, author, category (or all)
-    * Role Management - can assign Users to roles that have certain permissions(create, update, delete)
+    * User Invitation - Can generate unique invite links to send out to people.
+    * Search - Can search posts by title, author, category (or all).
     *  __Dashboard__:
-        * Latest Posts
+        * Widgets - Latest Posts / Category / Tags
         * Activity logger (create, update, edit, delete, user registration)
-* __User Roles (WIP)__:
-    * Permissions - As of now certain roles do not have permission to certain actions and page access
-
-
+    * __User Roles__:
+        * Roles can have up to 3 permissions (create, update and delete). These can be updated at any time.
+        * Admin actions are authorized by Policies based on a user's role and permissions.
 
 # Screenshots
 [View more screenshots here](https://imgur.com/a/M5jmzEb)
