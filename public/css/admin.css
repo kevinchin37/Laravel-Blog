@@ -13,7 +13,6 @@ body {
     background: #1a1a1a;
     float: left;
     height: 100%;
-    padding-top: 25px;
     width: 300px;
 }
 .sidebar .list-group-item {
@@ -22,6 +21,17 @@ body {
 }
 .sidebar .list-group-item:hover {
     background: #595959;
+}
+.sidebar .user-profile {
+    text-align: center;
+}
+.sidebar .user-profile .avatar {
+    border-radius: 50%;
+    height: 150px;
+    max-width: 150px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative
 }
 
 /* Admin Panel */
