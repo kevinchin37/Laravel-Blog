@@ -14,6 +14,7 @@ use App\Observers\RoleObserver;
 use App\Observers\CategoryObserver;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use App\Http\View\Composers\Admin\UserComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -52,5 +53,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['admin.role.create', 'admin.role.edit'], function($view) {
             $view->with('permissions', Permission::all());
         });
+
+        View::composer('admin*', UserComposer::class);
     }
 }
