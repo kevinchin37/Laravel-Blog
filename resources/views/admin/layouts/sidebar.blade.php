@@ -1,3 +1,13 @@
+<div class="user-profile my-4">
+    <div class="avatar" style="background: url({{ asset('storage/' . $user->avatar) }}) no-repeat; background-size: cover;"></div>
+    <div class="options">
+        <span style="color: white;">Hi {{ $user->name }}</span>
+        <ul>
+            <li><a href="/admin/user/{{ $user->id }}/profile/edit">Edit Profile</a></li>
+        </ul>
+    </div>
+</div>
+
 {{-- @TODO add submenus later --}}
 <div class="list-group list-group-flush">
     <a class="list-group-item" href="/admin">Dashboard</a>
