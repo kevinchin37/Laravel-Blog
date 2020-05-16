@@ -33,6 +33,10 @@ body {
     overflow: hidden;
     position: relative
 }
+.sidebar .user-profile .options {
+    color: #eeeeee;
+    margin-top: 15px;
+}
 
 /* Admin Panel */
 .main-admin-panel {
