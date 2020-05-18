@@ -47,6 +47,18 @@ body {
     color: #eeeeee;
     margin-top: 15px;
 }
+.sidebar .user-profile .options > .edit {
+    display: block;
+    margin-top: 5px;
+}
+.sidebar .user-profile .options > .edit:hover {
+    text-decoration: none;
+}
+.sidebar .user-profile .options > .edit:after {
+    content: "\F044";
+    font-family: 'Font Awesome 5 Free';
+    padding-left: 5px;
+}
 
 /* Admin Panel */
 .main-admin-panel {

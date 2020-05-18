@@ -2,7 +2,7 @@
     <div class="avatar" style="background: url({{ asset('storage/' . $user->avatar) }}) no-repeat; background-size: cover;"></div>
     <div class="options">
         <span>Hi {{ $user->name }}</span>
-        <div><a href="/admin/user/{{ $user->id }}/profile/edit">Edit Profile</a></div>
+        <a class="edit" href="/admin/user/{{ $user->id }}/profile/edit">Edit Profile</a>
     </div>
 </div>
 
