@@ -25,7 +25,7 @@
         <span class="title">Tags</span>
     </a>
 
-    <a class="list-group-item {{ (request()->is('admin/users*')) ? 'active' : '' }}" href="/admin/users">
+    <a class="list-group-item {{ (request()->is('admin/user*')) ? 'active' : '' }}" href="/admin/users">
         <span class="title">Users</span>
     </a>
 
