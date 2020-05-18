@@ -10,17 +10,27 @@ body {
 
 /* Sidebar */
 .sidebar {
-    background: #1a1a1a;
+    background: #0d0d0d;
     float: left;
     height: 100%;
     width: 300px;
 }
 .sidebar .list-group-item {
-    background: #333333;
+    background: #0d0d0d;
     color: #eeeeee;
 }
+.sidebar .list-group-item.active {
+    background: #272727;
+    border: none;
+}
 .sidebar .list-group-item:hover {
-    background: #595959;
+    background: #272727;
+    text-decoration: none;
+}
+.sidebar .list-group-item .title {
+    display: block;
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 .sidebar .user-profile {
     text-align: center;

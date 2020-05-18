@@ -8,12 +8,33 @@
 
 {{-- @TODO add submenus later --}}
 <div class="list-group list-group-flush">
-    <a class="list-group-item" href="/admin">Dashboard</a>
-    <a class="list-group-item" href="/admin/posts">Posts</a>
-    <a class="list-group-item" href="/admin/categories">Categories</a>
-    <a class="list-group-item" href="/admin/tags">Tags</a>
-    <a class="list-group-item" href="/admin/users">Users</a>
-    <a class="list-group-item" href="/admin/invitations">Invitations</a>
-    <a class="list-group-item" href="/admin/roles">Roles</a>
+    {{-- Update with named routes later --}}
+    <a class="list-group-item {{ (request()->is('admin/dashboard') || request()->is('admin')) ? 'active' : '' }}" href="/admin">
+        <span class="title">Dashboard</span>
+    </a>
+
+    <a class="list-group-item {{ (request()->is('admin/posts*')) ? 'active' : '' }}" href="/admin/posts">
+        <span class="title">Posts</span>
+    </a>
+
+    <a class="list-group-item {{ (request()->is('admin/categories*')) ? 'active' : '' }}" href="/admin/categories">
+        <span class="title">Categories</span>
+    </a>
+
+    <a class="list-group-item {{ (request()->is('admin/tags*')) ? 'active' : '' }}" href="/admin/tags">
+        <span class="title">Tags</span>
+    </a>
+
+    <a class="list-group-item {{ (request()->is('admin/users*')) ? 'active' : '' }}" href="/admin/users">
+        <span class="title">Users</span>
+    </a>
+
+    <a class="list-group-item {{ (request()->is('admin/invitations*')) ? 'active' : '' }}" href="/admin/invitations">
+        <span class="title">Invitations</span>
+    </a>
+
+    <a class="list-group-item {{ (request()->is('admin/roles*')) ? 'active' : '' }}" href="/admin/roles">
+        <span class="title">Roles</span>
+    </a>
     @yield('sidebar_items')
 </div>
