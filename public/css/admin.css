@@ -20,6 +20,9 @@ body {
     border-bottom: 1px solid #272727;
     color: #eeeeee;
 }
+.sidebar .list-group-item:first-child {
+    border-top: 1px solid #272727;
+}
 .sidebar .list-group-item.active {
     background: #272727;
     border: none;
@@ -28,7 +31,7 @@ body {
     background: #272727;
     text-decoration: none;
 }
-.sidebar .list-group-item .title {
+.sidebar .list-group-item > .title {
     display: block;
     margin-left: 50%;
     transform: translateX(-50%);
