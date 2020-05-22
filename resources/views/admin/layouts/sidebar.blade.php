@@ -1,5 +1,8 @@
 <div class="user-profile my-4">
-    <div class="avatar" style="background: url({{ asset('storage/' . $user->avatar) }}) no-repeat; background-size: cover;"></div>
+    <div class="avatar"
+        style="background: url({{ !empty($user->avatar) ? asset('storage/' . $user->avatar) : asset('images/placeholders/default-avatar.jpg') }}) center / cover no-repeat;">
+    </div>
+
     <div class="options">
         <span>Hi {{ $user->name }}</span>
         <a class="edit" href="/admin/user/{{ $user->id }}/profile/edit">Edit Profile</a>
