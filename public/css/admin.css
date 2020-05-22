@@ -17,6 +17,7 @@ body {
 }
 .sidebar .list-group-item {
     background: #0d0d0d;
+    border-bottom: 1px solid #272727;
     color: #eeeeee;
 }
 .sidebar .list-group-item.active {
