@@ -58,7 +58,7 @@ body {
     text-decoration: none;
 }
 .sidebar .user-profile .control-panel .options > .option:after {
-    color: #eeeeee
+    color: #eeeeee;
     font-family: 'Font Awesome 5 Free';
     padding-left: 5px;
 }
