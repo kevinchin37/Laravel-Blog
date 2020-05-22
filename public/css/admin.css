@@ -13,7 +13,7 @@ body {
     background: #0d0d0d;
     float: left;
     height: 100%;
-    width: 300px;
+    width: 250px;
 }
 .sidebar .list-group-item {
     background: #0d0d0d;
@@ -37,11 +37,11 @@ body {
 }
 .sidebar .user-profile .avatar {
     border-radius: 50%;
-    height: 150px;
-    max-width: 150px;
+    height: 120px;
+    max-width: 120px;
     margin: 0 auto;
     overflow: hidden;
-    position: relative
+    position: relative;
 }
 .sidebar .user-profile .options {
     color: #eeeeee;
