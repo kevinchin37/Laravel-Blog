@@ -3,9 +3,12 @@
         style="background: url({{ !empty($user->avatar) ? asset('storage/' . $user->avatar) : asset('images/placeholders/default-avatar.jpg') }}) center / cover no-repeat;">
     </div>
 
-    <div class="options">
+    <div class="control-panel">
         <span>Hi {{ $user->name }}</span>
-        <a class="edit" href="/admin/user/{{ $user->id }}/profile/edit">Edit Profile</a>
+        <div class="options">
+            <a class="option edit" href="/admin/user/{{ $user->id }}/profile/edit">Edit Profile</a>
+            <a class="option log-out" href="{{ url('logout') }}"> Log Out </a>
+        </div>
     </div>
 </div>
 
