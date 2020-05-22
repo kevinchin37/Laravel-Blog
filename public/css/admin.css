@@ -44,21 +44,29 @@ body {
     overflow: hidden;
     position: relative;
 }
-.sidebar .user-profile .options {
+.sidebar .user-profile .control-panel {
     color: #eeeeee;
     margin-top: 15px;
 }
-.sidebar .user-profile .options > .edit {
-    display: block;
-    margin-top: 5px;
+.sidebar .user-profile .control-panel .options {
+    margin: 0 auto;
 }
-.sidebar .user-profile .options > .edit:hover {
+.sidebar .user-profile .control-panel .options > .option {
+    display: block;
+}
+.sidebar .user-profile .control-panel .options >.option:hover {
     text-decoration: none;
 }
-.sidebar .user-profile .options > .edit:after {
-    content: "\F044";
+.sidebar .user-profile .control-panel .options > .option:after {
+    color: #eeeeee
     font-family: 'Font Awesome 5 Free';
     padding-left: 5px;
+}
+.sidebar .user-profile .control-panel .options > .option.edit:after {
+    content: "\F044";
+}
+.sidebar .user-profile .control-panel .options > .option.log-out:after {
+    content: "\f2f5";
 }
 
 /* Admin Panel */
