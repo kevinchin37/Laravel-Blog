@@ -53,6 +53,7 @@ body {
 }
 .sidebar .user-profile .control-panel .options {
     margin: 0 auto;
+    width: 150px;
 }
 .sidebar .user-profile .control-panel .options > .option {
     display: block;
