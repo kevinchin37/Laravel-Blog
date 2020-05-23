@@ -74,7 +74,7 @@ class ProfileController extends Controller
      */
     public function update(User $user) {
         $attributes = request()->validate([
-            'name' => 'required',
+            'name' => 'required|max:15',
             'avatar' => 'nullable|image|max:1500',
             'email' => Rule::unique('users')->ignore($user),
             'password' => 'nullable|min:8|confirmed',
