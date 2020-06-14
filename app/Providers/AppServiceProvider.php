@@ -45,6 +45,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('categories', Category::all());
         });
 
+        View::composer(['admin.post.create', 'admin.post.edit', 'admin.layouts.search'], function($view) {
+            $view->with('tags', Tag::all());
+        });
+
         View::composer(['admin.layouts.search'], function($view) {
             $view->with('users', User::all());
         });
