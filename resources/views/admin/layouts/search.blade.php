@@ -27,6 +27,16 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="col-md-4">
+                    <label for="search-category">Tag</label>
+                    <select class="custom-select" id="search-tag" name="tag">
+                        <option value="none" selected disabled hidden>Select a Tag</option>
+                        @foreach ($tags as $tag)
+                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
