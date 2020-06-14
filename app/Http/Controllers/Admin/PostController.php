@@ -27,9 +27,7 @@ class PostController extends Controller {
      */
     public function create() {
         $this->authorize('create', Post::class);
-        return view('admin.post.create',[
-            'tags'=> Tag::all(),
-        ]);
+        return view('admin.post.create');
     }
 
     /**
@@ -77,7 +75,6 @@ class PostController extends Controller {
     public function edit(Post $post) {
         return view('admin.post.edit', [
             'post' => $post,
-            'tags' => Tag::all(),
         ]);
     }
 
