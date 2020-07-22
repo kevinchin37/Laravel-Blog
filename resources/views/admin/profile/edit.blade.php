@@ -40,7 +40,7 @@
 
                     <div class="form-group">
                         @if (!empty($user->avatar))
-                            <img class="img-thumbnail img-fluid" src="{{ asset('storage/' . $user->avatar ) }}" alt="">
+                            <img class="img-thumbnail img-fluid" src="{{ asset( $user->avatar ) }}" alt="">
                         @endif
                     </div>
                 </div>
