@@ -38,15 +38,12 @@ class ProfileController extends Controller
         ]);
 
         if (!empty($attributes['avatar'])) {
-            Storage::disk('public')->delete($user->avatar);
-
             $avatar = Image::make($attributes['avatar']);
             $avatar->resize(400,400, function ($constraint) {
                 $constraint->aspectRatio();
             });
 
-            $size = $avatar->height() . '-' . $avatar->width();
-            $filename = 'avatar-' . time() . '-' . $size .  '.' . $attributes['avatar']->extension();
+            $filename = 'avatar' . '.' . ($attributes['avatar'])->extension();
             $attributes['avatar'] = $filepath = '/uploads/avatars/' . $user->id . '/' . $filename;
 
             $avatar->save(public_path('storage') . $filepath);
