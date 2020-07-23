@@ -1,6 +1,6 @@
 <div class="user-profile my-4">
     <div class="avatar"
-        style="background: url({{ !empty($user->avatar) ? asset('storage/' . $user->avatar) : asset('images/placeholders/default-avatar.jpg') }}) center / cover no-repeat;">
+        style="background: url('{{ asset($user->avatar) }}') center / cover no-repeat;">
     </div>
 
     <div class="control-panel">
