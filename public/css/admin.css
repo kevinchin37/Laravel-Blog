@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
-html, body {
+html, body, #app {
     height: 100%;
 }
 
@@ -56,6 +56,7 @@ body {
 }
 .sidebar .user-profile .control-panel .options > .option {
     display: block;
+    margin: 10px 0;
 }
 .sidebar .user-profile .control-panel .options >.option:hover {
     text-decoration: none;
