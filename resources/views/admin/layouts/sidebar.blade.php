@@ -1,13 +1,7 @@
-<div class="user-profile my-4">
-    <div class="avatar" style="background: url('{{ asset($user->avatar) }}') center / cover no-repeat;"></div>
-    <div class="control-panel">
-        <span>Hi {{ $user->name }}</span>
-        <div class="options">
-            <a class="option edit" href="/admin/user/{{ $user->id }}/profile/edit">Edit Profile</a>
-            <a class="option log-out" href="{{ url('logout') }}"> Log Out </a>
-        </div>
-    </div>
-</div>
+<profile-card :user="{
+    name: '{{ $user->name }}',
+    avatar: '{{ asset( $user->avatar ) }}',
+}"></profile-card>
 
 {{-- @TODO add submenus later --}}
 <div class="list-group list-group-flush">
