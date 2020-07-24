@@ -1,8 +1,5 @@
 <div class="user-profile my-4">
-    <div class="avatar"
-        style="background: url('{{ asset($user->avatar) }}') center / cover no-repeat;">
-    </div>
-
+    <div class="avatar" style="background: url('{{ asset($user->avatar) }}') center / cover no-repeat;"></div>
     <div class="control-panel">
         <span>Hi {{ $user->name }}</span>
         <div class="options">
