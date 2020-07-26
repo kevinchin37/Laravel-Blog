@@ -1,4 +1,5 @@
 <profile-card :user="{
+    id: '{{ $user->id }}',
     name: '{{ $user->name }}',
     avatar: '{{ asset( $user->avatar ) }}',
 }"></profile-card>
