@@ -3,56 +3,13 @@
 namespace App\Http\Controllers\admin;
 
 use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -76,31 +33,33 @@ class ProfileController extends Controller
         $attributes = request()->validate([
             'name' => 'required|max:15',
             'avatar' => 'nullable|image|max:1500',
-            'email' => Rule::unique('users')->ignore($user),
+            'email' => 'unique:users,email,' . $user->id,
             'password' => 'nullable|min:8|confirmed',
         ]);
 
         if (!empty($attributes['avatar'])) {
             Storage::disk('public')->delete($user->avatar);
-            $attributes['avatar'] = $attributes['avatar']->store('uploads/avatars/' . $user->id, 'public');
+
+            $avatar = Image::make($attributes['avatar']);
+            $avatar->resize(400,400, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $size = $avatar->height() . '-' . $avatar->width();
+            $filename = 'avatar-' . time() . '-' . $size .  '.' . ($attributes['avatar'])->extension();
+            $attributes['avatar'] = $filepath = '/uploads/avatars/' . $user->id . '/' . $filename;
+
+            $avatar->save(public_path('storage') . $filepath);
         }
 
-        $attributes['password'] = (!empty($attributes['password'])) ? Hash::make($attributes['password']) : '';
-        if ( empty($attributes['password'])) unset($attributes['password']);
+        if (!empty($attributes['password'])) {
+            $attributes['password'] = Hash::make($attributes['password']);
+        } else {
+            unset($attributes['password']);
+        }
 
         $user->update($attributes);
 
         return back()->with('status', 'Profile has been updated.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
     }
 }

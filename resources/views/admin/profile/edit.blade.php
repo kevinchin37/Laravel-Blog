@@ -16,7 +16,7 @@
 
                 <div class="form-group">
                     <label for="user-email">Email</label>
-                    <input id="user-name" class="form-control w-25" type="email" name="email" value="{{ $user->email }}"/>
+                    <input id="user-email" class="form-control w-25" type="email" name="email" value="{{ $user->email }}"/>
                 </div>
 
                 <div class="form-group">
@@ -25,25 +25,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="user-password">Confirm Password</label>
-                    <input id="user-password" class="form-control w-25" type="password" name="password_confirmation" value=""/>
+                    <label for="user-confirm-password">Confirm Password</label>
+                    <input id="user-confirm-password" class="form-control w-25" type="password" name="password_confirmation" value=""/>
                 </div>
 
-                <div class="user-avatar" style="background: #f5f5f5; padding: 25px 15px">
-                    <div class="form-group">
-                        <h5>Avatar</h5>
-                        <div class="custom-file w-50">
-                            <input type="file" class="custom-file-input" id="avatar" name="avatar">
-                            <label class="custom-file-label" for="avatar">Select Image</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @if (!empty($user->avatar))
-                            <img class="img-thumbnail img-fluid" src="{{ asset('storage/' . $user->avatar ) }}" alt="">
-                        @endif
-                    </div>
-                </div>
+                <avatar-uploader title="Upload Avatar" :user="{
+                    name: '{{ $user->name }}',
+                    avatar: '{{ asset( $user->avatar ) }}',
+                }"></avatar-uploader>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary mt-3">Update</button>
