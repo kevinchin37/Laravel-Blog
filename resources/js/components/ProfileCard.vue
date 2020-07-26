@@ -4,8 +4,8 @@
         <div class="control-panel">
             <span>Hi {{ this.name }} </span>
             <div class="options">
-                <a class="option edit" href="#" @click.prevent>Edit Profile</a>
-                <a class="option log-out" href="#" @click.prevent> Log Out </a>
+                <a class="option edit" :href="'/admin/user/' + this.id + '/profile/edit'" @click="isPreviewCheck">Edit Profile</a>
+                <a class="option log-out" href="/logout" @click="isPreviewCheck"> Log Out </a>
             </div>
         </div>
     </div>
@@ -22,6 +22,7 @@ export default {
     },
     data() {
         return {
+            id: this.user.id,
             name: this.user.name,
             avatar: this.user.avatar,
             isPreview: this.preview,
@@ -32,6 +33,13 @@ export default {
             this.$eventBus.$on('preview', (newAvatar) => {
                 this.avatar = newAvatar;
             });
+        }
+    },
+    methods: {
+        isPreviewCheck(e) {
+            if (this.isPreview) {
+                e.preventDefault();
+            }
         }
     }
 }

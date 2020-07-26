@@ -1813,6 +1813,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      id: this.user.id,
       name: this.user.name,
       avatar: this.user.avatar,
       isPreview: this.preview
@@ -1825,6 +1826,13 @@ __webpack_require__.r(__webpack_exports__);
       this.$eventBus.$on('preview', function (newAvatar) {
         _this.avatar = newAvatar;
       });
+    }
+  },
+  methods: {
+    isPreviewCheck: function isPreviewCheck(e) {
+      if (this.isPreview) {
+        e.preventDefault();
+      }
     }
   }
 });
@@ -38210,12 +38218,8 @@ var render = function() {
           "a",
           {
             staticClass: "option edit",
-            attrs: { href: "#" },
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-              }
-            }
+            attrs: { href: "/admin/user/" + this.id + "/profile/edit" },
+            on: { click: _vm.isPreviewCheck }
           },
           [_vm._v("Edit Profile")]
         ),
@@ -38224,12 +38228,8 @@ var render = function() {
           "a",
           {
             staticClass: "option log-out",
-            attrs: { href: "#" },
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-              }
-            }
+            attrs: { href: "/logout" },
+            on: { click: _vm.isPreviewCheck }
           },
           [_vm._v(" Log Out ")]
         )
