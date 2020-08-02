@@ -40,6 +40,11 @@ class ProfileController extends Controller
         if (!empty($attributes['avatar'])) {
             Storage::disk('public')->delete($user->avatar);
 
+            $filepath = '/uploads/avatars/' . $user->id;
+            if (!Storage::disk('public')->exists($filepath)) {
+                Storage::disk('public')->makeDirectory($filepath);
+            }
+
             $avatar = Image::make($attributes['avatar']);
             $avatar->resize(400,400, function ($constraint) {
                 $constraint->aspectRatio();
