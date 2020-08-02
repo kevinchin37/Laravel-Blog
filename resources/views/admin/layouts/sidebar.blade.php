@@ -1,12 +1,11 @@
 <profile-card :user="{
     id: '{{ $user->id }}',
     name: '{{ $user->name }}',
-    avatar: '{{ asset( $user->avatar ) }}',
+    avatar: '{{ asset( 'storage' . $user->avatar ) }}',
 }"></profile-card>
 
 {{-- @TODO add submenus later --}}
 <div class="list-group list-group-flush">
-    {{-- Update with named routes later --}}
     <a class="list-group-item {{ (request()->is('admin/dashboard') || request()->is('admin')) ? 'active' : '' }}" href="/admin">
         <span class="title">Dashboard</span>
     </a>
@@ -34,5 +33,6 @@
     <a class="list-group-item {{ (request()->is('admin/roles*')) ? 'active' : '' }}" href="/admin/roles">
         <span class="title">Roles</span>
     </a>
+
     @yield('sidebar_items')
 </div>

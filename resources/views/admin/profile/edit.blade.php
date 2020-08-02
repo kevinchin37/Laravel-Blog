@@ -31,7 +31,7 @@
 
                 <avatar-uploader title="Upload Avatar" :user="{
                     name: '{{ $user->name }}',
-                    avatar: '{{ asset( $user->avatar ) }}',
+                    avatar: '{{ asset( 'storage' . $user->avatar ) }}',
                 }"></avatar-uploader>
 
                 <div class="form-group">
