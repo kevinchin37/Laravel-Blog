@@ -55,6 +55,7 @@ export default {
     height: 120px;
     max-width: 120px;
     margin: 0 auto;
+    margin-bottom: 20px;
     overflow: hidden;
     position: relative;
 }
@@ -66,7 +67,7 @@ export default {
 }
 .profile-card .control-panel .options > .option {
     display: block;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 .profile-card .control-panel .options >.option:hover {
     text-decoration: none;
