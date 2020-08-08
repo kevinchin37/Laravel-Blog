@@ -31,7 +31,7 @@ class ProfileController extends Controller
      */
     public function update(User $user) {
         $attributes = request()->validate([
-            'name' => 'required|max:15',
+            'name' => 'required|min:5|max:15',
             'avatar' => 'nullable|image|max:1500',
             'email' => 'unique:users,email,' . $user->id,
             'password' => 'nullable|min:8|confirmed',
