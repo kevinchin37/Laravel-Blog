@@ -16,10 +16,8 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user) {
-        return view('admin.profile.edit', [
-            'user' => $user,
-        ]);
+    public function edit() {
+        return view('admin.profile.edit');
     }
 
     /**
