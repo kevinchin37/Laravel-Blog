@@ -1,11 +1,14 @@
 <template>
     <div class="profile-card">
-        <div class="avatar" :style="{ background: 'url(' + avatar + ') center / cover no-repeat' }"></div>
+        <div class="avatar"
+            :class="{ default: isDefaultAvatar() }"
+            :style="[ isDefaultAvatar() ? '' : { background: 'url(' + this.image.filepath + ') center / cover no-repeat' } ]"
+        ></div>
         <div class="control-panel">
             <span>Hi {{ this.name }} </span>
             <div class="options">
-                <a class="option edit" :href="'/admin/user/' + this.id + '/profile/edit'" @click="isPreviewCheck">Edit Profile</a>
-                <a class="option log-out" href="/logout" @click="isPreviewCheck"> Log Out </a>
+                <a class="option edit" :href="'/admin/user/' + this.id + '/profile/edit'" @click="preventClickThrough">Edit Profile</a>
+                <a class="option log-out" href="/logout" @click="preventClickThrough"> Log Out </a>
             </div>
         </div>
     </div>
@@ -15,6 +18,7 @@
 export default {
     props: {
         'user': Object,
+        'avatar': Object,
         'preview': {
             type: Boolean,
             default: false
@@ -24,22 +28,26 @@ export default {
         return {
             id: this.user.id,
             name: this.user.name,
-            avatar: this.user.avatar,
+            image: this.avatar,
             isPreview: this.preview,
         }
     },
     created() {
         if (this.isPreview) {
             this.$eventBus.$on('preview', (newAvatar) => {
-                this.avatar = newAvatar;
+                this.image.filename = 'upload';
+                this.image.filepath = newAvatar;
             });
         }
     },
     methods: {
-        isPreviewCheck(e) {
+        preventClickThrough(e) {
             if (this.isPreview) {
                 e.preventDefault();
             }
+        },
+        isDefaultAvatar() {
+            return (this.image.filename.length == "" || !this.image.filename);
         }
     }
 }
@@ -58,6 +66,9 @@ export default {
     margin-bottom: 20px;
     overflow: hidden;
     position: relative;
+}
+.profile-card .avatar.default {
+    background: url('/images/placeholders/default-avatar.jpg') center / cover no-repeat;
 }
 .profile-card .control-panel {
     color: #eeeeee;
