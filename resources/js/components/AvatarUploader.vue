@@ -13,7 +13,11 @@
                 <div class="col-md-6">
                    <div class="preview">
                         <span class="title">Preview</span>
-                        <profile-card :preview="true" :user="this.user"></profile-card>
+                        <profile-card
+                            :preview="true"
+                            :user="this.user"
+                            :avatar="{ filename: this.image.filename, filepath: this.image.filepath }"
+                        ></profile-card>
                    </div>
                 </div>
             </div>
@@ -25,12 +29,13 @@
 export default {
     props: {
         'title': String,
-        'user': Object
+        'user': Object,
+        'avatar': Object,
     },
     data() {
         return {
             name: this.user.name,
-            avatar: this.user.avatar,
+            image: this.avatar
         }
     },
     methods: {

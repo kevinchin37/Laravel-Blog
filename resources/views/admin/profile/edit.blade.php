@@ -29,10 +29,10 @@
                     <input id="user-confirm-password" class="form-control w-25" type="password" name="password_confirmation" value=""/>
                 </div>
 
-                <avatar-uploader title="Upload Avatar" :user="{
-                    name: '{{ $user->name }}',
-                    avatar: '{{ asset( 'storage' . $user->avatar ) }}',
-                }"></avatar-uploader>
+                <avatar-uploader title="Upload Avatar"
+                    :user="{ name: '{{ $user->name }}' }"
+                    :avatar="{ filename: '{{ $user->avatar }}', filepath: '{{ asset( 'storage' . $user->avatar ) }}' }"
+                ></avatar-uploader>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary mt-3">Update</button>
