@@ -1,8 +1,7 @@
-<profile-card :user="{
-    id: '{{ $user->id }}',
-    name: '{{ $user->name }}',
-    avatar: '{{ asset( 'storage' . $user->avatar ) }}',
-}"></profile-card>
+<profile-card
+    :user="{ id: '{{ $user->id }}', name: '{{ $user->name }}' }"
+    :avatar="{ filename: '{{ $user->avatar }}', filepath: '{{ asset( 'storage' . $user->avatar ) }}' }"
+></profile-card>
 
 {{-- @TODO add submenus later --}}
 <div class="list-group list-group-flush">
