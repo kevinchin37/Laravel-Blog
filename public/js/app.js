@@ -1720,15 +1720,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     'title': String,
-    'user': Object
+    'user': Object,
+    'avatar': Object
   },
   data: function data() {
     return {
       name: this.user.name,
-      avatar: this.user.avatar
+      image: this.avatar
     };
   },
   methods: {
@@ -1803,9 +1808,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     'user': Object,
+    'avatar': Object,
     'preview': {
       type: Boolean,
       "default": false
@@ -1815,7 +1824,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       id: this.user.id,
       name: this.user.name,
-      avatar: this.user.avatar,
+      image: this.avatar,
       isPreview: this.preview
     };
   },
@@ -1824,15 +1833,19 @@ __webpack_require__.r(__webpack_exports__);
 
     if (this.isPreview) {
       this.$eventBus.$on('preview', function (newAvatar) {
-        _this.avatar = newAvatar;
+        _this.image.filename = 'upload';
+        _this.image.filepath = newAvatar;
       });
     }
   },
   methods: {
-    isPreviewCheck: function isPreviewCheck(e) {
+    preventClickThrough: function preventClickThrough(e) {
       if (this.isPreview) {
         e.preventDefault();
       }
+    },
+    isDefaultAvatar: function isDefaultAvatar() {
+      return this.image.filename.length == "" || !this.image.filename;
     }
   }
 });
@@ -6300,7 +6313,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.profile-card[data-v-23caba84] {\n    margin: 20px 0;\n    text-align: center;\n}\n.profile-card .avatar[data-v-23caba84] {\n    border-radius: 50%;\n    height: 120px;\n    max-width: 120px;\n    margin: 0 auto;\n    margin-bottom: 20px;\n    overflow: hidden;\n    position: relative;\n}\n.profile-card .control-panel[data-v-23caba84] {\n    color: #eeeeee;\n}\n.profile-card .control-panel .options[data-v-23caba84] {\n    margin: 0 auto;\n}\n.profile-card .control-panel .options > .option[data-v-23caba84] {\n    display: block;\n    margin: 5px 0;\n}\n.profile-card .control-panel .options >.option[data-v-23caba84]:hover {\n    text-decoration: none;\n}\n.profile-card .control-panel .options > .option[data-v-23caba84]:after {\n    color: #eeeeee;\n    font-family: 'Font Awesome 5 Free';\n    padding-left: 5px;\n}\n.profile-card .control-panel .options > .option.edit[data-v-23caba84]:after {\n    content: \"\\F044\";\n}\n.profile-card .control-panel .options > .option.log-out[data-v-23caba84]:after {\n    content: \"\\F2F5\";\n}\n", ""]);
+exports.push([module.i, "\n.profile-card[data-v-23caba84] {\n    margin: 20px 0;\n    text-align: center;\n}\n.profile-card .avatar[data-v-23caba84] {\n    border-radius: 50%;\n    height: 120px;\n    max-width: 120px;\n    margin: 0 auto;\n    margin-bottom: 20px;\n    overflow: hidden;\n    position: relative;\n}\n.profile-card .avatar.default[data-v-23caba84] {\n    background: url('/images/placeholders/default-avatar.jpg') center / cover no-repeat;\n}\n.profile-card .control-panel[data-v-23caba84] {\n    color: #eeeeee;\n}\n.profile-card .control-panel .options[data-v-23caba84] {\n    margin: 0 auto;\n}\n.profile-card .control-panel .options > .option[data-v-23caba84] {\n    display: block;\n    margin: 5px 0;\n}\n.profile-card .control-panel .options >.option[data-v-23caba84]:hover {\n    text-decoration: none;\n}\n.profile-card .control-panel .options > .option[data-v-23caba84]:after {\n    color: #eeeeee;\n    font-family: 'Font Awesome 5 Free';\n    padding-left: 5px;\n}\n.profile-card .control-panel .options > .option.edit[data-v-23caba84]:after {\n    content: \"\\F044\";\n}\n.profile-card .control-panel .options > .option.log-out[data-v-23caba84]:after {\n    content: \"\\F2F5\";\n}\n", ""]);
 
 // exports
 
@@ -38126,7 +38139,16 @@ var render = function() {
             [
               _c("span", { staticClass: "title" }, [_vm._v("Preview")]),
               _vm._v(" "),
-              _c("profile-card", { attrs: { preview: true, user: this.user } })
+              _c("profile-card", {
+                attrs: {
+                  preview: true,
+                  user: this.user,
+                  avatar: {
+                    filename: this.image.filename,
+                    filepath: this.image.filepath
+                  }
+                }
+              })
             ],
             1
           )
@@ -38207,7 +38229,15 @@ var render = function() {
   return _c("div", { staticClass: "profile-card" }, [
     _c("div", {
       staticClass: "avatar",
-      style: { background: "url(" + _vm.avatar + ") center / cover no-repeat" }
+      class: { default: _vm.isDefaultAvatar() },
+      style: [
+        _vm.isDefaultAvatar()
+          ? ""
+          : {
+              background:
+                "url(" + this.image.filepath + ") center / cover no-repeat"
+            }
+      ]
     }),
     _vm._v(" "),
     _c("div", { staticClass: "control-panel" }, [
@@ -38219,7 +38249,7 @@ var render = function() {
           {
             staticClass: "option edit",
             attrs: { href: "/admin/user/" + this.id + "/profile/edit" },
-            on: { click: _vm.isPreviewCheck }
+            on: { click: _vm.preventClickThrough }
           },
           [_vm._v("Edit Profile")]
         ),
@@ -38229,7 +38259,7 @@ var render = function() {
           {
             staticClass: "option log-out",
             attrs: { href: "/logout" },
-            on: { click: _vm.isPreviewCheck }
+            on: { click: _vm.preventClickThrough }
           },
           [_vm._v(" Log Out ")]
         )
