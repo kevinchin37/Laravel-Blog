@@ -5,6 +5,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
         <link href="{{ asset('css/admin.css') }}" rel="stylesheet" type="text/css" >
+        @trixassets
     </head>
     <body>
         <div id="app">
