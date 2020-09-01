@@ -6,6 +6,7 @@ use App\Post;
 use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Mews\Purifier\Facades\Purifier;
 
 class PostController extends Controller {
     /**
@@ -44,6 +45,10 @@ class PostController extends Controller {
         $post = new Post;
         $attributes['slug'] = $post->getSlug($attributes['title']);
         $attributes['user_id'] = auth()->user()->id;
+
+        if (!empty($attributes['body'])) {
+            $attributes['body'] = Purifier::clean($attributes['body']);
+        }
 
         if (!empty($attributes['featured_image'])) {
             $attributes['featured_image'] = resizeAndStoreImage($attributes['featured_image'], [
@@ -93,6 +98,10 @@ class PostController extends Controller {
     public function update(Post $post) {
         $this->authorize('update', $post);
         $attributes = $this->validateRequest();
+
+        if (!empty($attributes['body'])) {
+            $attributes['body'] = Purifier::clean($attributes['body']);
+        }
 
         if (!empty($attributes['featured_image'])) {
             Storage::disk('public')->delete($post->featured_image);
