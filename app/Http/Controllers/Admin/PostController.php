@@ -7,7 +7,6 @@ use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
-
 class PostController extends Controller {
     /**
      * Display a listing of the resource.
@@ -47,7 +46,10 @@ class PostController extends Controller {
         $attributes['user_id'] = auth()->user()->id;
 
         if (!empty($attributes['featured_image'])) {
-            $attributes['featured_image'] = $attributes['featured_image']->store('uploads', 'public');
+            $attributes['featured_image'] = resizeAndStoreImage($attributes['featured_image'], [
+                'prefix' => 'attachment',
+                'path' => '/uploads/attachments'
+            ]);
         }
 
         $post = $post->create($attributes);
@@ -94,7 +96,10 @@ class PostController extends Controller {
 
         if (!empty($attributes['featured_image'])) {
             Storage::disk('public')->delete($post->featured_image);
-            $attributes['featured_image'] = $attributes['featured_image']->store('uploads', 'public');
+            $attributes['featured_image'] = resizeAndStoreImage($attributes['featured_image'], [
+                'prefix' => 'attachment',
+                'path' => '/uploads/attachments'
+            ]);
         }
 
         $post->updateCategories($attributes);

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\admin;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -37,22 +36,10 @@ class ProfileController extends Controller
 
         if (!empty($attributes['avatar'])) {
             Storage::disk('public')->delete($user->avatar);
-
-            $filepath = '/uploads/avatars/' . $user->id;
-            if (!Storage::disk('public')->exists($filepath)) {
-                Storage::disk('public')->makeDirectory($filepath);
-            }
-
-            $avatar = Image::make($attributes['avatar']);
-            $avatar->resize(400,400, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-
-            $size = $avatar->height() . '-' . $avatar->width();
-            $filename = 'avatar-' . time() . '-' . $size .  '.' . ($attributes['avatar'])->extension();
-            $attributes['avatar'] = $filepath = '/uploads/avatars/' . $user->id . '/' . $filename;
-
-            $avatar->save(public_path('storage') . $filepath);
+            $attributes['avatar'] = resizeAndStoreImage($attributes['avatar'], [
+                'prefix' => 'avatar',
+                'path' => '/uploads/avatars/' . $user->id,
+            ]);
         }
 
         if (!empty($attributes['password'])) {
