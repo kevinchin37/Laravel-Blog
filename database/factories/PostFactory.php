@@ -10,11 +10,16 @@ $factory->define(Post::class, function (Faker $faker) {
     $title = $faker->sentence;
     $slug = Str::slug($title);
 
+    $paragraphs = '';
+    for ($i=0; $i < mt_rand(3, 5); $i++) {
+        $paragraphs .= '<p>' . $faker->paragraph(mt_rand(5, 10)) . '</p>';
+    }
+
     return [
         'title' => $title,
         'slug' => $slug,
         'user_id' => 1, // admin
-        'body' => $faker->paragraphs(mt_rand(15, 25), true),
+        'body' => $paragraphs,
         'featured_image' => ''
 
 

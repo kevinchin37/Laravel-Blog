@@ -48,6 +48,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('admin/invitations/create', 'InvitationController@create');
     Route::post('admin/invitations', 'InvitationController@store');
     Route::delete('admin/invitations/{invitation}', 'InvitationController@destroy');
+
+    // Profile
+    Route::get('admin/user/{user}/profile/edit', 'ProfileController@edit');
+    Route::patch('admin/user/{user}/profile', 'ProfileController@update');
 });
 
 // Post
@@ -66,4 +70,6 @@ Route::get('/invitation/{invitation}', 'Admin\InvitationController@show')->middl
 
 // Login / Registration
 Auth::routes();
+Route::get('logout', 'Auth\LoginController@logout');
+
 Route::post('/invitation', 'auth\RegisterController@register');

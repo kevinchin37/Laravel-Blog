@@ -33,4 +33,6 @@
     @endif
 </div>
 
-<div class="body-content">{{ $post->body }}</div>
+<div class="body-content">
+    {!! $post->body !!}
+</div>
