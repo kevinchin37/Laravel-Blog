@@ -6,7 +6,7 @@ use App\Post;
 use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-
+use Mews\Purifier\Facades\Purifier;
 
 class PostController extends Controller {
     /**
@@ -46,8 +46,15 @@ class PostController extends Controller {
         $attributes['slug'] = $post->getSlug($attributes['title']);
         $attributes['user_id'] = auth()->user()->id;
 
+        if (!empty($attributes['body'])) {
+            $attributes['body'] = Purifier::clean($attributes['body']);
+        }
+
         if (!empty($attributes['featured_image'])) {
-            $attributes['featured_image'] = $attributes['featured_image']->store('uploads', 'public');
+            $attributes['featured_image'] = resizeAndStoreImage($attributes['featured_image'], [
+                'prefix' => 'attachment',
+                'path' => '/uploads/attachments'
+            ]);
         }
 
         $post = $post->create($attributes);
@@ -92,9 +99,16 @@ class PostController extends Controller {
         $this->authorize('update', $post);
         $attributes = $this->validateRequest();
 
+        if (!empty($attributes['body'])) {
+            $attributes['body'] = Purifier::clean($attributes['body']);
+        }
+
         if (!empty($attributes['featured_image'])) {
             Storage::disk('public')->delete($post->featured_image);
-            $attributes['featured_image'] = $attributes['featured_image']->store('uploads', 'public');
+            $attributes['featured_image'] = resizeAndStoreImage($attributes['featured_image'], [
+                'prefix' => 'attachment',
+                'path' => '/uploads/attachments'
+            ]);
         }
 
         $post->updateCategories($attributes);

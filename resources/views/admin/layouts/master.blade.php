@@ -5,6 +5,9 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
         <link href="{{ asset('css/admin.css') }}" rel="stylesheet" type="text/css" >
+        @if (!empty(env('TINY_MCE_KEY')))
+            <script src="https://cdn.tiny.cloud/1/{{ env('TINY_MCE_KEY') }}/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        @endif
     </head>
     <body>
         <div id="app">

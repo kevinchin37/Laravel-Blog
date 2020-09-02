@@ -13,7 +13,9 @@
                 </div>
 
                 <div class="form-group">
-                    <textarea id="post-body" class="form-control" cols="30" rows="10" name="body">{{ $post->body }}</textarea>
+                    @component('admin.components.editor.tinymce', ['selector' => 'textarea#post-body'])
+                        <textarea id="post-body" class="form-control" cols="30" rows="10" name="body">{{ $post->body }}</textarea>
+                    @endcomponent
                 </div>
 
                 <div class="row">
