@@ -17,12 +17,12 @@ class SearchController extends Controller
             'title' => [
                 'column' => 'title',
                 'operator' => 'like',
-                'value' => (request()->has('title')) ? '%' . request()->title . '%' : ''
+                'value' => (request('title')) ? '%' . request('title') . '%' : ''
             ],
             'author' => [
                 'column' => 'user_id',
                 'operator' => '=',
-                'value' => (request()->has('author')) ? request()->author : ''
+                'value' => (request('author')) ? request('author') : ''
             ],
         ];
 
@@ -33,16 +33,20 @@ class SearchController extends Controller
         }
 
         $posts = Post::where($filterConditions);
-        if (request()->has('category')) {
-            $posts = Post::whereHas('categories', function ($query) use($filterConditions) {
-                return $query->where('category_post.category_id', request()->category)->where($filterConditions);
+        if (request('category')) {
+            $posts = $posts->whereHas('categories', function ($query) {
+                return $query->where('category_post.category_id', request('category'));
+            });
+        }
+
+        if (request('tag')) {
+            $posts = $posts->whereHas('tags', function ($query) {
+                return $query->where('post_tag.tag_id', request('tag'));
             });
         }
 
         return view('admin.search.index', [
-            'posts' => $posts
-                ->orderBy('created_at', 'desc')
-                ->paginate(15)
+            'posts' => $posts->orderBy('created_at', 'desc')->paginate(15),
         ]);
     }
 }
