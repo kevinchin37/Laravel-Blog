@@ -58,6 +58,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('permissions', Permission::all());
         });
 
-        View::composer('admin*', UserComposer::class);
+        View::composer(['admin.profile.edit','admin.layouts.sidebar'], UserComposer::class);
     }
 }
