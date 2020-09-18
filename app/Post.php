@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Comment;
 use App\PostTag;
 use App\CategoryPost;
 use Illuminate\Support\Carbon;
@@ -110,5 +111,9 @@ class Post extends Model
      */
     public function getCreatedAtAttribute($date) {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('m/d/y, g:i:s A');
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
     }
 }
