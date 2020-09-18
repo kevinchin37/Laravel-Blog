@@ -59,6 +59,14 @@ Route::get('/', 'PostController@index');
 Route::get('/posts', 'PostController@index');
 Route::get('/post/{post}', 'PostController@show');
 
+//Comment
+Route::post('/post/comment', 'CommentController@store');
+Route::post('/post/comment/reply','ReplyController@store');
+Route::get('/comments', 'CommentController@index');
+Route::get('/comments/{post_id}', 'CommentController@index');
+Route::get('/comments/reply/thread', 'ReplyController@index');
+Route::get('/comments/reply/thread/{parent_id}', 'ReplyController@index');
+
 // Category
 Route::get('/category/{category}', 'CategoryController@show');
 
