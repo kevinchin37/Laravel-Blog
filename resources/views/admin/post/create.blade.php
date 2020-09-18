@@ -12,9 +12,7 @@
                 </div>
 
                 <div class="form-group ">
-                    @component('admin.components.editor.tinymce', ['selector' => 'textarea#post-body'])
-                        <textarea id="post-body" class="form-control" cols="30" rows="10" name="body"></textarea>
-                    @endcomponent
+                    <tinymce-editor></tinymce-editor>
                 </div>
 
                 <div class="form-group">
