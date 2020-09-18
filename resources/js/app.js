@@ -22,6 +22,11 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('avatar-uploader', require('./components/AvatarUploader.vue').default);
 Vue.component('profile-card', require('./components/ProfileCard.vue').default);
+Vue.component('avatar', require('./components/Avatar.vue').default);
+Vue.component('comments', require('./components/Comments.vue').default);
+Vue.component('tinymce-editor', require('./components/Tinymce.vue').default);
+Vue.component('reply-form', require('./components/replyForm.vue').default);
+Vue.component('replies', require('./components/Replies.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
