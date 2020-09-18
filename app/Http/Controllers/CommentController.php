@@ -18,7 +18,7 @@ class CommentController extends Controller
             ->where('parent_id', null)
             ->with('user')
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(5);
 
         return response()->json($comments);
     }
