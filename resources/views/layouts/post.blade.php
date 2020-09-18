@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
     <title>@yield('pagetitle')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
     <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" >
+    @if (!empty(env('TINY_MCE_KEY')))
+        <script src="https://cdn.tiny.cloud/1/{{ env('TINY_MCE_KEY') }}/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    @endif
 </head>
 <body>
-    <section>
+    <div id="app">
         @include('layouts.header')
 
         <div class="container">
@@ -20,7 +24,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
     @include('layouts.footer')
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
