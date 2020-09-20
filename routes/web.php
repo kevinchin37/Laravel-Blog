@@ -80,4 +80,4 @@ Route::get('/invitation/{invitation}', 'Admin\InvitationController@show')->middl
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 
-Route::post('/invitation', 'auth\RegisterController@register');
+Route::post('/invitation', 'auth\Invitation\RegisterController@register');

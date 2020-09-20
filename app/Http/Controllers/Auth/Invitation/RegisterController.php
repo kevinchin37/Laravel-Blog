@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth\Invitation;
 
 use App\Events\InvitationAccepted;
 use App\User;
