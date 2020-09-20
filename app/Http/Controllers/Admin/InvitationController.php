@@ -62,7 +62,7 @@ class InvitationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Invitation $invitation) {
-        return view('auth.register', [
+        return view('auth.invitation.register', [
             'invitation' => $invitation,
         ]);
     }
