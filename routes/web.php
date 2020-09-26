@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function () {
+Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'admin.access']], function () {
     // Post
     Route::get('admin', 'DashboardController@index');
     Route::get('admin/dashboard', 'DashboardController@index');
@@ -81,3 +81,6 @@ Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 
 Route::post('/invitation', 'auth\Invitation\RegisterController@register');
+
+Route::get('/register', 'auth\RegisterController@showRegistrationForm');
+Route::post('/register', 'auth\RegisterController@register');
