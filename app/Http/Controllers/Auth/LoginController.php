@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -39,6 +40,24 @@ class LoginController extends Controller
     }
 
     /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+        $this->redirectGuest();
+        $this->clearLoginAttempts($request);
+
+        return $this->authenticated($request, $this->guard()->user())
+                ?: redirect()->intended($this->redirectPath());
+    }
+
+
+    /**
      * Log the user out of the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -52,4 +71,13 @@ class LoginController extends Controller
         return $this->loggedOut($request) ?: redirect('/login');
     }
 
+    /**
+     * Redirect guests to homepage
+     *
+     * @return void
+     */
+    private function redirectGuest() {
+        $role_id = $this->guard()->user()->role_id;
+        if ($role_id === Role::GUEST_ROLE_ID) $this->redirectTo = '/';
+    }
 }
