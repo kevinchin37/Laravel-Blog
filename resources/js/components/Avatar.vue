@@ -1,8 +1,7 @@
 <template>
-    <div class="avatar"
-        :class="[ { default: isDefaultAvatar() }, iconSize ]"
-        :style="[ isDefaultAvatar() ? '' : { background: 'url(' + this.src + ') center / cover no-repeat' } ]"
-    ></div>
+    <div class="avatar" :class="[ { default: isDefaultAvatar() }, iconSize ]">
+        <img :src="src"/>
+    </div>
 </template>
 
 <script>
@@ -12,7 +11,7 @@ export default {
             default: ''
         },
         size: {
-            default: 'large',
+            default: 'medium',
         }
     },
     data() {
@@ -49,5 +48,10 @@ export default {
     }
     .avatar.default {
         background: url('/images/placeholders/default-avatar.jpg') center / cover no-repeat;
+    }
+    .avatar > img {
+        border-radius: 50%;
+        height: 100%;
+        max-width: 100%;
     }
 </style>
