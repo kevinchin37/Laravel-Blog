@@ -1,12 +1,25 @@
 #main-menu,
 #main-footer {
-    background: #222831;
+    background: #0d0d0d;
     height: 60px;
     width: 100%;
 }
 #main-menu {
     margin-bottom: 20px;
 }
+#main-menu .user-menu {
+    max-width: 100%;
+    overflow: hidden;
+}
+#main-menu .user-menu .avatar-wrapper {
+    display: inline-block;
+    padding-right: 5px;
+}
+#main-menu .user-menu .welcome-msg {
+    color: white;
+    padding-right: 8px;
+}
+
 #main-footer {
     margin-top: 20px;
 }
