@@ -31,8 +31,8 @@
 
                 <avatar-uploader title="Upload Avatar"
                     :user="{ name: '{{ $user->name }}' }"
-                    :avatar="{ filename: '{{ $user->avatar }}', filepath: '{{ asset( 'storage' . $user->avatar ) }}' }"
-                ></avatar-uploader>
+                    avatar="{{ $user->avatar }}">
+                </avatar-uploader>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary mt-3">Update</button>

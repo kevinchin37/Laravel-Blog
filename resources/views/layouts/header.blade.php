@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse">
             @if (Auth::check())
                 <div class="avatar-wrapper">
-                    <avatar image="{{ auth()->user()->avatar }}" size="small"></avatar>
+                    <avatar src="{{ auth()->user()->avatar }}" size="small"></avatar>
                 </div>
                 <span class="welcome-msg">Hi {{ auth()->user()->name }}</span>
 

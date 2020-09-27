@@ -4,7 +4,7 @@
         <div class="comment-card" v-for="comment in comments" :key="comment.id">
             <div class="header">
                 <div class="avatar">
-                    <avatar :image="comment.user.avatar" size="medium"></avatar>
+                    <avatar :src="comment.user.avatar" size="medium"></avatar>
                 </div>
                 <span class="meta author">{{ comment.user.name }}</span>
                 <span class="meta date">{{ comment.created_at }}</span>

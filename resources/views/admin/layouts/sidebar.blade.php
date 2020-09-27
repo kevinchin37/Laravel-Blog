@@ -1,6 +1,6 @@
 <profile-card
     :user="{ id: '{{ $user->id }}', name: '{{ $user->name }}' }"
-    :avatar="{ filename: '{{ $user->avatar }}', filepath: '{{ asset( 'storage' . $user->avatar ) }}' }"
+    avatar="{{ $user->avatar }}"
 ></profile-card>
 
 {{-- @TODO add submenus later --}}
