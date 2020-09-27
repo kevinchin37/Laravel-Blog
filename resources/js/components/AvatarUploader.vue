@@ -16,7 +16,7 @@
                         <profile-card
                             :preview="true"
                             :user="this.user"
-                            :avatar="{ filename: this.image.filename, filepath: this.image.filepath }"
+                            :avatar="this.image"
                         ></profile-card>
                    </div>
                 </div>
@@ -30,7 +30,7 @@ export default {
     props: {
         'title': String,
         'user': Object,
-        'avatar': Object,
+        'avatar': String,
     },
     data() {
         return {
@@ -53,16 +53,16 @@ export default {
 </script>
 
 <style scoped>
-.upload-wrapper {
-    background: #f5f5f5;
-    padding: 25px 15px;
-}
-.upload-wrapper .preview {
-    background: #0d0d0d;
-    padding: 20px;
-}
-.upload-wrapper .preview .title {
-    color: white;
-    font-size: 18px;
-}
+    .upload-wrapper {
+        background: #f5f5f5;
+        padding: 25px 15px;
+    }
+    .upload-wrapper .preview {
+        background: #0d0d0d;
+        padding: 20px;
+    }
+    .upload-wrapper .preview .title {
+        color: white;
+        font-size: 18px;
+    }
 </style>
