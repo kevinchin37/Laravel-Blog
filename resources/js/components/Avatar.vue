@@ -7,7 +7,7 @@
 <script>
 export default {
     props: {
-        image: {
+        src: {
             default: ''
         },
         size: {
@@ -16,13 +16,13 @@ export default {
     },
     data() {
         return {
-            src: this.image,
+            imgSrc: this.src,
             iconSize: this.size
         }
     },
     methods: {
         isDefaultAvatar() {
-            if (this.src === null || this.src.length === 0) return true;
+            if (this.imgSrc === null || this.imgSrc.length === 0) return true;
         }
     }
 }
