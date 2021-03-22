@@ -1,19 +1,12 @@
 <template>
     <div class="comments-container" :style="[ isEmptyComments() ? { display: 'none' } : '' ]">
-        <h1>Comments</h1>
-        <div class="comment-card" v-for="comment in comments" :key="comment.id">
-            <div class="header">
-                <div class="avatar">
-                    <avatar :src="comment.user.avatar" size="medium"></avatar>
-                </div>
-                <span class="meta author">{{ comment.user.name }}</span>
-                <span class="meta date">{{ comment.created_at }}</span>
-            </div>
+        <div class="comments-header">
+            <h1 class="title">{{ this.headerTitle }}</h1>
+            <a v-if="!this.isLoggedIn" href="/login">Log in to leave a comment.</a>
+        </div>
 
-            <div class="body" v-html="comment.body"></div>
-
-        <reply-form :parent="comment.id" :post="comment.post_id"></reply-form>
-        <replies :thread="comment.id"></replies>
+        <div class="comment-block" v-for="comment in comments" :key="comment.id">
+            <comment-card :post-comment="comment"></comment-card>
         </div>
 
         <div class="show-more" @click="getMoreComments"
@@ -26,18 +19,24 @@
 <script>
 export default {
     props: {
-        'post_id': Number
+        'postId': Number,
+        'title': String
     },
     data() {
         return {
             comments: [],
             page: 1,
-            postId: this.post_id,
             pagination: true,
+            headerTitle: "Comments",
+            isLoggedIn: $('meta[name=isLoggedIn]').attr('content'),
         }
     },
     created() {
         this.updateCommentStack();
+
+        if (this.title && this.title.length > 0) {
+            this.headerTitle = this.title;
+        }
     },
     methods: {
         getComments() {
@@ -76,29 +75,6 @@ export default {
 </script>
 
 <style>
-    .comment-card {
-        overflow: hidden;
-        padding: 20px 35px;
-    }
-    .comment-card .header {
-        color: #21827e;
-        margin-bottom: 30px;
-        min-height: 30px;
-        overflow: hidden;
-        position: relative;
-    }
-    .comment-card .header .avatar {
-        float: left;
-        margin-right: 8px;
-    }
-    .comment-card .header .meta {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    .comment-card .header .meta.date {
-        right: 0;
-    }
     .show-more {
         background: #29a19c;
         color: white;
@@ -118,10 +94,12 @@ export default {
 
 
 <style scoped>
-    .comments-container .comment-card .body {
-        padding: 0 25px;
+    .comments-container .comments-header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
     }
-    .comments-container .comment-card:nth-child(even) {
+    .comments-container .comment-block:nth-child(even) {
         background: #eeeeee;
     }
 </style>
