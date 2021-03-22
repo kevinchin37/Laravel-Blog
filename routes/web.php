@@ -84,4 +84,7 @@ Route::get('logout', 'Auth\LoginController@logout');
 Route::get('/register', 'auth\RegisterController@showRegistrationForm');
 Route::post('/register', 'auth\RegisterController@register');
 
-Route::get('/user/{user}/profile/edit', 'ProfileController@edit');
+Route::group(['middleware' => ['auth', 'profile.access']], function () {
+    Route::get('/user/{user}/profile/edit', 'ProfileController@edit');
+    Route::patch('/user/{user}/profile', 'ProfileController@update');
+});

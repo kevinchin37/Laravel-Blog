@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role.admin' => \App\Http\Middleware\CheckAdminRole::class,
         'admin.access' => \App\Http\Middleware\CheckAdminAccess::class,
+        'profile.access' => \App\Http\Middleware\CheckIsUserProfile::class,
         'invitation.token' => \App\Http\Middleware\VerifyInvitationToken::class,
     ];
 
