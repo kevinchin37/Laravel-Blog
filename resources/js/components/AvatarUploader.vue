@@ -11,14 +11,12 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                   <div class="preview">
+                    <div class="row preview">
                         <span class="title">Preview</span>
-                        <profile-card
-                            :preview="true"
-                            :user="this.user"
-                            :avatar="this.image"
-                        ></profile-card>
-                   </div>
+                        <div class="col-md-12 bg-light">
+                            <comment-card :post-comment="this.comment" :preview="true"></comment-card>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,8 +32,8 @@ export default {
     },
     data() {
         return {
-            name: this.user.name,
-            image: this.avatar
+            image: this.avatar,
+            comment: { "body": "<p>Hello World!</p>", "status": 1, "created_at": "11/09/20, 9:35:33 PM", "updated_at": "2020-11-09 21:35:33", "user": this.user }
         }
     },
     methods: {
@@ -59,6 +57,7 @@ export default {
     }
     .upload-wrapper .preview {
         background: #0d0d0d;
+        margin-left: 0px;
         padding: 20px;
     }
     .upload-wrapper .preview .title {

@@ -1,6 +1,6 @@
 <template>
     <div class="avatar" :class="[ { default: isDefaultAvatar() }, iconSize ]">
-        <img :src="src"/>
+        <img :src="imgSrc"/>
     </div>
 </template>
 
@@ -12,12 +12,24 @@ export default {
         },
         size: {
             default: 'medium',
+        },
+        preview: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
         return {
             imgSrc: this.src,
-            iconSize: this.size
+            iconSize: this.size,
+            isPreview: this.preview
+        }
+    },
+    created() {
+        if (this.isPreview) {
+            this.$eventBus.$on('preview', (newAvatar) => {
+                this.imgSrc = newAvatar;
+            });
         }
     },
     methods: {
@@ -52,6 +64,9 @@ export default {
     .avatar > img {
         border-radius: 50%;
         height: 100%;
-        max-width: 100%;
+        width: 100%;
+    }
+    .avatar.default > img {
+        display: none;
     }
 </style>
