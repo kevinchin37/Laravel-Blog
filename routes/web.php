@@ -75,12 +75,13 @@ Route::get('/tag/{tag}', 'TagController@show');
 
 // Invitation
 Route::get('/invitation/{invitation}', 'Admin\InvitationController@show')->middleware('invitation.token');
+Route::post('/invitation', 'auth\Invitation\RegisterController@register');
 
 // Login / Registration
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 
-Route::post('/invitation', 'auth\Invitation\RegisterController@register');
-
 Route::get('/register', 'auth\RegisterController@showRegistrationForm');
 Route::post('/register', 'auth\RegisterController@register');
+
+Route::get('/user/{user}/profile/edit', 'ProfileController@edit');
