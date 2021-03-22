@@ -41,21 +41,23 @@
     <div class="body-content">
         {!! $post->body !!}
 
-        <form action="/post/comment" method="POST">
-            @csrf
-            <div class="form-group">
-                <div style="border:1px solid #29a19c; padding: 15px;">
-                    <label for="comment-body"><h4 style="">Leave a Comment</h4></label>
-                    <textarea id="comment-body" class="form-control mb-2" cols="30" rows="10" name="body"></textarea>
-                    <button type="submit" id="comment-submit" class="btn btn-primary mt-3">Submit</button>
+        @auth
+            <form action="/post/comment" method="POST">
+                @csrf
+                <div class="form-group">
+                    <div style="border:1px solid #29a19c; padding: 15px;">
+                        <label for="comment-body"><h4 style="">Leave a Comment</h4></label>
+                        <textarea id="comment-body" class="form-control mb-2" cols="30" rows="10" name="body"></textarea>
+                        <button type="submit" id="comment-submit" class="btn btn-primary mt-3">Submit</button>
+                    </div>
+
+                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                    <input type="hidden" name="post_id" value="{{ $post->id }}">
                 </div>
+            </form>
+        @endauth
 
-                <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                <input type="hidden" name="post_id" value="{{ $post->id }}">
-            </div>
-        </form>
-
-        <comments :post_id="{{ $post->id}}"></comments>
+        <comments :post-id="{{ $post->id }}" auth-user="{{ auth()->id() }}"></comments>
     </div>
 
     @component('components.posts.blocks', [

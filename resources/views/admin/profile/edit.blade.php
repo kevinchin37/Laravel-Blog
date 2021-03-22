@@ -30,7 +30,7 @@
                 </div>
 
                 <avatar-uploader title="Upload Avatar"
-                    :user="{ name: '{{ $user->name }}' }"
+                    :user="{{ $user }}"
                     avatar="{{ $user->avatar }}">
                 </avatar-uploader>
 

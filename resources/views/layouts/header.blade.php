@@ -24,7 +24,7 @@
 
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="">Edit Profile</a>
+                        <a class="nav-link" href="/user/{{ auth()->user()->id }}/profile/edit">Edit Profile</a>
                     </li>
 
                     <li class="nav-item">

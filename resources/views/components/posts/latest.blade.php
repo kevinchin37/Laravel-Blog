@@ -1,6 +1,6 @@
 @if (!empty($post))
-    <h1 class="header-title">{{ (empty($headerTitle)) ? 'Latest' : $headerTitle }}</h1>
-    <div id="latest-post" class="jumbotron">
+    <h1 class="header-title w-100">{{ (empty($headerTitle)) ? 'Latest' : $headerTitle }}</h1>
+    <div id="latest-post" class="jumbotron col-md-12">
         <div class="row">
             <div class="col-md-3">
                 <div class="thumbnail-wrapper{{ (empty($post->featured_image))? ' placeholder' : '' }}">

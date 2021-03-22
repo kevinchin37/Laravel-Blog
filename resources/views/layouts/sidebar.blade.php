@@ -1,15 +1,3 @@
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
-<div>Sidebar content place holder</div>
+<div>
+    <img src="https://via.placeholder.com/300x250" />
+</div>

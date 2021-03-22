@@ -1,17 +1,15 @@
 @extends('layouts.master')
 
-@section('latest_post')
+@section('main_content')
     @component('components.posts.latest', [
         'post' => $posts->shift(),
         'headerTitle' => 'Latest'
     ])
     @endcomponent
-@endsection
 
-@section('more_posts')
     @component('components.posts.blocks', [
         'posts' => $posts,
-        'headerTitle' => 'Older Posts'
+        'headerTitle' => 'Older Posts',
     ])
     @endcomponent
 @endsection
