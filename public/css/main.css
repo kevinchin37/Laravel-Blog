@@ -31,8 +31,9 @@
     width: 100%;
 }
 .thumbnail-wrapper.placeholder {
-    background: url('../images/placeholders/lorem-logo.svg');
+    background: url('../images/placeholders/lorem-logo.svg') no-repeat 50%;
     background-color: #eaeaea;
+    background-size: cover;
 }
 .thumbnail-wrapper > .thumbnail {
     bottom: 0;
