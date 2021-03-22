@@ -24,6 +24,7 @@ Vue.component('avatar-uploader', require('./components/AvatarUploader.vue').defa
 Vue.component('profile-card', require('./components/ProfileCard.vue').default);
 Vue.component('avatar', require('./components/Avatar.vue').default);
 Vue.component('comments', require('./components/Comments.vue').default);
+Vue.component('comment-card', require('./components/CommentsCard.vue').default);
 Vue.component('tinymce-editor', require('./components/Tinymce.vue').default);
 Vue.component('reply-form', require('./components/replyForm.vue').default);
 Vue.component('replies', require('./components/Replies.vue').default);
