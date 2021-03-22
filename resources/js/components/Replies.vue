@@ -1,10 +1,10 @@
 <template>
     <div class="replies-container" v-if="replies.length !== 0">
         <div class="divider"></div>
-        <div class="comment-card" v-for="reply in replies" :key="reply.id" :style="{ borderLeft: '3px dashed ' + randomizeBorderColor() }">
+        <div class="comment" v-for="reply in replies" :key="reply.id" :style="{ borderLeft: '3px dashed ' + randomizeBorderColor() }">
             <div class="header">
                 <div class="avatar">
-                    <avatar :image="reply.user.avatar" size="medium"></avatar>
+                    <avatar :src="reply.user.avatar" size="medium"></avatar>
                 </div>
                 <span class="meta author">{{ reply.user.name }}</span>
                 <span class="meta date">{{ reply.created_at }}</span>
@@ -17,21 +17,21 @@
 <script>
 export default {
     props: {
-        thread: {
-            type: Number
-        }
+        'thread': Number
     },
     data() {
         return {
             parent_id: this.thread,
-            replies: []
+            replies: [],
         }
     },
     created() {
-        this.getReplies().then(replies => {
-            replies.forEach((item) => {
-                this.replies.push(item);
-            })
+        this.updateReplyStack();
+
+        this.$eventBus.$on('newReply', (id) => {
+            if (id !== this.parent_id) return false; // only refresh the thread that is getting a new reply
+            this.replies = [];
+            this.updateReplyStack();
         });
     },
     methods: {
@@ -47,7 +47,15 @@ export default {
 
         randomizeBorderColor() {
             return '#' + Math.floor(100000 + Math.random() * 900000);
-        }
+        },
+
+        updateReplyStack() {
+            this.getReplies().then(replies => {
+                replies.forEach((item) => {
+                    this.replies.push(item);
+                })
+            });
+        },
     }
 }
 </script>
@@ -61,10 +69,10 @@ export default {
         margin: 0 auto;
         width: 450px;
     }
-    .replies-container .comment-card {
+    .replies-container .comment {
         margin: 30px 50px;
     }
-    .replies-container .comment-card:before {
+    .replies-container .comment:before {
         content: "";
     }
 </style>
